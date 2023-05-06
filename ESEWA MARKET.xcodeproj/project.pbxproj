@@ -29,6 +29,12 @@
 		B3D51CEA29EE847A00435BB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3D51CE829EE847A00435BB3 /* LaunchScreen.storyboard */; };
 		B3E9250A2A05FDB7007CF3DD /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E925092A05FDB7007CF3DD /* HomeModel.swift */; };
 		B3E9250C2A05FDFD007CF3DD /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E9250B2A05FDFD007CF3DD /* HomePresenter.swift */; };
+		B3ED37802A06C1A100E4786C /* CartModelPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED377F2A06C1A100E4786C /* CartModelPresenter.swift */; };
+		B3ED37822A06C1CF00E4786C /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED37812A06C1CF00E4786C /* CartModel.swift */; };
+		B3ED37842A06C1E100E4786C /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED37832A06C1E100E4786C /* Cart.swift */; };
+		B3ED37862A06C20C00E4786C /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED37852A06C20C00E4786C /* CustomTableViewCell.swift */; };
+		B3ED37882A06C26000E4786C /* DeletePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED37872A06C26000E4786C /* DeletePopUpViewController.swift */; };
+		B3ED378A2A06C28100E4786C /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED37892A06C28100E4786C /* CartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +64,12 @@
 		B3D51CEB29EE847A00435BB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3E925092A05FDB7007CF3DD /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		B3E9250B2A05FDFD007CF3DD /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		B3ED377F2A06C1A100E4786C /* CartModelPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModelPresenter.swift; sourceTree = "<group>"; };
+		B3ED37812A06C1CF00E4786C /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
+		B3ED37832A06C1E100E4786C /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		B3ED37852A06C20C00E4786C /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		B3ED37872A06C26000E4786C /* DeletePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePopUpViewController.swift; sourceTree = "<group>"; };
+		B3ED37892A06C28100E4786C /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +107,7 @@
 		B3CA02F929F1A42F00D5185B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B3ED377A2A06C14E00E4786C /* Cart */,
 				B3E925042A04A260007CF3DD /* Presenter */,
 				B3E925032A04A258007CF3DD /* Model */,
 				B3D1FF8E2A03A7F200335742 /* View */,
@@ -174,6 +187,43 @@
 				B3E9250B2A05FDFD007CF3DD /* HomePresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B3ED377A2A06C14E00E4786C /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				B3ED377E2A06C17600E4786C /* View */,
+				B3ED377D2A06C16B00E4786C /* Presenter */,
+				B3ED377B2A06C15800E4786C /* Model */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		B3ED377B2A06C15800E4786C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B3ED37812A06C1CF00E4786C /* CartModel.swift */,
+				B3ED37832A06C1E100E4786C /* Cart.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B3ED377D2A06C16B00E4786C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B3ED377F2A06C1A100E4786C /* CartModelPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B3ED377E2A06C17600E4786C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B3ED37852A06C20C00E4786C /* CustomTableViewCell.swift */,
+				B3ED37872A06C26000E4786C /* DeletePopUpViewController.swift */,
+				B3ED37892A06C28100E4786C /* CartViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C0663D8990985AD0B9E5967B /* Frameworks */ = {
@@ -300,17 +350,23 @@
 			files = (
 				B3D1FF972A03A94300335742 /* CategoriesTableViewCell.swift in Sources */,
 				B3D1FFAE2A03AB5C00335742 /* SceneDelegate.swift in Sources */,
+				B3ED37802A06C1A100E4786C /* CartModelPresenter.swift in Sources */,
 				B3E9250A2A05FDB7007CF3DD /* HomeModel.swift in Sources */,
 				B3D1FF952A03A91C00335742 /* ShopBannerTableViewCell.swift in Sources */,
 				B3D1FFA32A03AA6F00335742 /* PopularBrandCell.swift in Sources */,
 				B3D1FFA12A03AA3200335742 /* HotDealsCell.swift in Sources */,
+				B3ED378A2A06C28100E4786C /* CartViewController.swift in Sources */,
+				B3ED37862A06C20C00E4786C /* CustomTableViewCell.swift in Sources */,
+				B3ED37882A06C26000E4786C /* DeletePopUpViewController.swift in Sources */,
 				B3E9250C2A05FDFD007CF3DD /* HomePresenter.swift in Sources */,
 				B3D1FFA92A03AAE400335742 /* RecommendedTableViewCell.swift in Sources */,
+				B3ED37822A06C1CF00E4786C /* CartModel.swift in Sources */,
 				B3D1FF932A03A8DF00335742 /* BannerCell.swift in Sources */,
 				B3D1FFAC2A03AB3C00335742 /* AppDelegate.swift in Sources */,
 				B3D1FFA52A03AA9A00335742 /* RecommendedCell.swift in Sources */,
 				B3D1FF9F2A03A9E000335742 /* HotDealsOfTheTableViewCell.swift in Sources */,
 				B3D1FF902A03A83000335742 /* HomeViewController.swift in Sources */,
+				B3ED37842A06C1E100E4786C /* Cart.swift in Sources */,
 				B3297ED829F1400500D5E555 /* API.swift in Sources */,
 				B3297ED329F13F6D00D5E555 /* Constants.swift in Sources */,
 				B3D1FF992A03A97300335742 /* CategoryCell.swift in Sources */,

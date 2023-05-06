@@ -1,0 +1,270 @@
+//  CartViewController.swift
+//  ESEWA MARKET
+//
+//  Created by Kiran Gurung on 23/04/2023.
+//
+
+import UIKit
+class CartViewController: UIViewController, AddItemToCartProtocol {
+    
+    var presenter: AddCartItemPresenter?
+    var model = [AddCartItemModel]()
+//    var Item = [ItemList]
+    
+    //    let pc = HomeViewController()
+    
+    
+//    var item = 2
+//    var count = 1
+    var totalPrice = 0.0
+    
+    // MARK: - Add Custom FooterView
+    
+    private var footerView: UIView = {
+        let myfooterView = UIView()
+        myfooterView.translatesAutoresizingMaskIntoConstraints = false
+        myfooterView.backgroundColor = .white//.systemFill
+        return myfooterView
+    }()
+    
+    private let myCheckOutTotal: UILabel = {
+        let total = UILabel()
+        total.text = "Checkout Total"
+        total.translatesAutoresizingMaskIntoConstraints = false
+        total.textAlignment = .left
+        total.font = .systemFont(ofSize: 16, weight: .bold)
+        total.textColor = .gray
+        return total
+    }()
+    
+    private let totalPriceLabel: UILabel = {
+        let totalPrice = UILabel()
+        totalPrice.text = "Rs.52,500"
+        totalPrice.translatesAutoresizingMaskIntoConstraints = false
+        totalPrice.textAlignment = .left
+        totalPrice.font = .systemFont(ofSize: 16, weight: .medium)
+        totalPrice.textColor = .black
+        return totalPrice
+    }()
+    
+    private let myCheckOutButton: UIButton = {
+        let checkOutButton = UIButton()
+        checkOutButton.translatesAutoresizingMaskIntoConstraints = false
+        checkOutButton.setTitle("CHECKOUT", for: .normal)
+        checkOutButton.backgroundColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
+        checkOutButton.layer.cornerRadius = 16
+        checkOutButton.layer.masksToBounds = true
+        return checkOutButton
+    }()
+    
+    //    func getProductList(resposne: ProductResponse) {
+    //
+    //    }
+    
+    // MARK: - Add a table View
+    
+    private let tableView: UITableView = {
+        let table = UITableView()
+        //table.backgroundColor = .clear//.systemFill
+        table.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
+        return table
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        
+        // VC ko view ko color
+        self.view.backgroundColor = .systemGray6.withAlphaComponent(1)
+        
+        
+        
+        //MARK: - ADD NABBAR INTO VIEWCONTROLLER
+        
+        let button = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: nil)
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonPressed))
+        button.tintColor = .black
+        backButton.tintColor = .black
+        
+        self.navigationController?.popViewController(animated: true)
+        
+        
+        navigationItem.rightBarButtonItem = button
+        navigationItem.leftBarButtonItem = backButton
+        
+        navigationItem.title = "My Cart"
+        
+        // add tableview to view
+        view.addSubview(tableView)
+        view.addSubview(footerView)
+        view.addSubview(myCheckOutTotal)
+        view.addSubview(totalPriceLabel)
+        view.addSubview(myCheckOutButton)
+        
+        
+        
+        // add the data source and delegate into tableview
+        setupTableView()
+    }
+    
+    // changing the layout
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+        setupFooterView()
+        updateTotalPriceLabel()
+        
+    }
+    func displayItemList(model: [AddCartItemModel]) {
+        self.model = model
+        tableView.reloadData()
+    }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.presenter = AddCartItemPresenter(delegate: self)
+        presenter?.populateTableView()
+        
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableView.separatorColor = .clear
+        
+    }
+    
+    @objc func backButtonPressed() {
+        self.navigationController?.popViewController(animated: true)
+        
+        
+        
+    }
+    
+    private func updateTotalPriceLabel() {
+        totalPriceLabel.text = "Rs.\(totalPrice)"
+
+    }
+    private func setupFooterView() {
+        
+        NSLayoutConstraint.activate([
+            
+            
+            // MARK: - Set Constraint of footerView
+            
+            footerView.leadingAnchor.constraint(equalTo: self.tableView.leadingAnchor, constant: 0),
+            footerView.bottomAnchor.constraint(equalTo: self.tableView.bottomAnchor, constant: 0),
+            footerView.trailingAnchor.constraint(equalTo: self.tableView.trailingAnchor, constant: 0),
+            footerView.heightAnchor.constraint(equalToConstant: 100),
+            
+            // pin checkouttotal label
+            
+            myCheckOutTotal.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 8),
+            myCheckOutTotal.leadingAnchor.constraint(equalTo: self.footerView.leadingAnchor, constant:8),
+            myCheckOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -8),
+            
+            // totalPriceLabel
+            totalPriceLabel.topAnchor.constraint(equalTo: myCheckOutTotal.bottomAnchor),
+            totalPriceLabel.leadingAnchor.constraint(equalTo: myCheckOutTotal.leadingAnchor),
+            totalPriceLabel.heightAnchor.constraint(equalToConstant: 30),
+            
+            // pin Checkout button
+            myCheckOutButton.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 16),
+            myCheckOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: 16),
+            myCheckOutButton.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -16),
+            myCheckOutButton.widthAnchor.constraint(equalToConstant: 170),
+            myCheckOutButton.heightAnchor.constraint(equalToConstant: 40)
+            
+        ])
+    }
+    
+}
+
+extension CartViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("clicked cell at \(indexPath.row)")
+        
+    }
+    // add delete row feature with swap action
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        //                // show the delete pop up view
+        let vc = DeletePopUpViewController()
+        vc.modalPresentationStyle = .popover
+        //                vc.contentSizeForViewInPopover.height = 300
+        vc.preferredContentSize.height = 50
+        // Keep animated value as false
+        // Custom Modal presentation animation will be handled in VC itself
+        self.present(vc, animated: true)
+        
+    }
+    @objc func didPressed() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+}
+
+
+extension CartViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return item.count
+//    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.count + 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
+//        let item = model[indexPath.row]
+        cell.backgroundColor = .clear
+        
+        
+        //        for i in 0..<tableView.numberOfRows(inSection: 0) {
+        //            if let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0)) as? CustomTableViewCell {
+        //                cell.countChanged = { price in
+        //                    self.totalPrice += price
+        //                    self.updateTotalPriceLabel()
+        //            }
+        //        }
+        
+        cell.countChanged = { price in
+            self.totalPrice += price
+            self.updateTotalPriceLabel()
+
+        }
+        
+        // update the view
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 150
+        
+    }
+    
+    
+    //* reference for shop page
+    
+    //    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    //        let footerView = UIView()
+    //        footerView.backgroundColor = .cyan
+    //        return footerView
+    //    }
+    //
+    //    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    //        return 120
+    //    }
+    
+}
+
