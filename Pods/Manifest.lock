@@ -1,14 +1,17 @@
 PODS:
   - Alamofire (5.6.4)
   - BottomSheet (2.0.2)
+  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
   - Alamofire
   - BottomSheet (from `https://github.com/joomcode/BottomSheet`)
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - SwiftyJSON
 
 EXTERNAL SOURCES:
   BottomSheet:
@@ -22,7 +25,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   BottomSheet: bd3d79027e5b50b98ca870f4c62a0f4d85de9656
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: e97c26ba2a40f5c7bb0d76d90753d74918fbe112
+PODFILE CHECKSUM: 68469e435b19e9ec8edef5dabbd8d88512009c22
 
 COCOAPODS: 1.12.0

@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "R50-BLU_293ad727-6fbe-4055-baba-717842861b31.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

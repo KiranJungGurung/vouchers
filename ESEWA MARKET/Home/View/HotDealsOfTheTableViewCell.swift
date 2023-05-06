@@ -1,4 +1,5 @@
 //
+//
 //  HotDealsOfTheTableViewCell.swift
 //  ESEWA MARKET
 //
@@ -7,9 +8,9 @@
 
 import UIKit
 
-class HotDealsOfTheTableViewCell: UITableViewCell {
+class HotDealsTableViewCell: UITableViewCell {
 
-    private let cellReuseIdentifier = "HotDealsOfTheTableViewCell"
+    private let cellReuseIdentifier = "HotDealsTableViewCell"
     
     private let hotDealsCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
@@ -21,8 +22,7 @@ class HotDealsOfTheTableViewCell: UITableViewCell {
             return collectionView
         
         }()
-    
-    static let reuseIdentifier = "HotDealsOfTheTableViewCell"
+    static let reuseIdentifier = "HotDealsTableViewCell"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,13 +39,11 @@ class HotDealsOfTheTableViewCell: UITableViewCell {
         
         
         NSLayoutConstraint.activate([
-              hotDealsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-               hotDealsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-               hotDealsCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
-               hotDealsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-               hotDealsCollectionView.heightAnchor.constraint(equalToConstant: 170),
-               
-               
+            hotDealsCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant:8),
+            hotDealsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant:8),
+            hotDealsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            hotDealsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            hotDealsCollectionView.heightAnchor.constraint(equalToConstant: 300),
            ])
         
         hotDealsCollectionView.register(HotDealsCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
@@ -56,29 +54,22 @@ class HotDealsOfTheTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-
-    
-    
 }
-extension HotDealsOfTheTableViewCell: UICollectionViewDataSource {
+extension HotDealsTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! HotDealsCell
         return cell
     }
-    
 }
 
-
-extension HotDealsOfTheTableViewCell: UICollectionViewDelegateFlowLayout {
+extension HotDealsTableViewCell: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 200)
-     }
-    
+        return CGSize(width: 180, height: 300)
+    }
 }

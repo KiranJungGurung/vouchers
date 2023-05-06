@@ -7,9 +7,19 @@ target 'ESEWA MARKET' do
 
   # Pods for ESEWA MARKET
 pod 'Alamofire'
-pod 'BottomSheet', :git => 'https://github.com/joomcode/BottomSheet'
+#pod 'BottomSheet', :git => 'https://github.com/joomcode/BottomSheet'
 pod 'SwiftyJSON', '~> 4.0'
 #pod 'ObjectMapper'
 
 
+end
+
+post_install do |installer|
+    installer.generated_projects.each do |project|
+          project.targets.each do |target|
+              target.build_configurations.each do |config|
+                  config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+               end
+          end
+   end
 end

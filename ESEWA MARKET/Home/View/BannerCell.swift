@@ -16,7 +16,7 @@ class BannerCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 30
+        imageView.layer.cornerRadius = 14
         return imageView
     
     }()
@@ -25,14 +25,15 @@ class BannerCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
+        contentView.backgroundColor = .clear
         
         
         NSLayoutConstraint.activate([
-                 imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-                 imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-                 imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-                 imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-                 imageView.heightAnchor.constraint(equalToConstant: 120)
+                 imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+                 imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+                 imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+                 imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+                 imageView.heightAnchor.constraint(equalToConstant: 150)
              ])
     }
     required init?(coder: NSCoder) {
