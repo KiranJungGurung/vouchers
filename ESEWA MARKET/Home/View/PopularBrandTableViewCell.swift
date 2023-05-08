@@ -12,6 +12,8 @@ class PopularBrandTableViewCell: UITableViewCell {
 
     private let cellReuseIdentifier = "PopularBrandTableViewCell"
     
+    var model = [PopularBrand]()
+
     private let brandCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
@@ -51,6 +53,10 @@ class PopularBrandTableViewCell: UITableViewCell {
         brandCollectionView.register(PopularBrandCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
 
     }
+    func configure(model: [PopularBrand]) {
+            self.model = model
+            brandCollectionView.reloadData()
+        }
 
     
     required init?(coder: NSCoder) {
@@ -62,11 +68,14 @@ class PopularBrandTableViewCell: UITableViewCell {
 extension PopularBrandTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        8
+        model.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! PopularBrandCell
+        let item = model[indexPath.row]
+        cell.productTitleLabel.text = item.productName
+        cell.configure(with: item)
         return cell
     }
     

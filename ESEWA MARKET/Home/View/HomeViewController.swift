@@ -7,8 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UITableViewDelegate {
-
+class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDelegate {
     var searchController = UISearchController(searchResultsController: nil)
 
     private let homeTableView: UITableView = {
@@ -19,6 +18,15 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     }()
     
     let footerView = UIView()
+    var presenter: HomePresenter?
+    var model = [Product]()
+    var featuredProduct = [FeaturedProduct]()
+    var hotDeal = [HotDealsOfTheDay]()
+    var hotDealBanner = [HotDealBanner]()
+    var popularBrand = [PopularBrand]()
+    var recommendedForYou = [RecommendedForYou]()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +49,6 @@ class HomeViewController: UIViewController, UITableViewDelegate {
 
         navigationItem.title = "Market"
 
-
-       
-
-
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -55,6 +59,8 @@ class HomeViewController: UIViewController, UITableViewDelegate {
     private func setupTableView() {
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        self.presenter = HomePresenter(delegate: self, view: self)
+        presenter?.updateView()
 
         homeTableView.estimatedRowHeight = 300
         homeTableView.rowHeight = UITableView.automaticDimension
@@ -116,7 +122,7 @@ class HomeViewController: UIViewController, UITableViewDelegate {
             return moreButton
         }()
         
-        cartButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+//        cartButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
 
         view.addSubview(footerView)
         footerView.addSubview(homeButton)
@@ -146,79 +152,107 @@ class HomeViewController: UIViewController, UITableViewDelegate {
             
         ])
     }
-    @objc func didTap() {
-        let viewcontroller = CartViewController()
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
+    func displayCategoryAndProduct(model: [Product], featuredProduct: [FeaturedProduct], hotDeals: [HotDealsOfTheDay], hotDealBanner: [HotDealBanner], popularBrand: [PopularBrand], recommendedForYou: [RecommendedForYou]) {
+        self.model = model
+        self.featuredProduct = featuredProduct
+        self.hotDeal = hotDeals
+        self.hotDealBanner = hotDealBanner
+        self.popularBrand = popularBrand
+        self.recommendedForYou = recommendedForYou
+        homeTableView.reloadData()
     }
+    
+//    func displayProductList(model: [Product]) {
+//        self.model = model
+//        homeTableView.reloadData()
+//
+//    }
+////    @objc func didTap() {
+//        let viewcontroller = CartViewController()
+//        self.navigationController?.pushViewController(viewcontroller, animated: true)
+//    }
 }
 
 extension HomeViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
 
-        return 10
+        return model.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+     return 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return ""
-        case 1:
-            return "Categories"
-        case 2:
-            return "Featured Products"
-        case 3:
-            return "Hot Deals Of TheDay"
-        case 4:
-            return ""
-        case 5:
-            return "Popular Brands"
-        case 6:
-            return "Recommended for you"
-        default:
-            return nil
-        }
+        let sectionType = model[section]
+        return sectionType.category?.categoryName
+//        switch section {
+//        case 0:
+//            return ""
+//        case 1:
+//            return "Categories"
+//        case 2:
+//            return "Featured Products"
+//        case 3:
+//            return "Hot Deals Of TheDay"
+//        case 4:
+//            return ""
+//        case 5:
+//            return "Popular Brands"
+//        case 6:
+//            return "Recommended for you"
+//        default:
+//            return nil
+//        }
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
+        let sectionType = model[indexPath.section].category?.categoryName
+        switch sectionType {
+        case "Fashion":
             let cell = homeTableView.dequeueReusableCell(withIdentifier: ShopBannerTableViewCell.reuseIdentifier, for: indexPath) as! ShopBannerTableViewCell
+            cell.configure(model: self.hotDealBanner)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
         
-        case 1:
+        case "Mobile":
             let cell = homeTableView.dequeueReusableCell(withIdentifier: CategoriesTableViewCell.reuseIdentifier, for: indexPath) as! CategoriesTableViewCell
+            
 
 //            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             cell.backgroundColor = .red
             return cell
             
-        case 2:
+        case "Featured Products":
             let cell = homeTableView.dequeueReusableCell(withIdentifier: FeaturedTableViewCell.reuseIdentifier, for: indexPath) as! FeaturedTableViewCell
+            
+           
+            cell.configure(model: self.featuredProduct)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
-        case 3 :
+            
+        case "Hot Deals" :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: HotDealsTableViewCell.reuseIdentifier, for: indexPath) as! HotDealsTableViewCell
+            cell.configure(model: self.hotDeal)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
-            
-        case 4:
-            
+
+        case "Hot Deals Banner":
+
             let cell = homeTableView.dequeueReusableCell(withIdentifier: ShopBannerTableViewCell.reuseIdentifier, for: indexPath) as! ShopBannerTableViewCell
+            cell.configure(model: self.hotDealBanner)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
-            
-        case 5 :
+
+        case "Popular Brand" :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: PopularBrandTableViewCell.reuseIdentifier, for: indexPath) as! PopularBrandTableViewCell
+            cell.configure(model: self.popularBrand)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
-        
+
         default :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: RecommendedTableViewCell.reuseIdentifier, for: indexPath) as! RecommendedTableViewCell
+            cell.configure(model: self.recommendedForYou)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
         }

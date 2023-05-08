@@ -13,7 +13,7 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
     //    private var list: [BannerModel]?
     
     let pageControl = UIPageControl()
-    
+    var model = [HotDealBanner]()
     // Add collectionView
     private let homeCollectionView: UICollectionView = {
         
@@ -68,6 +68,13 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
         homeCollectionView.register(BannerCell.self, forCellWithReuseIdentifier: BannerCell.identifier)
         
     }
+    
+    func configure(model: [HotDealBanner]) {
+            self.model = model
+        homeCollectionView.reloadData()
+        }
+    
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -76,12 +83,13 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
 extension ShopBannerTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return model.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BannerCell", for: indexPath) as! BannerCell
-        cell.setupCollectionCell(with: "banner\(indexPath.row + 1)")
+        let item = model[indexPath.row]
+        cell.setupCollectionCell(with: "\(item.image ?? "")")
         return cell
     }
     

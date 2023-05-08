@@ -12,6 +12,8 @@ class HotDealsTableViewCell: UITableViewCell {
 
     private let cellReuseIdentifier = "HotDealsTableViewCell"
     
+    var model = [HotDealsOfTheDay]()
+    
     private let hotDealsCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
@@ -49,6 +51,10 @@ class HotDealsTableViewCell: UITableViewCell {
         hotDealsCollectionView.register(HotDealsCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
 
     }
+    func configure(model: [HotDealsOfTheDay]) {
+            self.model = model
+            hotDealsCollectionView.reloadData()
+        }
 
     
     required init?(coder: NSCoder) {
@@ -58,12 +64,16 @@ class HotDealsTableViewCell: UITableViewCell {
 extension HotDealsTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return model.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! HotDealsCell
+        let item = model[indexPath.row]
+        cell.productTitleLabel.text = item.productName
+        cell.configure(with: item)
         return cell
+       
     }
 }
 

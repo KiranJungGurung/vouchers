@@ -6,10 +6,11 @@
 //
 
 import UIKit
-
 class FeaturedTableViewCell: UITableViewCell {
-
+    
     private let cellReuseIdentifier = "FeaturedTableViewCell"
+    
+    var model = [FeaturedProduct]()
     
     private let featuredCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
@@ -30,7 +31,6 @@ class FeaturedTableViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
         contentView.addSubview(featuredCollectionView)
         
-
         
         // add datasource and delegate protocol
         
@@ -49,20 +49,32 @@ class FeaturedTableViewCell: UITableViewCell {
         featuredCollectionView.register(FeaturedCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
 
     }
-
+ 
+    func configure(model: [FeaturedProduct]) {
+            self.model = model
+            featuredCollectionView.reloadData()
+        }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+   
+   
 }
 extension FeaturedTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return model.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! FeaturedCell
+        
+        // add model and cell.configure
+        
+        let item = model[indexPath.row]
+        cell.configure(with: item)
         return cell
     }
     
@@ -75,3 +87,4 @@ extension FeaturedTableViewCell: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 180, height: 300)
     }
 }
+

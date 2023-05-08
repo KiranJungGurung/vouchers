@@ -13,6 +13,8 @@ class RecommendedTableViewCell: UITableViewCell {
 
     private let cellReuseIdentifier = "RecommendedTableViewCell"
     
+    var model = [RecommendedForYou]()
+    
     private let recommendedCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
@@ -53,6 +55,10 @@ class RecommendedTableViewCell: UITableViewCell {
         recommendedCollectionView.register(RecommendedCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
 
     }
+    func configure(model: [RecommendedForYou]) {
+            self.model = model
+            recommendedCollectionView.reloadData()
+        }
 
     
     required init?(coder: NSCoder) {
@@ -64,11 +70,14 @@ class RecommendedTableViewCell: UITableViewCell {
 extension RecommendedTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        2
+        model.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! RecommendedCell
+        let item = model[indexPath.row]
+        cell.productTitleLabel.text = item.productName
+        cell.configure(with: item)
         return cell
     }
     

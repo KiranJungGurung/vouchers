@@ -27,7 +27,7 @@ class CategoryCell: UICollectionViewCell {
                                   
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "Mobile"
+//        label.text = "Mobile"
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +58,12 @@ class CategoryCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
 
-    }   
+    }
+//    func configure(with model: Category) {
+//       categoryLabel.text = model.categoryName
+//        
+//       
+//    }
 }
 
 

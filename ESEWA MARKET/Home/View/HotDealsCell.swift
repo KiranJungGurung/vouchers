@@ -30,9 +30,9 @@ class HotDealsCell: UICollectionViewCell {
         
     }()
     
-    private let productTitleLabel: UILabel = {
+     var productTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Jacket"
+//        label.text = "Jacket"
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +42,7 @@ class HotDealsCell: UICollectionViewCell {
     
     private let productSubTitleLabel: UILabel = {
         let subLabel = UILabel()
-        subLabel.text = "IN STOCK - 99 SHOP"
+//        subLabel.text = "IN STOCK - 99 SHOP"
         subLabel.textColor = .gray
         subLabel.font = .systemFont(ofSize: 10, weight: .medium)
         subLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +52,7 @@ class HotDealsCell: UICollectionViewCell {
     
     private let priceLabel: UILabel = {
         let priceLabel = UILabel()
-        priceLabel.text = "Rs.3000.00"
+//        priceLabel.text = "Rs.3000.00"
         priceLabel.font = UIFont.systemFont(ofSize: 16)
         priceLabel.textAlignment = .left
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -166,5 +166,10 @@ class HotDealsCell: UICollectionViewCell {
             fatalError("init(coder:) has not been implemented")
             
         }
-        
+    func configure(with model: HotDealsOfTheDay) {
+        productTitleLabel.text = model.productName
+        productSubTitleLabel.text = model.productDesc
+        priceLabel.text = "Price: \(model.price ?? 1)"
     }
+        
+}

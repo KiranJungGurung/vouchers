@@ -11,13 +11,13 @@ class PopularBrandCell: UICollectionViewCell {
     
     static let identifier = "PopularBrandCell"
     
-    private let containerView: UIView = {
+    var containerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         return containerView
     }()
     
-    private let PopularBrandImageView: UIImageView = {
+    var PopularBrandImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "nivea")
         imageView.contentMode = .scaleAspectFit
@@ -30,9 +30,9 @@ class PopularBrandCell: UICollectionViewCell {
         
     }()
     
-    private let productTitleLabel: UILabel = {
+    var productTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Nivea Body Lotion"
+//        label.text = "Nivea Body Lotion"
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -40,9 +40,9 @@ class PopularBrandCell: UICollectionViewCell {
         return label
     }()
     
-    private let productSubTitleLabel: UILabel = {
+    var productSubTitleLabel: UILabel = {
         let subLabel = UILabel()
-        subLabel.text = "75 ML - NIVEA"
+//        subLabel.text = "75 ML - NIVEA"
         subLabel.textColor = .gray
         subLabel.font = .systemFont(ofSize: 10, weight: .medium)
         subLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -50,16 +50,16 @@ class PopularBrandCell: UICollectionViewCell {
         return subLabel
     }()
     
-    private let priceLabel: UILabel = {
+    var priceLabel: UILabel = {
         let priceLabel = UILabel()
-        priceLabel.text = "Rs.134.00"
+//        priceLabel.text = "Rs.134.00"
         priceLabel.font = UIFont.systemFont(ofSize: 16)
         priceLabel.textAlignment = .left
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.textColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
         return priceLabel
     }()
-    private let likeButton: UIButton = {
+    var likeButton: UIButton = {
             let likeButton = UIButton()
           likeButton.contentMode = .scaleAspectFit
           likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -72,7 +72,7 @@ class PopularBrandCell: UICollectionViewCell {
     
         //need to make separate uiview and pin add button there
     
-    private let addContainerView: UIView = {
+    var addContainerView: UIView = {
         let addView = UIView()
         addView.translatesAutoresizingMaskIntoConstraints = false
         addView.backgroundColor  = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
@@ -163,7 +163,6 @@ class PopularBrandCell: UICollectionViewCell {
             addButton.widthAnchor.constraint(equalToConstant: 20),
             addButton.heightAnchor.constraint(equalToConstant: 20)
             
-        
             
         ])
         
@@ -173,6 +172,12 @@ class PopularBrandCell: UICollectionViewCell {
             fatalError("init(coder:) has not been implemented")
             
         }
+    func configure(with model: PopularBrand) {
+        productTitleLabel.text = model.productName
+        productSubTitleLabel.text = model.productDesc
+        priceLabel.text = "Price: \(model.price ?? 1)"
+    }
+    
         
     }
 
