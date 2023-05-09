@@ -7,6 +7,9 @@
 
 import Foundation
 import UIKit
+import Alamofire
+import SwiftyJSON
+
 
 struct Product {
     var category: Categories?
@@ -14,6 +17,7 @@ struct Product {
 //    var productName: String?
 //    var productDesc: String?
 //    var price: Double?
+    
     
 }
 
@@ -34,6 +38,12 @@ struct FeaturedProduct {
     var productName: String?
     var productDesc: String?
     var price: Double?
+    
+    init(json: JSON) {
+        self.productName = json["title"].string
+        self.productDesc = json["description"].string
+        self.price = json["price"].double
+    }
     
 }
 

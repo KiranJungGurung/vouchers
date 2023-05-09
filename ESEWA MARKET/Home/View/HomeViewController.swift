@@ -6,6 +6,9 @@
 
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+
 
 class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDelegate {
     var searchController = UISearchController(searchResultsController: nil)
@@ -18,7 +21,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     }()
     
     let footerView = UIView()
-    var presenter: HomePresenter?
+    var presenter: EventsPresenter?
     var model = [Product]()
     var featuredProduct = [FeaturedProduct]()
     var hotDeal = [HotDealsOfTheDay]()
@@ -59,8 +62,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     private func setupTableView() {
         homeTableView.delegate = self
         homeTableView.dataSource = self
-        self.presenter = HomePresenter(delegate: self, view: self)
-        presenter?.updateView()
+        self.presenter = EventsPresenter(delegate: self)
+//        presenter?.updateView()
+        presenter?.fetch()
 
         homeTableView.estimatedRowHeight = 300
         homeTableView.rowHeight = UITableView.automaticDimension
