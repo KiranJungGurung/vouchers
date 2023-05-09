@@ -10,7 +10,11 @@ class ProductInfoTableViewCell: UITableViewCell {
     
     private let identifier = "ProductInfoTableViewCell"
     
-    private let productContainerView: UIView = {
+//    var model = [ProductInfo]()
+    
+    var table = UITableView()
+    
+    var productContainerView: UIView = {
         let myContainerView = UIView()
         myContainerView.translatesAutoresizingMaskIntoConstraints = false
         myContainerView.backgroundColor = .white
@@ -19,7 +23,7 @@ class ProductInfoTableViewCell: UITableViewCell {
         
     }()
     
-    private let productTitleLabel: UILabel = {
+    var productTitleLabel: UILabel = {
         let productTitle = UILabel()
 //        productTitle.text = "Jacket In Nylon"
         productTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +33,7 @@ class ProductInfoTableViewCell: UITableViewCell {
         return productTitle
     }()
     
-    private let priceLabel: UILabel = {
+    var priceLabel: UILabel = {
         let pricelbl = UILabel()
 //        pricelbl.text = "Rs.2500.00"
         pricelbl.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +43,7 @@ class ProductInfoTableViewCell: UITableViewCell {
         return pricelbl
     }()
     
-    private let priceCrossedLabel: UILabel = {
+    var priceCrossedLabel: UILabel = {
         let crossedPricelbl = UILabel()
         crossedPricelbl.translatesAutoresizingMaskIntoConstraints = false
         crossedPricelbl.textAlignment = .left
@@ -90,8 +94,15 @@ class ProductInfoTableViewCell: UITableViewCell {
             
             
         ])
+        
      
     }
+    
+//    func configure(model: [ProductInfo]) {
+//        self.model = model
+////        productContainerView.reloadData()
+//    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

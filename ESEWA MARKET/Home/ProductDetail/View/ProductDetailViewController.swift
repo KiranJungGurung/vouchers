@@ -6,16 +6,17 @@
 
 import UIKit
 
-class ProductDetailViewController: UIViewController, UITableViewDelegate,ProductDetailProtocolDelegate{
+class ProductDetailViewController: UIViewController, UITableViewDelegate{
+   
     
-    // define presenter and model
+//    var presenter: ProductDetailPresenter?
+//    var model = [ProductDetail]()
     
-    var presenter: ProductDetailPresenter?
-    var model = [ProductDetail]()
-    var productImage = [ProductImage]()
+    /*var productImage = [ProductImage]()
     var productInfo = [ProductInfo]()
     var productDescription = [ProductDescription]()
     var productCalculation = [ProductCalculation]()
+     */
 
     private let productDetailTableView: UITableView = {
         let productTable = UITableView()
@@ -69,9 +70,10 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate,Product
         productDetailTableView.separatorStyle = .none
         
         //add presenter and populatetableview
-        self.presenter = ProductDetailPresenter(delegate: self, view: self)
-        presenter?.updateView()
         
+//        presenter = ProductDetailPresenter(delegate: self, view: self)
+//        presenter?.updateView()
+//
         
     }
     
@@ -79,7 +81,10 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate,Product
         super.viewDidLayoutSubviews()
         productDetailTableView.frame = view.bounds
     }
-    // confirming productdetail protocols
+//    func displayProductList(model: [ProductDetailProtocolDelegate]) {
+//        productDetailTableView.reloadData()
+//    }
+     /*confirming productdetail protocols
     func displayProductDetailItems(model: [ProductDetail], productImage: [ProductImage], productInfo: [ProductInfo], productDescription: [ProductDescription], productCalculation: [ProductCalculation]) {
         self.model = model
         self.productImage = productImage
@@ -87,8 +92,9 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate,Product
         self.productDescription = productDescription
         self.productCalculation = productCalculation
         productDetailTableView.reloadData()
-        
+
     }
+      */
     
 
 }
@@ -97,7 +103,7 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate,Product
 extension ProductDetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return mySections.count
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -110,10 +116,10 @@ extension ProductDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let sectionType = model[section]
-        return sectionType.section?.sectionName
+//        let sectionType = model[section]
+//        return sectionType.section?.sectionName
         
-        /*
+        
         switch mySections[section] {
         case 0:
             return ""
@@ -124,7 +130,7 @@ extension ProductDetailViewController: UITableViewDataSource {
         default:
             return nil
         }
-         */
+        
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -168,30 +174,34 @@ extension ProductDetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch mySections[indexPath.section] {
-        case 0:
-            let cell = productDetailTableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.reuseIdentifier, for: indexPath) as! PhotoTableViewCell
-            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
-            tableView.separatorStyle = .singleLine
+//        let sectionType = model[indexPath.section].section?.sectionName
+//        switch sectionType {
+            case 0:
+                let cell = productDetailTableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.reuseIdentifier, for: indexPath) as! PhotoTableViewCell
+//                let item = presenter?.productDetail.first
+//                cell.configure(model: self.productImage)
+                cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
+                tableView.separatorStyle = .singleLine
+                
+                return cell
+            case 1:
+                let cell = productDetailTableView.dequeueReusableCell(withIdentifier: ProductInfoTableViewCell.reuseIdentifier, for: indexPath) as! ProductInfoTableViewCell
             
-            return cell
-        case 1:
-            let cell = productDetailTableView.dequeueReusableCell(withIdentifier: ProductInfoTableViewCell.reuseIdentifier, for: indexPath) as! ProductInfoTableViewCell
-            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
-            tableView.separatorStyle = .singleLine
-            
-            return cell
-            
-        case 2:
-            let cell = productDetailTableView.dequeueReusableCell(withIdentifier: DescriptionView.reuseIdentifier, for: indexPath) as! DescriptionView
-            cell.descLabel.text = "Approx. model measurements: height:5'10 bust 31-1/2,waist: 24"
-            return cell
-            
-        default:
-            let cell = productDetailTableView.dequeueReusableCell(withIdentifier: FooterCell.reuseIdentifier, for: indexPath) as! FooterCell
-            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
-            return cell
-            
-            
+                cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
+                tableView.separatorStyle = .singleLine
+    
+                return cell
+    
+            case 2:
+                let cell = productDetailTableView.dequeueReusableCell(withIdentifier: DescriptionView.reuseIdentifier, for: indexPath) as! DescriptionView
+                cell.descLabel.text = "Approx. model measurements: height:5'10 bust 31-1/2,waist: 24"
+                return cell
+                
+            default:
+                let cell = productDetailTableView.dequeueReusableCell(withIdentifier: FooterCell.reuseIdentifier, for: indexPath) as! FooterCell
+                cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
+                return cell
+        
         }
         
         

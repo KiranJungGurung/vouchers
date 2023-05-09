@@ -9,6 +9,28 @@
 
 import UIKit
 
+
+//3RD APPROACH
+
+//struct ProductDetail {
+//    var productImages: UIImage?
+//    var productName: String?
+//    var priceLabel: Double?
+//    var discountpriceLabel: Double?
+//    var productDescription: String
+////    var productCalculation: Total?
+//    
+//}
+
+//struct Total{
+//    var productName: String?
+//    var totalPrice: Double?
+//
+//    }
+
+
+// SECOND APPROACH
+/*
 struct ProductDetail{
     var section: Section?
     
@@ -37,41 +59,26 @@ struct ProductCalculation {
     var totalPrice: Double?
     
 }
-//struct ProductDetailModel {
-//    var productImages: [UIImage]
-//    var productName: String?
-//    var priceLabel: Double?
-//    var discountpriceLabel: Double?
-//    var productDescription: description?
-//    var totalPrice: Double?
-//
-//}
+*/
 
-//struct description {
-////    var checkImage: String?
-//    var descLabel: String?
-//
-//
-//}
+/*
+ // FIRST APPROACH
+struct ProductDetailModel {
+    var productImages: [UIImage]
+    var productName: String?
+    var priceLabel: Double?
+    var discountpriceLabel: Double?
+    var productDescription: description?
+    var totalPrice: Double?
+
+}
+
+struct description {
+    var checkImage: String?
+    var descLabel: String?
 
 
-//import Alamofire
-//import SwiftyJSON
-//
-//struct product {
-//    let id: Int
-//    let title: String
-//    let price: Double
-//    let description: String
-//    let category: String
-//    let imageUrl: URL?
-//
-//    init(json: JSON) {
-//        id = json["id"].intValue
-//        title = json["title"].stringValue
-//        price = json["price"].doubleValue
-//        description = json["description"].stringValue
-//        category = json["category"].stringValue
-//        imageUrl = URL(string: json["image"].stringValue)
-//    }
-//}
+}
+ 
+*/
+
