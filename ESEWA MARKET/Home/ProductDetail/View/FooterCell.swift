@@ -20,7 +20,7 @@ class FooterCell: UITableViewCell {
         return myfooterView
     }()
     
-    private let myCheckOutTotal: UILabel = {
+    private let checkOutTotal: UILabel = {
         let total = UILabel()
 //        total.text = "Jacket in Nylon - Celene"
         total.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +40,7 @@ class FooterCell: UITableViewCell {
         return totalPrice
     }()
     
-    private let myCheckOutButton: UIButton = {
+    private let checkOutButton: UIButton = {
         let checkOutButton = UIButton()
         checkOutButton.translatesAutoresizingMaskIntoConstraints = false
         checkOutButton.setTitle("ADD TO CART", for: .normal)
@@ -57,9 +57,9 @@ class FooterCell: UITableViewCell {
         
         contentView.backgroundColor = .clear
         contentView.addSubview(footerView)
-        footerView.addSubview(myCheckOutTotal)
+        footerView.addSubview(checkOutTotal)
         footerView.addSubview(totalPriceLabel)
-        footerView.addSubview(myCheckOutButton)
+        footerView.addSubview(checkOutButton)
         
         //MARK: - ADD CONSTRAINTS INTO DESCRIPTION CONTAINERVIEW
         
@@ -71,21 +71,21 @@ class FooterCell: UITableViewCell {
             footerView.heightAnchor.constraint(equalToConstant: 100),
             
             
-            myCheckOutTotal.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 8),
-            myCheckOutTotal.leadingAnchor.constraint(equalTo: self.footerView.leadingAnchor, constant:8),
-            myCheckOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -8),
+            checkOutTotal.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 8),
+            checkOutTotal.leadingAnchor.constraint(equalTo: self.footerView.leadingAnchor, constant:8),
+            checkOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -8),
             
             // totalPriceLabel
-            totalPriceLabel.topAnchor.constraint(equalTo: myCheckOutTotal.bottomAnchor),
-            totalPriceLabel.leadingAnchor.constraint(equalTo: myCheckOutTotal.leadingAnchor),
+            totalPriceLabel.topAnchor.constraint(equalTo: checkOutTotal.bottomAnchor),
+            totalPriceLabel.leadingAnchor.constraint(equalTo: checkOutTotal.leadingAnchor),
             totalPriceLabel.heightAnchor.constraint(equalToConstant: 30),
             
             // pin Checkout button
-            myCheckOutButton.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 16),
-            myCheckOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: 16),
-            myCheckOutButton.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -16),
-            myCheckOutButton.widthAnchor.constraint(equalToConstant: 170),
-            myCheckOutButton.heightAnchor.constraint(equalToConstant: 40),
+            checkOutButton.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 16),
+            checkOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: 16),
+            checkOutButton.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -16),
+            checkOutButton.widthAnchor.constraint(equalToConstant: 170),
+            checkOutButton.heightAnchor.constraint(equalToConstant: 40),
             
             
             
@@ -99,5 +99,11 @@ class FooterCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    func configure(with model: ProductDetail) {
+        checkOutTotal.text = model.productName
+        totalPriceLabel.text = "\(model.price ?? 00)"
+
+        
+      }
             
-    }
+}

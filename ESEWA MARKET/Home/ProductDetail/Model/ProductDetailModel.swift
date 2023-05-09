@@ -12,21 +12,21 @@ import UIKit
 
 //3RD APPROACH
 
-//struct ProductDetail {
-//    var productImages: UIImage?
-//    var productName: String?
-//    var priceLabel: Double?
-//    var discountpriceLabel: Double?
-//    var productDescription: String
-////    var productCalculation: Total?
-//    
+struct ProductDetail {
+    var productImages: UIImage?
+    var productName: String?
+    var price: Double?
+    var discountpriceLabel: Double?
+    var productDescription: String?
+//    var productCalculation: Total?
+    
+}
+//struct Desc {
+//    var checkMark: UIImage?
+//    var description: String?
 //}
 
-//struct Total{
-//    var productName: String?
-//    var totalPrice: Double?
-//
-//    }
+
 
 
 // SECOND APPROACH

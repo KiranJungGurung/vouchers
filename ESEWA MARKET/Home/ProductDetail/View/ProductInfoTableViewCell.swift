@@ -10,15 +10,11 @@ class ProductInfoTableViewCell: UITableViewCell {
     
     private let identifier = "ProductInfoTableViewCell"
     
-//    var model = [ProductInfo]()
-    
-    var table = UITableView()
-    
+
     var productContainerView: UIView = {
         let myContainerView = UIView()
         myContainerView.translatesAutoresizingMaskIntoConstraints = false
         myContainerView.backgroundColor = .white
-        
         return myContainerView
         
     }()
@@ -98,13 +94,17 @@ class ProductInfoTableViewCell: UITableViewCell {
      
     }
     
-//    func configure(model: [ProductInfo]) {
-//        self.model = model
-////        productContainerView.reloadData()
-//    }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func configure(with model: ProductDetail) {
+        productTitleLabel.text = model.productName
+        priceLabel.text = "\(model.price ?? 00)"
+        priceCrossedLabel.text = "\(model.discountpriceLabel ?? 00)"
+        
+      }
     
 }

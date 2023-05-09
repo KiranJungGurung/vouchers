@@ -6,11 +6,12 @@
 
 import UIKit
 
-class ProductDetailViewController: UIViewController, UITableViewDelegate{
+class ProductDetailViewController: UIViewController, UITableViewDelegate, ProductDetailProtocolDelegate{
+   
    
     
-//    var presenter: ProductDetailPresenter?
-//    var model = [ProductDetail]()
+    var presenter: ProductDetailPresenter?
+    var model = [ProductDetail]()
     
     /*var productImage = [ProductImage]()
     var productInfo = [ProductInfo]()
@@ -71,8 +72,8 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         
         //add presenter and populatetableview
         
-//        presenter = ProductDetailPresenter(delegate: self, view: self)
-//        presenter?.updateView()
+        presenter = ProductDetailPresenter(delegate: self, view: self)
+        presenter?.updateView()
 //
         
     }
@@ -81,9 +82,10 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         super.viewDidLayoutSubviews()
         productDetailTableView.frame = view.bounds
     }
-//    func displayProductList(model: [ProductDetailProtocolDelegate]) {
-//        productDetailTableView.reloadData()
-//    }
+    func displayProductList(model: [ProductDetail]) {
+        self.model = model
+        productDetailTableView.reloadData()
+    }
      /*confirming productdetail protocols
     func displayProductDetailItems(model: [ProductDetail], productImage: [ProductImage], productInfo: [ProductInfo], productDescription: [ProductDescription], productCalculation: [ProductCalculation]) {
         self.model = model
@@ -136,6 +138,7 @@ extension ProductDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if mySections[section] == 2 {
             
+            
             let footerView = UIView()
             footerView.translatesAutoresizingMaskIntoConstraints = false
             
@@ -176,20 +179,24 @@ extension ProductDetailViewController: UITableViewDataSource {
         switch mySections[indexPath.section] {
 //        let sectionType = model[indexPath.section].section?.sectionName
 //        switch sectionType {
-            case 0:
-                let cell = productDetailTableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.reuseIdentifier, for: indexPath) as! PhotoTableViewCell
-//                let item = presenter?.productDetail.first
-//                cell.configure(model: self.productImage)
-                cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
-                tableView.separatorStyle = .singleLine
-                
+        case 0:
+            let cell = productDetailTableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.reuseIdentifier, for: indexPath) as! PhotoTableViewCell
+            let item = model[indexPath.row]
+            cell.configure(with: item)
+//                cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
+//            tableView.separatorStyle = .singleLine
+//                
                 return cell
+            
             case 1:
                 let cell = productDetailTableView.dequeueReusableCell(withIdentifier: ProductInfoTableViewCell.reuseIdentifier, for: indexPath) as! ProductInfoTableViewCell
             
-                cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
-                tableView.separatorStyle = .singleLine
-    
+                   let item = model[indexPath.row]
+                   cell.configure(with: item)
+            
+//                cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
+//                tableView.separatorStyle = .singleLine
+//
                 return cell
     
             case 2:
@@ -199,6 +206,9 @@ extension ProductDetailViewController: UITableViewDataSource {
                 
             default:
                 let cell = productDetailTableView.dequeueReusableCell(withIdentifier: FooterCell.reuseIdentifier, for: indexPath) as! FooterCell
+                let item = model[indexPath.row]
+                cell.configure(with: item)
+     
                 cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
                 return cell
         

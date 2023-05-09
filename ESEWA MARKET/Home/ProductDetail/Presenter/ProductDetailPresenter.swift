@@ -53,19 +53,19 @@ class ProductDetailPresenter {
 
 
     
-/*
 
+*/
 
 protocol ProductDetailProtocolDelegate: NSObject {
-    func displayProductList(model: [ProductDetailProtocolDelegate])
+    func displayProductList(model: [ProductDetail])
 }
 
 class ProductDetailPresenter {
     
-    var productDetail = [ProductDetail(productImages: UIImage(named: "jacket"), productName: "Jacket In Nylon", priceLabel: 2500.00, discountpriceLabel: 500.00, productDescription: "V-neck")]
+    var productDetail = [ProductDetail(productImages: UIImage(named: "hoddie"), productName: "Jacket In Nylon", price: 2500, discountpriceLabel: 500, productDescription: "V-neck")]
 
-  var delegate: ProductDetailProtocolDelegate?
-  weak var view: ProductDetailViewController?
+    var delegate: ProductDetailProtocolDelegate?
+    weak var view: ProductDetailViewController?
 
     init(delegate: ProductDetailProtocolDelegate, view: ProductDetailViewController) {
         self.delegate = delegate
@@ -80,8 +80,7 @@ class ProductDetailPresenter {
         
         
         
+        
+        
     }
 }
-    
-*/
- */
