@@ -21,6 +21,8 @@ struct ProductDetail {
 //    var productCalculation: Total?
     
 }
+
+
 //struct Desc {
 //    var checkMark: UIImage?
 //    var description: String?
@@ -81,4 +83,5 @@ struct description {
 }
  
 */
+
 
