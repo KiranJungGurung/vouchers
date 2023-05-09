@@ -5,56 +5,84 @@
 //
 //  Created by Kiran Gurung on 05/05/2023.
 //
-
+import Foundation
 import UIKit
 
-
-//class AddCartItemPresenter {
-//    var itemList: [AddCartItemModel] = [AddCartItemModel(itemName: "Iphone", itemDescription: "This is my iphone", itemCount: 1, itemPrice: 2000.0),AddCartItemModel(itemName: "Airpods", itemDescription: "This is my airpods", itemCount: 1, itemPrice: 1000.0)]
-//
-////    var totalPrice = itemCount * itemPrice
-//
-//
-//    var delegate: AddItemToCartProtocol?
-//
-//    // weak var view: SecondPageViewController?
-//
-//    init(delegate: AddItemToCartProtocol) {
-//        self.delegate = delegate
-//    }
-//
-//    func populateTableView() {
-//        self.delegate?.displayItemList(model: itemList)
-//    }
-//
-//}
-
-protocol ProductDetailProtocol: AnyObject {
-    func displayProductItems(model: [ProductDetailModel] )
+protocol ProductDetailProtocolDelegate: NSObject {
+//    func displayProductItems(model: [ProductDetail]
+    func displayProductDetailItems(model: [ProductDetail], productImage: [ProductImage], productInfo: [ProductInfo], productDescription: [ProductDescription], productCalculation: [ProductCalculation])
 }
+
 
 
 class ProductDetailPresenter {
-    var images = ["hoodie", "jacket", "nivea", "t-shirt"]
+    let sections: [ProductDetail] = [
+        ProductDetail(section: Section(sectionName: "ProductImage")),
+        ProductDetail(section: Section(sectionName: "ProductInfo")),
+        ProductDetail(section: Section(sectionName: "Description")),
+        ProductDetail(section: Section(sectionName: "ProductCalculation")),
+    ]
     
-    var productDetails: [ProductDetailModel]  = [ProductDetailModel(productImages: [UIImage(named: "jacket")!],productName: "Jacket in Nylon", priceLabel: 230.0, discountpriceLabel: 50.0, productDescription: description(descLabel: "V-neck"), totalPrice: 5200.00)]
+    let productImage: [ProductImage] = [ProductImage(image: UIImage(named: "jacket"))]
+    
+    let productInfo: [ProductInfo] = [ProductInfo(productName: "Jacket In Nylong",price: 2500.00)]
+    
+    let productDescription: [ProductDescription] = [
+        ProductDescription(productCheckMark: UIImage(systemName: "checkmark.circle"), productDesc: "Approx. model measurements: height:5'10, bust:31-1/2, waist: 24"),
+        ProductDescription(productCheckMark: UIImage(systemName: "checkmark.circle"), productDesc: "V-neck"),
+        ProductDescription(productCheckMark: UIImage(systemName: "checkmark.circle"), productDesc: "Created for Macy's")
+    ]
+    
+    let productCalculation: [ProductCalculation] = [ProductCalculation(productName: "Jacket In Nylon - celene", totalPrice: 2500.00)]
+    
+    
+    weak var delegate: ProductDetailProtocolDelegate?
+       weak var view: ProductDetailViewController?
+
+       init(delegate: ProductDetailProtocolDelegate?, view: ProductDetailViewController?) {
+           self.delegate = delegate
+           self.view = view
+           
+       }
+
+       func updateView() {
+           self.delegate?.displayProductDetailItems(model: sections, productImage: productImage, productInfo: productInfo, productDescription: productDescription, productCalculation: productCalculation)
+           
+           
+           
+       }
+   }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    var images = ["hoodie", "jacket", "nivea", "t-shirt"]
+    
+//    var productDetails: [ProductDetailModel]  = [ProductDetailModel(productImages: [UIImage(named: "jacket")!],productName: "Jacket in Nylon", priceLabel: 230.0, discountpriceLabel: 50.0, productDescription: description(descLabel: "V-neck"), totalPrice: 5200.00)]
+//
+//
                                                  
-                                                 
-                                                 
-    var delegate: ProductDetailProtocol?
-    
-    weak var view: ProductDetailViewController?
-    
-    init(delegate: ProductDetailProtocol? = nil, view: ProductDetailViewController? = nil) {
-        self.delegate = delegate
-        self.view = view
-        
-    }
-    
-    func populateTableView() {
-        self.delegate?.displayProductItems(model: productDetails)
-    }
-}
+//    var delegate: ProductDetailProtocol?
+//
+//    weak var view: ProductDetailViewController?
+//
+//    init(delegate: ProductDetailProtocol? = nil, view: ProductDetailViewController? = nil) {
+//        self.delegate = delegate
+//        self.view = view
+//
+//    }
+//
+//    func populateTableView() {
+//        self.delegate?.displayProductItems(model: productDetails)
+//    }
+//}
 
 //import Alamofire
 //import SwiftyJSON

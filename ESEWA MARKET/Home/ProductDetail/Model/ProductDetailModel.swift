@@ -9,22 +9,50 @@
 
 import UIKit
 
-struct ProductDetailModel {
-    var productImages: [UIImage]
-    var productName: String?
-    var priceLabel: Double?
-    var discountpriceLabel: Double?
-    var productDescription: description?
-    var totalPrice: Double?
+struct ProductDetail{
+    var section: Section?
+    
+}
+struct Section {
+    var sectionName: String?
+    
+}
+struct ProductImage {
+    var image: UIImage?
     
 }
 
-struct description {
-//    var checkImage: String?
-    var descLabel: String?
-    
+struct ProductInfo {
+    var productName: String?
+    var price: Double?
+}
+
+struct ProductDescription {
+    var productCheckMark: UIImage?
+    var productDesc: String?
+}
+
+struct ProductCalculation {
+    var productName: String?
+    var totalPrice: Double?
     
 }
+//struct ProductDetailModel {
+//    var productImages: [UIImage]
+//    var productName: String?
+//    var priceLabel: Double?
+//    var discountpriceLabel: Double?
+//    var productDescription: description?
+//    var totalPrice: Double?
+//
+//}
+
+//struct description {
+////    var checkImage: String?
+//    var descLabel: String?
+//
+//
+//}
 
 
 //import Alamofire

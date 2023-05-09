@@ -10,8 +10,8 @@ import UIKit
 class HomeViewController: UIViewController, UITableViewDelegate {
 
     var searchController = UISearchController(searchResultsController: nil)
-
-    private let homeTableView: UITableView = {
+    
+    let homeTableView: UITableView = {
         let homeTable = UITableView()
         homeTable.backgroundColor = .white//.systemFill
         homeTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -116,7 +116,7 @@ class HomeViewController: UIViewController, UITableViewDelegate {
             return moreButton
         }()
         
-        cartButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+//        cartButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
 
         view.addSubview(footerView)
         footerView.addSubview(homeButton)
@@ -146,10 +146,10 @@ class HomeViewController: UIViewController, UITableViewDelegate {
             
         ])
     }
-    @objc func didTap() {
-        let viewcontroller = CartViewController()
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
-    }
+//    @objc func didTap() {
+//        let viewcontroller = CartViewController()
+//        self.navigationController?.pushViewController(viewcontroller, animated: true)
+//    }
 }
 
 extension HomeViewController: UITableViewDataSource {

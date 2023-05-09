@@ -6,13 +6,16 @@
 
 import UIKit
 
-class ProductDetailViewController: UIViewController, UITableViewDelegate,ProductDetailProtocol{
-   
+class ProductDetailViewController: UIViewController, UITableViewDelegate,ProductDetailProtocolDelegate{
     
     // define presenter and model
     
     var presenter: ProductDetailPresenter?
-    var model = [ProductDetailModel]()
+    var model = [ProductDetail]()
+    var productImage = [ProductImage]()
+    var productInfo = [ProductInfo]()
+    var productDescription = [ProductDescription]()
+    var productCalculation = [ProductCalculation]()
 
     private let productDetailTableView: UITableView = {
         let productTable = UITableView()
@@ -66,8 +69,9 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate,Product
         productDetailTableView.separatorStyle = .none
         
         //add presenter and populatetableview
-        self.presenter = ProductDetailPresenter(delegate: self)
-        presenter?.populateTableView()
+        self.presenter = ProductDetailPresenter(delegate: self, view: self)
+        presenter?.updateView()
+        
         
     }
     
@@ -76,10 +80,15 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate,Product
         productDetailTableView.frame = view.bounds
     }
     // confirming productdetail protocols
-    func displayProductItems(model: [ProductDetailModel]) {
-           self.model = model
-           productDetailTableView.reloadData()
-       }
+    func displayProductDetailItems(model: [ProductDetail], productImage: [ProductImage], productInfo: [ProductInfo], productDescription: [ProductDescription], productCalculation: [ProductCalculation]) {
+        self.model = model
+        self.productImage = productImage
+        self.productInfo = productInfo
+        self.productDescription = productDescription
+        self.productCalculation = productCalculation
+        productDetailTableView.reloadData()
+        
+    }
     
 
 }
@@ -101,6 +110,10 @@ extension ProductDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let sectionType = model[section]
+        return sectionType.section?.sectionName
+        
+        /*
         switch mySections[section] {
         case 0:
             return ""
@@ -111,6 +124,7 @@ extension ProductDetailViewController: UITableViewDataSource {
         default:
             return nil
         }
+         */
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

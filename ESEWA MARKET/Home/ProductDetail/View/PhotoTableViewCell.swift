@@ -6,9 +6,16 @@
 
 import UIKit
 
-class PhotoTableViewCell: UITableViewCell, UICollectionViewDelegate {
+class PhotoTableViewCell: UITableViewCell, UICollectionViewDelegate, ProductDetailProtocolDelegate {
+    func displayProductDetailItems(model: [ProductDetail], productImage: [ProductImage], productInfo: [ProductInfo], productDescription: [ProductDescription], productCalculation: [ProductCalculation]) {
+        <#code#>
+    }
+    
     
     private let identifier = "PhotoTableViewCell"
+    
+    var model = [ProductImage]()
+
     
     private let photoCollectionView: UICollectionView = {
         
@@ -52,6 +59,13 @@ class PhotoTableViewCell: UITableViewCell, UICollectionViewDelegate {
         photoCollectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.identifier)
 
     }
+    func displayProductDetailItems(model: [ProductDetail], productImage: [ProductImage], productInfo: [ProductInfo], productDescription: [ProductDescription], productCalculation: [ProductCalculation]) {
+        <#code#>
+    }
+    func configure(model: [ProductImage]) {
+                self.model = model
+            photoCollectionView.reloadData()
+        }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -63,12 +77,14 @@ class PhotoTableViewCell: UITableViewCell, UICollectionViewDelegate {
 extension PhotoTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return model.count
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
+        let item = model[indexPath.row]
+        cell.setupCollectionCell(with: imageView)
         return cell
     }
     

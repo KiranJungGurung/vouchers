@@ -22,7 +22,7 @@ class FooterCell: UITableViewCell {
     
     private let myCheckOutTotal: UILabel = {
         let total = UILabel()
-        total.text = "Jacket in Nylon - Celene"
+//        total.text = "Jacket in Nylon - Celene"
         total.translatesAutoresizingMaskIntoConstraints = false
         total.textAlignment = .left
         total.font = .systemFont(ofSize: 16, weight: .bold)
@@ -32,7 +32,7 @@ class FooterCell: UITableViewCell {
     
     private let totalPriceLabel: UILabel = {
         let totalPrice = UILabel()
-        totalPrice.text = "Rs.52,500.00"
+//        totalPrice.text = "Rs.52,500.00"
         totalPrice.translatesAutoresizingMaskIntoConstraints = false
         totalPrice.textAlignment = .left
         totalPrice.font = .systemFont(ofSize: 18, weight: .medium)

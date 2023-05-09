@@ -31,11 +31,11 @@ class PhotoCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             productImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-             productImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 100),
-             productImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            productImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 100),
+            productImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
            
-             productImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-             productImageView.heightAnchor.constraint(equalToConstant: 300)
+            productImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            productImageView.heightAnchor.constraint(equalToConstant: 300)
          ])
     }
     

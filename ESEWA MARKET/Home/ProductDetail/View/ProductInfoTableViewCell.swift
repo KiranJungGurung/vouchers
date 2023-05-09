@@ -21,7 +21,7 @@ class ProductInfoTableViewCell: UITableViewCell {
     
     private let productTitleLabel: UILabel = {
         let productTitle = UILabel()
-        productTitle.text = "Jacket In Nylon"
+//        productTitle.text = "Jacket In Nylon"
         productTitle.translatesAutoresizingMaskIntoConstraints = false
         productTitle.textAlignment = .left
         productTitle.font = .systemFont(ofSize: 18, weight: .bold)
@@ -31,7 +31,7 @@ class ProductInfoTableViewCell: UITableViewCell {
     
     private let priceLabel: UILabel = {
         let pricelbl = UILabel()
-        pricelbl.text = "Rs.2500.00"
+//        pricelbl.text = "Rs.2500.00"
         pricelbl.translatesAutoresizingMaskIntoConstraints = false
         pricelbl.textAlignment = .left
         pricelbl.font = .systemFont(ofSize: 26, weight: .medium)
