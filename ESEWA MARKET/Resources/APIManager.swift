@@ -106,7 +106,7 @@ protocol HomeProtocolDelegate: NSObject {
 
 class FetchProduct {
     
-    var delegate: HomeProtocolDelegate? 
+    var delegate: HomeProtocolDelegate?
     
     init(delegate: HomeProtocolDelegate? = nil) {
         self.delegate = delegate
@@ -135,28 +135,30 @@ class FetchProduct {
                 let products = Product(json: json)
                 self.delegate?.didFetchProduct(model:products)
                 
-//
-//                for i in 0..<arrayCount {
-//
-//                    let title = json["title"].string ?? "N/A"
-//                    print("Product Name: \(title)")
-//
-//                    let price = json["price"].float ?? "N/A"
-//                    print("Product Price: \(price)")
-//
-//                    let category = json["category"].string ?? "N/A"
-//                    print("Product Category: \(category)")
-//
-//                }
-            
+                //
+                //                for i in 0..<arrayCount {
+                //
+                //                    let title = json["title"].string ?? "N/A"
+                //                    print("Product Name: \(title)")
+                //
+                //                    let price = json["price"].float ?? "N/A"
+                //                    print("Product Price: \(price)")
+                //
+                //                    let category = json["category"].string ?? "N/A"
+                //                    print("Product Category: \(category)")
+                //
+                //                }
                 
-//                
-//                let products = Product(json: json)
-//
+                
+                //
+                //                let products = Product(json: json)
+                //
             case .failure(let error):
                 print(error)
                 
+            }
         }
+        
     }
-       
 }
+

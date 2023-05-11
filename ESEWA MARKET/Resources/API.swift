@@ -143,48 +143,5 @@ final class APIManager {
     
 }
 
-*/
 
 
-//AF.request("https://fakestoreapi.com/products").responseJSON { response in
-//    debugPrint(response)
-//
-//    if let json = response.value {
-//        print("JSON: \(json)")
-//    }
-//}
-
-import Alamofire
-import SwiftyJSON
-
-func makeAPIRequest() {
-  let url = "https://fakestoreapi.com/products"
-  
-  AF.request.responseJSON { response in
-      switch response.result {
-      case .success(let value):
-        let json = JSON(value)
-        // Use SwiftyJSON to access the data in the JSON object
-        print(json["data"])
-      case .failure(let error):
-        print(error)
-      }
-  }
-}
-
-import Alamofire
-
-final class NetworkManager {
-    deinit {
-        print("deinit networkmanager")
-    }
-    static let shared = NetworkManager()
-
-    func request<T>(path: String, onSuccess: @escaping (T) -> (), onError: @escaping (AFError) -> ()) where T:Codable {
-        AF.request().responseJSON{ response in
-            guard let model = response.value else { print(response.error as Any); return}
-            onSuccess(model)
-        }
-    }
-    
-}
