@@ -3,25 +3,25 @@
 //  ESEWA MARKET
 //
 //  Created by Kiran Gurung on 20/04/2023.
-
-import Alamofire
-import SwiftyJSON
+//
+//import Alamofire
+//import SwiftyJSON
 
 
 /*
-protocol ProductProtocol:AnyObject {
+protocol ProductProtocol:NSObject {
   func didReceiveResult(model: Product?)
 }
 
 class ProductAPI {
     
-    private let baseURL = "https://fakestoreapi.com"
+     let baseURL = "https:fakestoreapi.com"
     
 //    func fetchProduct() {
 //        getProducts { listOfFeaturedProducts in
-////            self.delegate.didFetchedListOfProducts(with list: [featuredproducts])
+//            self.delegate.didFetchedListOfProducts(with list: [featuredproducts])
 //        }
-//    }
+    }
 
     func getProducts(completion: @escaping ([FeaturedProduct]) -> Void) {
         let url = "\(baseURL)/products"
@@ -29,8 +29,57 @@ class ProductAPI {
         AF.request(url).responseJSON { response in
             switch response.result {
             case .success(let value):
+                
+                let json = try! JSON(data: data)
+                let arrayCount = json.array?.count ?? 0
+                for i in 0..<arrayCount {
+                    // ID
+                    let id = json[i]["id"].string ?? "N/A"
+                    print("ID: \(id)")
+                    
+                    // Employee Name
+                    let employeeName = json[i]["employee_name"].string ?? "N/A"
+                    print("Employee Name: \(employeeName)")
+                    
+                    // Employee Salary
+                    let employeeSalary = json[i]["employee_salary"].string ?? "N/A"
+                    print("Employee Salary: \(employeeSalary)")
+                    
+                    // Employee Age
+                    let employeeAge = json[i]["employee_age"].string ?? "N/A"
+                    print("Employee Age: \(employeeAge)")
+                    
+                    
+                    // Save data using your Model
+                    
+                    // Reload data of TableView/CollectionView
+                }
                 let json = JSON(value)
-                let products = json.arrayValue.map { FeaturedProduct(json: $0)}
+                let arrayCount = json.arrayValue.map { FeaturedProduct(json: $0)}
+                for i in 0..<arrayCount {
+                    // ID
+                    let id = json[i]["id"].string ?? "N/A"
+                    print("ID: \(id)")
+                    
+                    // Employee Name
+                    let employeeName = json[i]["employee_name"].string ?? "N/A"
+                    print("Employee Name: \(employeeName)")
+                    
+                    // Employee Salary
+                    let employeeSalary = json[i]["employee_salary"].string ?? "N/A"
+                    print("Employee Salary: \(employeeSalary)")
+                    
+                    // Employee Age
+                    let employeeAge = json[i]["employee_age"].string ?? "N/A"
+                    print("Employee Age: \(employeeAge)")
+                    
+                    
+                    // Save data using your Model
+                    
+                    // Reload data of TableView/CollectionView
+                }
+                let
+                
                 completion(products)
             case .failure(let error):
                 print("Error: \(error)")
@@ -41,8 +90,8 @@ class ProductAPI {
     }
 }
 
-
 */
+
 
 /*
 
@@ -105,3 +154,37 @@ final class APIManager {
 //    }
 //}
 
+import Alamofire
+import SwiftyJSON
+
+func makeAPIRequest() {
+  let url = "https://fakestoreapi.com/products"
+  
+  AF.request.responseJSON { response in
+      switch response.result {
+      case .success(let value):
+        let json = JSON(value)
+        // Use SwiftyJSON to access the data in the JSON object
+        print(json["data"])
+      case .failure(let error):
+        print(error)
+      }
+  }
+}
+
+import Alamofire
+
+final class NetworkManager {
+    deinit {
+        print("deinit networkmanager")
+    }
+    static let shared = NetworkManager()
+
+    func request<T>(path: String, onSuccess: @escaping (T) -> (), onError: @escaping (AFError) -> ()) where T:Codable {
+        AF.request().responseJSON{ response in
+            guard let model = response.value else { print(response.error as Any); return}
+            onSuccess(model)
+        }
+    }
+    
+}

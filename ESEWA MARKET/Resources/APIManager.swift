@@ -32,6 +32,7 @@ class NetworkManager: NetworkManagerProtocol {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+ 
                 completion(.success(json.dictionaryObject ?? [:]))
                 
             case .failure(let error):
@@ -92,3 +93,70 @@ class NetworkManager: NetworkManagerProtocol {
 //    }
 //
 //}
+
+
+import Foundation
+import UIKit
+import Alamofire
+import SwiftyJSON
+
+protocol HomeProtocolDelegate: NSObject {
+    func didFetchProduct(model:Product?)
+}
+
+class FetchProduct {
+    
+    var delegate: HomeProtocolDelegate? 
+    
+    init(delegate: HomeProtocolDelegate? = nil) {
+        self.delegate = delegate
+        
+    }
+    func fetch() {
+        fetchProducts {[weak self] result in
+            switch result {
+            case .success(let model):
+                print(model)
+            case .failure(let error):
+                print(error.localizedDescription)
+                
+            }
+            
+        }
+    }
+    
+    func fetchProducts(completion: @escaping (Result<[Product], Error>) -> Void) {
+        let url = "https://fakestoreapi.com/products"
+        
+        AF.request(url).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let products = Product(json: json)
+                self.delegate?.didFetchProduct(model:products)
+                
+//
+//                for i in 0..<arrayCount {
+//
+//                    let title = json["title"].string ?? "N/A"
+//                    print("Product Name: \(title)")
+//
+//                    let price = json["price"].float ?? "N/A"
+//                    print("Product Price: \(price)")
+//
+//                    let category = json["category"].string ?? "N/A"
+//                    print("Product Category: \(category)")
+//
+//                }
+            
+                
+//                
+//                let products = Product(json: json)
+//
+            case .failure(let error):
+                print(error)
+                
+        }
+    }
+       
+}

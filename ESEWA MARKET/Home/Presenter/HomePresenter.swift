@@ -172,16 +172,28 @@
   }
   */*
  */
-
+/*
 import Alamofire
+import SwiftyJSON
+
 
 let url = "https://fakestoreapi.com/products"
-// In order to request data from API using Alamofire
+
 AF.request(url).responseJSON { response in
     switch response.result {
     case .success(let value):
+        let id = json["id"].string ?? "N/A"
+        print("ID: \(id)")
+        let title = json["employee_name"].string ?? "N/A"
+        print("Employee Name: \(employeeName)")
+        let employeeSalary = json["employee_salary"].string ?? "N/A"
+        print("Employee Salary: \(employeeSalary)")
+        let employeeAge = json["employee_age"].string ?? "N/A"
+        print("Employee Age: \(employeeAge)")
         print("Response: \(value)")
+        
     case .failure(let error):
         print("Error: \(error)")
     }
 }
+*/

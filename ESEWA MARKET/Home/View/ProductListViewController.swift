@@ -4,7 +4,9 @@
 //
 //  Created by Kiran Gurung on 10/05/2023.
 //
-
+/*
+ 
+ 
 import UIKit
 
 class ProductListViewController: UIViewController {
@@ -13,7 +15,7 @@ class ProductListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configuretion()
+        configuration()
         
         
     
@@ -52,4 +54,26 @@ extension ProductListViewController {
             }
         }
     }
+}
+*/
+
+import UIKit
+import Alamofire
+import SwiftyJSON
+
+class ProductListViewController: UIViewController {
+    
+    var products: Product?
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       
+        let url = "https://fakestoreapi.com/products"
+
+    
+        
+        print("\(products)")
+    }
+    
 }

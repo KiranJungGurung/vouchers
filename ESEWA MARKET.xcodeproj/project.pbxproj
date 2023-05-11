@@ -32,7 +32,6 @@
 		B3F60D532A0B4ADD003984D0 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F60D522A0B4ADD003984D0 /* ProductListViewController.swift */; };
 		B3F60D562A0BB238003984D0 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F60D552A0BB238003984D0 /* APIManager.swift */; };
 		B3F60D582A0BB310003984D0 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F60D572A0BB310003984D0 /* Presenter.swift */; };
-		B3F60D5B2A0BFCF9003984D0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F60D5A2A0BFCF9003984D0 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +64,6 @@
 		B3F60D522A0B4ADD003984D0 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 		B3F60D552A0BB238003984D0 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		B3F60D572A0BB310003984D0 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
-		B3F60D5A2A0BFCF9003984D0 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +102,6 @@
 		B3CA02F929F1A42F00D5185B /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B3F60D592A0BFCE6003984D0 /* VView Model */,
 				B3E925042A04A260007CF3DD /* Presenter */,
 				B3E925032A04A258007CF3DD /* Model */,
 				B3D1FF8E2A03A7F200335742 /* View */,
@@ -163,7 +160,6 @@
 		B3D51CDC29EE847900435BB3 /* ESEWA MARKET */ = {
 			isa = PBXGroup;
 			children = (
-				B3F60D542A0BB20D003984D0 /* New Group */,
 				B3D1FFAA2A03AB1E00335742 /* App */,
 				B3CA02F929F1A42F00D5185B /* Home */,
 				B3D51CEB29EE847A00435BB3 /* Info.plist */,
@@ -187,21 +183,6 @@
 				B3F60D572A0BB310003984D0 /* Presenter.swift */,
 			);
 			path = Presenter;
-			sourceTree = "<group>";
-		};
-		B3F60D542A0BB20D003984D0 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
-		B3F60D592A0BFCE6003984D0 /* VView Model */ = {
-			isa = PBXGroup;
-			children = (
-				B3F60D5A2A0BFCF9003984D0 /* ViewModel.swift */,
-			);
-			path = "VView Model";
 			sourceTree = "<group>";
 		};
 		C0663D8990985AD0B9E5967B /* Frameworks */ = {
@@ -331,7 +312,6 @@
 				B3F60D532A0B4ADD003984D0 /* ProductListViewController.swift in Sources */,
 				B3E9250A2A05FDB7007CF3DD /* HomeModel.swift in Sources */,
 				B3D1FF952A03A91C00335742 /* ShopBannerTableViewCell.swift in Sources */,
-				B3F60D5B2A0BFCF9003984D0 /* ViewModel.swift in Sources */,
 				B3D1FFA32A03AA6F00335742 /* PopularBrandCell.swift in Sources */,
 				B3F60D562A0BB238003984D0 /* APIManager.swift in Sources */,
 				B3D1FFA12A03AA3200335742 /* HotDealsCell.swift in Sources */,
