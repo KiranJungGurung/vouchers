@@ -6,6 +6,10 @@
 
 import Foundation
 
+struct Section {
+    var item: Int?
+}
+
 struct AddCartItemModel {
 //    var itemImage: String?
     var itemName: String

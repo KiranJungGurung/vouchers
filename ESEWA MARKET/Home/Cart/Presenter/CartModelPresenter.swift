@@ -12,10 +12,13 @@ protocol AddItemToCartProtocol: NSObject {
 
 }
 class AddCartItemPresenter {
-    var itemList: [AddCartItemModel] = [AddCartItemModel(itemName: "iphone", itemDescription: "This is my iphone", itemCount: 1, itemPrice: 2000.0),
-                                        AddCartItemModel(itemName: "Airpods", itemDescription: "This is my airpods", itemCount: 1, itemPrice: 1000.0)]
+    var itemList: [AddCartItemModel] = [
+        
+        AddCartItemModel(itemName: "iphone", itemDescription: "This is my iphone", itemCount: 1, itemPrice: 2000.0),
+        
+        AddCartItemModel(itemName: "Airpods", itemDescription: "This is my airpods", itemCount: 1, itemPrice: 1000.0)
+    ]
     
-//    var totalPrice = itemCount * itemPrice
     
     var delegate: AddItemToCartProtocol?
     
@@ -30,7 +33,17 @@ class AddCartItemPresenter {
         self.delegate?.displayItemList(model: itemList)
     }
     
+    var items: [AddCartItemModel] = []
+
+    func sectionHeaderTitle() -> String {
+        let itemCount = items.count
+        return "Items(\(itemCount))"
+    }
 }
+    
+    
+    
+
 
 /*
 

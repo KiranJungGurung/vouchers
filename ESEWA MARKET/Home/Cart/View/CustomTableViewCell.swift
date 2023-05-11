@@ -33,6 +33,7 @@ class CustomTableViewCell: UITableViewCell {
         containerView.layer.shadowOpacity = 0.4
         containerView.layer.shadowOffset = .zero
         containerView.backgroundColor = .white
+
         return containerView
         
     }()
@@ -156,7 +157,7 @@ class CustomTableViewCell: UITableViewCell {
     func configure(with model: AddCartItemModel) {
         itemName.text = model.itemName
         itemDescription.text = model.itemDescription
-        itemPrice.text = "\(model.itemPrice)"
+        itemPrice.text = "Rs\(model.itemPrice)"
         itemCountLabel.text = "\(model.itemCount)"
         
     }

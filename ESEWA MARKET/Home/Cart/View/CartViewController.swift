@@ -10,17 +10,17 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
     var presenter: AddCartItemPresenter?
     var model: [AddCartItemModel] = []
     
-//    var item = 2
-//    var count = 1
+    var items = [AddCartItemModel]().self
+    
     var totalPrice = 0.0
     
     // MARK: - Add Custom FooterView
     
-    private var footerView: UIView = {
-        let myfooterView = UIView()
-        myfooterView.translatesAutoresizingMaskIntoConstraints = false
-        myfooterView.backgroundColor = .white//.systemFill
-        return myfooterView
+    private var cartFooterView: UIView = {
+        let footerView = UIView()
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.backgroundColor = .white//.systemFill
+        return footerView
     }()
     
     private let itemCheckOutTotal: UILabel = {
@@ -92,7 +92,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         
         // add tableview to view
         view.addSubview(tableView)
-        view.addSubview(footerView)
+        view.addSubview(cartFooterView)
         view.addSubview(itemCheckOutTotal)
         view.addSubview(itemTotalPriceLabel)
         view.addSubview(itemCheckOutButton)
@@ -122,7 +122,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
-        tableView.separatorColor = .clear
+        tableView.separatorColor = .none
         
     }
     func displayItemList(model: [AddCartItemModel]) {
@@ -138,10 +138,10 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         
     }
     
-//    private func updateTotalPriceLabel() {
-//        itemTotalPriceLabel.text = "Rs.\(totalPrice)"
-//
-//    }
+    private func updateTotalPriceLabel() {
+        itemTotalPriceLabel.text = "Rs.\(totalPrice)"
+
+    }
     private func setupFooterView() {
         
         NSLayoutConstraint.activate([
@@ -149,16 +149,16 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
             
             // MARK: - Set Constraint of footerView
             
-            footerView.leadingAnchor.constraint(equalTo: self.tableView.leadingAnchor, constant: 0),
-            footerView.bottomAnchor.constraint(equalTo: self.tableView.bottomAnchor, constant: 0),
-            footerView.trailingAnchor.constraint(equalTo: self.tableView.trailingAnchor, constant: 0),
-            footerView.heightAnchor.constraint(equalToConstant: 100),
+            cartFooterView.leadingAnchor.constraint(equalTo: self.tableView.leadingAnchor, constant: 0),
+            cartFooterView.bottomAnchor.constraint(equalTo: self.tableView.bottomAnchor, constant: 0),
+            cartFooterView.trailingAnchor.constraint(equalTo: self.tableView.trailingAnchor, constant: 0),
+            cartFooterView.heightAnchor.constraint(equalToConstant: 100),
             
             // pin checkouttotal label
             
-            itemCheckOutTotal.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 8),
-            itemCheckOutTotal.leadingAnchor.constraint(equalTo: self.footerView.leadingAnchor, constant:8),
-            itemCheckOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -8),
+            itemCheckOutTotal.topAnchor.constraint(equalTo: self.cartFooterView.topAnchor, constant: 8),
+            itemCheckOutTotal.leadingAnchor.constraint(equalTo: self.cartFooterView.leadingAnchor, constant:8),
+            itemCheckOutTotal.trailingAnchor.constraint(equalTo: self.cartFooterView.trailingAnchor, constant: -8),
             
             // totalPriceLabel
             itemTotalPriceLabel.topAnchor.constraint(equalTo: itemCheckOutTotal.bottomAnchor),
@@ -166,9 +166,9 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
             itemTotalPriceLabel.heightAnchor.constraint(equalToConstant: 30),
             
             // pin Checkout button
-            itemCheckOutButton.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 16),
-            itemCheckOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: 16),
-            itemCheckOutButton.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -16),
+            itemCheckOutButton.topAnchor.constraint(equalTo: self.cartFooterView.topAnchor, constant: 16),
+            itemCheckOutTotal.trailingAnchor.constraint(equalTo: self.cartFooterView.trailingAnchor, constant: 16),
+            itemCheckOutButton.trailingAnchor.constraint(equalTo: self.cartFooterView.trailingAnchor, constant: -16),
             itemCheckOutButton.widthAnchor.constraint(equalToConstant: 170),
             itemCheckOutButton.heightAnchor.constraint(equalToConstant: 40)
             
@@ -212,9 +212,12 @@ extension CartViewController: UITableViewDataSource {
         return 1
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return item.count
-//    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let itemCount = items.count
+        return "Items(\(itemCount))"
+//
+        
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.count
