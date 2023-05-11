@@ -6,12 +6,13 @@
 
 import UIKit
 class CartViewController: UIViewController, AddItemToCartProtocol {
+   
+    
     
     var presenter: AddCartItemPresenter?
     var model: [AddCartItemModel] = []
-    
-    var items = [AddCartItemModel]().self
-    
+
+    var items = 1
     var totalPrice = 0.0
     
     // MARK: - Add Custom FooterView
@@ -125,7 +126,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         tableView.separatorColor = .none
         
     }
-    func displayItemList(model: [AddCartItemModel]) {
+    func displayCartItemList(model: [AddCartItemModel]) {
         self.model = model
         tableView.reloadData()
     }
@@ -189,23 +190,28 @@ extension CartViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        //                // show the delete pop up view
         let vc = DeletePopUpViewController()
-        vc.modalPresentationStyle = .popover
-        //                vc.contentSizeForViewInPopover.height = 300
-        vc.preferredContentSize.height = 50
-        // Keep animated value as false
-        // Custom Modal presentation animation will be handled in VC itself
-        self.present(vc, animated: true)
+        vc.onDeleteClicked = { deletedMessage in
+            self.presenter?.cartItemsList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            vc.dismiss(animated: true) {
+                self.tableView.reloadData()
+                print(deletedMessage)
+            }
+        }
+        vc.dismissVc() {
+            vc.dismiss(animated: true, completion: nil)
+            vc.modalPresentationStyle = .popover
+            vc.preferredContentSize.height = 50
+            self.present(vc, animated: true)
+        }
+        func didPressed() {
+            navigationController?.popViewController(animated: true)
+        }
         
-    }
-    @objc func didPressed() {
-        navigationController?.popViewController(animated: true)
     }
     
 }
-
-
 extension CartViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -213,8 +219,8 @@ extension CartViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let itemCount = items.count
-        return "Items(\(itemCount))"
+       
+        return "Items(\(items))"
 //
         
     }
@@ -241,11 +247,11 @@ extension CartViewController: UITableViewDataSource {
         //            }
         //        }
         
-//        cell.countChanged = { price in
-//            self.totalPrice += price
-//            self.updateTotalPriceLabel()
-//
-//        }
+        cell.countChanged = { price in
+            self.totalPrice += price
+            self.updateTotalPriceLabel()
+
+        }
         
         // update the view
         return cell

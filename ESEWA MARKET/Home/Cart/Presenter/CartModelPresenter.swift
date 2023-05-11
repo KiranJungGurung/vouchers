@@ -8,11 +8,11 @@
 import UIKit
 
 protocol AddItemToCartProtocol: NSObject {
-    func displayItemList(model: [AddCartItemModel])
+    func displayCartItemList(model: [AddCartItemModel])
 
 }
 class AddCartItemPresenter {
-    var itemList: [AddCartItemModel] = [
+    var cartItemsList: [AddCartItemModel] = [
         
         AddCartItemModel(itemName: "iphone", itemDescription: "This is my iphone", itemCount: 1, itemPrice: 2000.0),
         
@@ -30,15 +30,10 @@ class AddCartItemPresenter {
     }
     
     func updateView() {
-        self.delegate?.displayItemList(model: itemList)
+        self.delegate?.displayCartItemList(model: cartItemsList)
     }
     
-    var items: [AddCartItemModel] = []
-
-    func sectionHeaderTitle() -> String {
-        let itemCount = items.count
-        return "Items(\(itemCount))"
-    }
+   
 }
     
     

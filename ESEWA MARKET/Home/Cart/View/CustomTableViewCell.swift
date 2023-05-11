@@ -24,7 +24,7 @@ class CustomTableViewCell: UITableViewCell {
     
     // MARK: - Add ContainerView
     
-    private let itemContainerView: UIView = {
+    var itemContainerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layer.cornerRadius = 16
@@ -38,7 +38,7 @@ class CustomTableViewCell: UITableViewCell {
         
     }()
     
-    private let itemImage: UIImageView = {
+     var itemImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "jacket")
         imageView.contentMode = .scaleAspectFill
@@ -49,7 +49,7 @@ class CustomTableViewCell: UITableViewCell {
         
     }()
     
-    private let itemName: UILabel = {
+    var itemName: UILabel = {
         let itemLabel = UILabel()
         //        itemLabel.text = "Jacket on Nylon"
         itemLabel.textColor = .black
@@ -59,9 +59,8 @@ class CustomTableViewCell: UITableViewCell {
         return itemLabel
     }()
     
-    private let itemDescription: UILabel = {
+    var itemDescription: UILabel = {
         let desc = UILabel()
-        //        desc.text = "Celeine"
         desc.textColor = .gray
         desc.font = .systemFont(ofSize: 10, weight: .medium)
         desc.translatesAutoresizingMaskIntoConstraints = false
@@ -69,9 +68,8 @@ class CustomTableViewCell: UITableViewCell {
         return desc
     }()
     
-    private let itemPrice: UILabel = {
+    var itemPrice: UILabel = {
         let price = UILabel()
-        //        price.text = "Rs.19,500.00"
         price.font = UIFont.systemFont(ofSize: 16)
         price.textAlignment = .left
         price.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +81,7 @@ class CustomTableViewCell: UITableViewCell {
     
     // MARK: - Add CountView
     
-    private let itemCountView: UIView = {
+    var itemCountView: UIView = {
         let countView = UIView()
         countView.translatesAutoresizingMaskIntoConstraints = false
         countView.backgroundColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
@@ -94,7 +92,7 @@ class CustomTableViewCell: UITableViewCell {
         
     }()
     
-    private let itemSubButton: UIButton = {
+    var itemSubButton: UIButton = {
         let subButton = UIButton()
         subButton.contentMode = .scaleAspectFit
         subButton.setImage(UIImage(systemName: "minus"), for: .normal)
@@ -104,7 +102,7 @@ class CustomTableViewCell: UITableViewCell {
         return subButton
     }()
     
-    private let itemCountLabel: UILabel = {
+    var itemCountLabel: UILabel = {
         let count = UILabel()
         //        count.text = "01"
         count.font = UIFont.systemFont(ofSize: 14)
@@ -114,7 +112,7 @@ class CustomTableViewCell: UITableViewCell {
         return count
     }()
     
-    private let itemAddButton: UIButton = {
+    var itemAddButton: UIButton = {
         let addButton = UIButton()
         addButton.contentMode = .scaleAspectFit
         addButton.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -125,8 +123,8 @@ class CustomTableViewCell: UITableViewCell {
         
     }()
     
-    //    var quantity = 1
-    //    var productPrice =  19_500.00
+        var quantity = 1
+        var productPrice =  2000.00
     
     
     
@@ -146,9 +144,8 @@ class CustomTableViewCell: UITableViewCell {
         contentView.addSubview(itemCountLabel)
         contentView.addSubview(itemAddButton)
     }
-//        itemAddButton.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
-//        itemSubButton.addTarget(self, action: #selector(subButtonTapped(_:)), for: .touchUpInside)
-//    }
+       
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -165,6 +162,9 @@ class CustomTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         setupViews()
+        
+        itemAddButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        itemSubButton.addTarget(self, action: #selector(subButtonTapped), for: .touchUpInside)
     }
     
     private func setupViews() {
@@ -228,12 +228,12 @@ class CustomTableViewCell: UITableViewCell {
             itemAddButton.widthAnchor.constraint(equalToConstant: 10)
         ])
     }
-}
-    /*
-//    func calculatePrice(quantity: Int) -> Double {
-//        let productQuantityLabel = productPrice * Double(quantity)
-//        return productQuantityLabel
-//    }
+
+    func calculatePrice(quantity: Int) -> Double {
+        let productQuantityLabel = productPrice * Double(quantity)
+        return productQuantityLabel
+        
+    }
     
     func updatePriceLabel() {
         let updatedPrice = calculatePrice(quantity: quantity)
@@ -255,10 +255,11 @@ class CustomTableViewCell: UITableViewCell {
         if quantity > 1 {
             quantity -= 1
             updatePriceLabel()
+            updateCount()
         }
     }
     
     
 }
 
-*/
+
