@@ -10,9 +10,13 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-let baseURL = "https://fakestoreapi.com/"
-let getProductURL = baseURL + "products"
+//let baseURL = "https://fakestoreapi.com/"
+//let getProductURL = baseURL + "products"
 
-
+enum Constant {
+    enum API {
+        static let productURL = "https://fakestoreapi.com/products"
+    }
+}
 
 

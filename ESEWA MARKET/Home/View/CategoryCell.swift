@@ -61,7 +61,7 @@ class CategoryCell: UICollectionViewCell {
     }
 //    func configure(with model: Category) {
 //       categoryLabel.text = model.categoryName
-//        
+        
 //       
 //    }
 }

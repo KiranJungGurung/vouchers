@@ -5,12 +5,15 @@
 //  Created by Kiran Gurung on 26/04/2023.
 //
 
+
 import UIKit
 class FeaturedTableViewCell: UITableViewCell {
     
     private let cellReuseIdentifier = "FeaturedTableViewCell"
     
-    var model = [FeaturedProduct]()
+    var model: [FeaturedProduct]?
+    var productClicked: ((FeaturedProduct) -> ())?
+    
     
     private let featuredCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
@@ -65,18 +68,22 @@ class FeaturedTableViewCell: UITableViewCell {
 extension FeaturedTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.count
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! FeaturedCell
         
-        // add model and cell.configure
+        if let item = model?[indexPath.row] {
+            cell.configure(with: item)
+            
+        }
         
-        let item = model[indexPath.row]
-        cell.configure(with: item)
+//        let item = model[indexPath.row]
+//        cell.configure(with: item)
         return cell
     }
+    
     
 }
 

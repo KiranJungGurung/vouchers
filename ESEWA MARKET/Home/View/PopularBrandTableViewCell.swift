@@ -5,7 +5,8 @@
 //  Created by Kiran Gurung on 28/04/2023.
 //
 
-import UIKit
+
+ import UIKit
 
 
 class PopularBrandTableViewCell: UITableViewCell {
@@ -68,14 +69,14 @@ class PopularBrandTableViewCell: UITableViewCell {
 extension PopularBrandTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        model.count
+        return model.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! PopularBrandCell
         let item = model[indexPath.row]
         cell.productTitleLabel.text = item.productName
-        cell.configure(with: item)
+//        cell.configure(with: item)
         return cell
     }
     

@@ -3,31 +3,34 @@
 //  ESEWA MARKET
 //
 //  Created by Kiran Gurung on 20/04/2023.
-
+/*
 
 import UIKit
 import Alamofire
 import SwiftyJSON
 
 
+
 class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDelegate {
+
     var searchController = UISearchController(searchResultsController: nil)
 
-    private let homeTableView: UITableView = {
-        let homeTable = UITableView()
-        homeTable.backgroundColor = .white//.systemFill
-        homeTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        return homeTable
-    }()
-    
+  
     let footerView = UIView()
-    var presenter: EventsPresenter?
+    var presenter: HomePresenter?
     var model = [Product]()
     var featuredProduct = [FeaturedProduct]()
     var hotDeal = [HotDealsOfTheDay]()
     var hotDealBanner = [HotDealBanner]()
     var popularBrand = [PopularBrand]()
     var recommendedForYou = [RecommendedForYou]()
+    
+    private let homeTableView: UITableView = {
+        let homeTable = UITableView()
+        homeTable.backgroundColor = .white//.systemFill
+        homeTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        return homeTable
+    }()
     
     
     
@@ -62,9 +65,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     private func setupTableView() {
         homeTableView.delegate = self
         homeTableView.dataSource = self
-        self.presenter = EventsPresenter(delegate: self)
+        self.presenter = HomePresenter(delegate: self)
 //        presenter?.updateView()
-        presenter?.fetch()
+          presenter?.fetch()
 
         homeTableView.estimatedRowHeight = 300
         homeTableView.rowHeight = UITableView.automaticDimension
@@ -156,16 +159,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
             
         ])
     }
-    func displayCategoryAndProduct(model: [Product], featuredProduct: [FeaturedProduct], hotDeals: [HotDealsOfTheDay], hotDealBanner: [HotDealBanner], popularBrand: [PopularBrand], recommendedForYou: [RecommendedForYou]) {
+//    func displayCategoryAndProduct(model: [Product], featuredProduct: [FeaturedProduct], hotDeals: [HotDealsOfTheDay], hotDealBanner: [HotDealBanner], popularBrand: [PopularBrand], recommendedForYou: [RecommendedForYou]) {
+//        self.model = model
+//        self.featuredProduct = featuredProduct
+//        self.hotDeal = hotDeals
+//        self.hotDealBanner = hotDealBanner
+//        self.popularBrand = popularBrand
+//        self.recommendedForYou = recommendedForYou
+//        homeTableView.reloadData()
+//    }
+    func didFetchProduct(model: [Product], featuredProduct: [FeaturedProduct]) {
         self.model = model
         self.featuredProduct = featuredProduct
-        self.hotDeal = hotDeals
-        self.hotDealBanner = hotDealBanner
-        self.popularBrand = popularBrand
-        self.recommendedForYou = recommendedForYou
         homeTableView.reloadData()
+        
     }
-    
 //    func displayProductList(model: [Product]) {
 //        self.model = model
 //        homeTableView.reloadData()
@@ -230,10 +238,22 @@ extension HomeViewController: UITableViewDataSource {
         case "Featured Products":
             let cell = homeTableView.dequeueReusableCell(withIdentifier: FeaturedTableViewCell.reuseIdentifier, for: indexPath) as! FeaturedTableViewCell
             
+                //need to add sthg
+            
+//            if let model = model.category.categoryName {
+            
+//                           cell.setupViewWithData(model: model)
+//                       }
+////                       cell.itemClicked = { item in
+////                           let vc = FeaturedEventsDetailedViewController()
+////                           vc.eventData = item
+////                           self.navigationController?.pushViewController(vc, animated: true)
+////                       }
            
             cell.configure(model: self.featuredProduct)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
+            
             
         case "Hot Deals" :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: HotDealsTableViewCell.reuseIdentifier, for: indexPath) as! HotDealsTableViewCell
@@ -262,3 +282,6 @@ extension HomeViewController: UITableViewDataSource {
         }
     }
 }
+
+
+*/

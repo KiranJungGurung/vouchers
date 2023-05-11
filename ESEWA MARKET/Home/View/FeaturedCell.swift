@@ -5,6 +5,7 @@
 //  Created by Kiran Gurung on 26/04/2023.
 //
 
+
 import UIKit
 
 class FeaturedCell: UICollectionViewCell {
@@ -162,8 +163,22 @@ class FeaturedCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
         
     }
+//    func setupViewWithData(model: EmbeddedEvents) {
+//
+//            if let url = URL(string: model.images?.first?.url ?? "") {
+//                eventImageView.kf.setImage(with: url)
+//            }
+//
+//            titleLabel.text = model.name
+//            dateLabel.text = model.dates?.start?.localDate
+//            locationLabel.text = model.embedded?.venues?.first?.name
+//            priceLabel.text = String("$\(model.priceRanges?.first?.min ?? 0.0)")
+//        }
     
     func configure(with model: FeaturedProduct) {
+//        if let url = URL(string: model.images.first.url ?? "") {
+//            featuredImageView.kf.setImage(with: url)
+//        }
         productTitleLabel.text = model.productName
         productSubTitleLabel.text = model.productDesc
         priceLabel.text = "Price: \(model.price ?? 1)"
@@ -172,3 +187,4 @@ class FeaturedCell: UICollectionViewCell {
     
     
 }
+

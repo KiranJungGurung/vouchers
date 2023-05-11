@@ -6,6 +6,7 @@
 //  Created by Kiran Gurung on 27/04/2023.
 //
 
+
 import UIKit
 
 class HotDealsTableViewCell: UITableViewCell {
@@ -83,3 +84,4 @@ extension HotDealsTableViewCell: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 180, height: 300)
     }
 }
+

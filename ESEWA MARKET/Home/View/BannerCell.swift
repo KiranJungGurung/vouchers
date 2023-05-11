@@ -36,6 +36,7 @@ class BannerCell: UICollectionViewCell {
                  imageView.heightAnchor.constraint(equalToConstant: 150)
              ])
     }
+    
     required init?(coder: NSCoder) {
         fatalError()
     }

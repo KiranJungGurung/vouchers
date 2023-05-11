@@ -9,6 +9,7 @@ target 'ESEWA MARKET' do
 pod 'Alamofire'
 #pod 'BottomSheet', :git => 'https://github.com/joomcode/BottomSheet'
 pod 'SwiftyJSON', '~> 4.0'
+
 #pod 'ObjectMapper'
 
 

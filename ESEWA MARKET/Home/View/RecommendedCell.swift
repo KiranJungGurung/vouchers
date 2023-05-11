@@ -5,7 +5,6 @@
 //  Created by Kiran Gurung on 28/04/2023.
 //
 
-
 import UIKit
 
 class RecommendedCell: UICollectionViewCell {
@@ -181,6 +180,7 @@ class RecommendedCell: UICollectionViewCell {
     }
         
 }
+
 
 
 
