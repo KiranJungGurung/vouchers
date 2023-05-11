@@ -6,37 +6,38 @@
 //
 import UIKit
 
-struct Cart {
-    var quanity: Int?
-    var productPrice: Double?
-    var itemCountLabel: Int?
-}
+//struct Cart {
+//    var quanity: Int?
+//    var productPrice: Double?
+//    var itemCountLabel: Int?
+//}
 
 
 class CustomTableViewCell: UITableViewCell {
-
-
-  static let identifier = "CustomCartableViewCell"
-
-    var countChanged: ((Double)-> Void)?
-
-
-// MARK: - Add ContainerView
     
-    private let containerView: UIView = {
-        let myContainerView = UIView()
-        myContainerView.translatesAutoresizingMaskIntoConstraints = false
-        myContainerView.layer.cornerRadius = 16
-        myContainerView.layer.shadowColor = UIColor.black.cgColor
-        myContainerView.layer.shadowRadius = 10
-        myContainerView.layer.shadowOpacity = 0.4
-        myContainerView.layer.shadowOffset = .zero
-        myContainerView.backgroundColor = .white
-        return myContainerView
+    
+    static let identifier = "CustomCartableViewCell"
+    
+    var countChanged: ((Double)-> Void)?
+    
+    
+    
+    // MARK: - Add ContainerView
+    
+    private let itemContainerView: UIView = {
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.layer.cornerRadius = 16
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowRadius = 10
+        containerView.layer.shadowOpacity = 0.4
+        containerView.layer.shadowOffset = .zero
+        containerView.backgroundColor = .white
+        return containerView
         
     }()
     
-    private let myImageView: UIImageView = {
+    private let itemImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "jacket")
         imageView.contentMode = .scaleAspectFill
@@ -44,44 +45,44 @@ class CustomTableViewCell: UITableViewCell {
         imageView.layer.cornerRadius = 10
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-
-    }()
-
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Jacket on Nylon"
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 17, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .left
-        return label
-    }()
-
-    private let subTitleLabel: UILabel = {
-        let subLabel = UILabel()
-        subLabel.text = "Celeine"
-        subLabel.textColor = .gray
-        subLabel.font = .systemFont(ofSize: 10, weight: .medium)
-        subLabel.translatesAutoresizingMaskIntoConstraints = false
-        subLabel.textAlignment = .left
-        return subLabel
+        
     }()
     
-    private let productQuantityLabel: UILabel = {
-        let quantityLabel = UILabel()
-        quantityLabel.text = "Rs.19,500.00"
-        quantityLabel.font = UIFont.systemFont(ofSize: 16)
-        quantityLabel.textAlignment = .left
-        quantityLabel.translatesAutoresizingMaskIntoConstraints = false
-        quantityLabel.textColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
-        return quantityLabel
-
+    private let itemName: UILabel = {
+        let itemLabel = UILabel()
+        //        itemLabel.text = "Jacket on Nylon"
+        itemLabel.textColor = .black
+        itemLabel.font = .systemFont(ofSize: 17, weight: .bold)
+        itemLabel.translatesAutoresizingMaskIntoConstraints = false
+        itemLabel.textAlignment = .left
+        return itemLabel
+    }()
+    
+    private let itemDescription: UILabel = {
+        let desc = UILabel()
+        //        desc.text = "Celeine"
+        desc.textColor = .gray
+        desc.font = .systemFont(ofSize: 10, weight: .medium)
+        desc.translatesAutoresizingMaskIntoConstraints = false
+        desc.textAlignment = .left
+        return desc
+    }()
+    
+    private let itemPrice: UILabel = {
+        let price = UILabel()
+        //        price.text = "Rs.19,500.00"
+        price.font = UIFont.systemFont(ofSize: 16)
+        price.textAlignment = .left
+        price.translatesAutoresizingMaskIntoConstraints = false
+        price.textColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
+        return price
+        
     }()
     
     
-// MARK: - Add CountView
+    // MARK: - Add CountView
     
-    private let myCountView: UIView = {
+    private let itemCountView: UIView = {
         let countView = UIView()
         countView.translatesAutoresizingMaskIntoConstraints = false
         countView.backgroundColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
@@ -92,7 +93,7 @@ class CustomTableViewCell: UITableViewCell {
         
     }()
     
-    private let mySubButton: UIButton = {
+    private let itemSubButton: UIButton = {
         let subButton = UIButton()
         subButton.contentMode = .scaleAspectFit
         subButton.setImage(UIImage(systemName: "minus"), for: .normal)
@@ -104,15 +105,15 @@ class CustomTableViewCell: UITableViewCell {
     
     private let itemCountLabel: UILabel = {
         let count = UILabel()
-        count.text = "01"
+        //        count.text = "01"
         count.font = UIFont.systemFont(ofSize: 14)
         count.textAlignment = .center
         count.translatesAutoresizingMaskIntoConstraints = false
         count.textColor = .white
         return count
     }()
-
-    private let myAddButton: UIButton = {
+    
+    private let itemAddButton: UIButton = {
         let addButton = UIButton()
         addButton.contentMode = .scaleAspectFit
         addButton.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -120,36 +121,44 @@ class CustomTableViewCell: UITableViewCell {
         addButton.tintColor = .white
         addButton.isUserInteractionEnabled = true
         return addButton
-
+        
     }()
     
-    var quantity = 1
-    var productPrice =  19_500.00
+    //    var quantity = 1
+    //    var productPrice =  19_500.00
     
-
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .clear//.systemBackground
         
-        contentView.addSubview(containerView)
-        contentView.addSubview(myImageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(subTitleLabel)
-        contentView.addSubview(productQuantityLabel)
+        contentView.addSubview(itemContainerView)
+        contentView.addSubview(itemImage)
+        contentView.addSubview(itemName)
+        contentView.addSubview(itemDescription)
+        contentView.addSubview(itemPrice)
         
         
-        contentView.addSubview(myCountView)
-        contentView.addSubview(mySubButton)
+        contentView.addSubview(itemCountView)
+        contentView.addSubview(itemSubButton)
         contentView.addSubview(itemCountLabel)
-        contentView.addSubview(myAddButton)
-        
-        myAddButton.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
-        mySubButton.addTarget(self, action: #selector(subButtonTapped(_:)), for: .touchUpInside)
+        contentView.addSubview(itemAddButton)
     }
+//        itemAddButton.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
+//        itemSubButton.addTarget(self, action: #selector(subButtonTapped(_:)), for: .touchUpInside)
+//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+        
+    }
+    func configure(with model: AddCartItemModel) {
+        itemName.text = model.itemName
+        itemDescription.text = model.itemDescription
+        itemPrice.text = "\(model.itemPrice)"
+        itemCountLabel.text = "\(model.itemCount)"
+        
     }
     
     override func layoutSubviews() {
@@ -159,74 +168,75 @@ class CustomTableViewCell: UITableViewCell {
     
     private func setupViews() {
         
-   // MARK: - Set Constraints to ContainerView
+        // MARK: - Set Constraints to ContainerView
         // pin the container view
         
         NSLayoutConstraint.activate([
             
-            containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
-            containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16),
-            containerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
-            containerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
-
-            // pin image view inside containerview
-            myImageView.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 8),
-            myImageView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 16),
-            myImageView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -8),
-            myImageView.widthAnchor.constraint(equalToConstant: 100),
-            myImageView.heightAnchor.constraint(equalToConstant: 100),
-             
-           // pin title label
+            itemContainerView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
+            itemContainerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16),
+            itemContainerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
+            itemContainerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
             
-            titleLabel.leadingAnchor.constraint(equalTo: myImageView.trailingAnchor, constant: 8),
-            titleLabel.heightAnchor.constraint(equalToConstant: 80),
+            // pin image view inside containerview
+            itemImage.topAnchor.constraint(equalTo: self.itemContainerView.topAnchor, constant: 8),
+            itemImage.leadingAnchor.constraint(equalTo: self.itemContainerView.leadingAnchor, constant: 16),
+            itemImage.bottomAnchor.constraint(equalTo: self.itemContainerView.bottomAnchor, constant: -8),
+            itemImage.widthAnchor.constraint(equalToConstant: 100),
+            itemImage.heightAnchor.constraint(equalToConstant: 100),
+            
+            // pin title label
+            
+            itemName.leadingAnchor.constraint(equalTo: itemImage.trailingAnchor, constant: 8),
+            itemName.heightAnchor.constraint(equalToConstant: 80),
             
             // pin subtitle label
-            subTitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            subTitleLabel.heightAnchor.constraint(equalToConstant: 120),
+            itemDescription.leadingAnchor.constraint(equalTo: itemName.leadingAnchor),
+            itemDescription.heightAnchor.constraint(equalToConstant: 120),
             
             // pin price label
-            productQuantityLabel.leadingAnchor.constraint(equalTo: subTitleLabel.leadingAnchor),
-            productQuantityLabel.heightAnchor.constraint(equalToConstant: 230),
+            itemPrice.leadingAnchor.constraint(equalTo: itemDescription.leadingAnchor),
+            itemPrice.heightAnchor.constraint(equalToConstant: 230),
             
             
             // MARK: - Add Constraints to CounterView
             
             // pin CounterView:
             
-            myCountView.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 0),
-            myCountView.leadingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -38),
-            myCountView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: 0),
-            myCountView.widthAnchor.constraint(equalToConstant: 38),
+            itemCountView.topAnchor.constraint(equalTo: self.itemContainerView.topAnchor, constant: 0),
+            itemCountView.leadingAnchor.constraint(equalTo: self.itemContainerView.trailingAnchor, constant: -38),
+            itemCountView.bottomAnchor.constraint(equalTo: self.itemContainerView.bottomAnchor, constant: 0),
+            itemCountView.widthAnchor.constraint(equalToConstant: 38),
             
             // pin mySubButton in myCountView
             
-            mySubButton.topAnchor.constraint(equalTo: myCountView.topAnchor, constant: 10),
-            mySubButton.leadingAnchor.constraint(equalTo: myCountView.leadingAnchor, constant: 10),
-            mySubButton.trailingAnchor.constraint(equalTo: myCountView.trailingAnchor, constant: -10),
-            mySubButton.heightAnchor.constraint(equalToConstant: 20),
+            itemSubButton.topAnchor.constraint(equalTo: itemCountView.topAnchor, constant: 10),
+            itemSubButton.leadingAnchor.constraint(equalTo: itemCountView.leadingAnchor, constant: 10),
+            itemSubButton.trailingAnchor.constraint(equalTo: itemCountView.trailingAnchor, constant: -10),
+            itemSubButton.heightAnchor.constraint(equalToConstant: 20),
             
             // pin counter in myCountView
-            itemCountLabel.leadingAnchor.constraint(equalTo: myCountView.leadingAnchor, constant: 10),
-            itemCountLabel.trailingAnchor.constraint(equalTo: myCountView.trailingAnchor, constant: -10),
+            itemCountLabel.leadingAnchor.constraint(equalTo: itemCountView.leadingAnchor, constant: 10),
+            itemCountLabel.trailingAnchor.constraint(equalTo: itemCountView.trailingAnchor, constant: -10),
             itemCountLabel.heightAnchor.constraint(equalToConstant: 155),
             
             //pin addbutton
-            myAddButton.leadingAnchor.constraint(equalTo: mySubButton.trailingAnchor, constant: -14),
-            myAddButton.trailingAnchor.constraint(equalTo: mySubButton.leadingAnchor, constant:  14),
-            myAddButton.bottomAnchor.constraint(equalTo: myCountView.bottomAnchor, constant: -8),
-            myAddButton.widthAnchor.constraint(equalToConstant: 10)
+            itemAddButton.leadingAnchor.constraint(equalTo: itemSubButton.trailingAnchor, constant: -14),
+            itemAddButton.trailingAnchor.constraint(equalTo: itemSubButton.leadingAnchor, constant:  14),
+            itemAddButton.bottomAnchor.constraint(equalTo: itemCountView.bottomAnchor, constant: -8),
+            itemAddButton.widthAnchor.constraint(equalToConstant: 10)
         ])
     }
-    
-    func calculatePrice(quantity: Int) -> Double {
-        let productQuantityLabel = productPrice * Double(quantity)
-        return productQuantityLabel
-    }
+}
+    /*
+//    func calculatePrice(quantity: Int) -> Double {
+//        let productQuantityLabel = productPrice * Double(quantity)
+//        return productQuantityLabel
+//    }
     
     func updatePriceLabel() {
         let updatedPrice = calculatePrice(quantity: quantity)
-        productQuantityLabel.text = "$\(updatedPrice)"
+        itemPrice.text = "$\(updatedPrice)"
         countChanged?(Double(updatedPrice))
     }
 
@@ -249,3 +259,5 @@ class CustomTableViewCell: UITableViewCell {
     
     
 }
+
+*/

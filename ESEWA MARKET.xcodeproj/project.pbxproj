@@ -31,7 +31,6 @@
 		B3E9250C2A05FDFD007CF3DD /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E9250B2A05FDFD007CF3DD /* HomePresenter.swift */; };
 		B3ED37802A06C1A100E4786C /* CartModelPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED377F2A06C1A100E4786C /* CartModelPresenter.swift */; };
 		B3ED37822A06C1CF00E4786C /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED37812A06C1CF00E4786C /* CartModel.swift */; };
-		B3ED37842A06C1E100E4786C /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED37832A06C1E100E4786C /* Cart.swift */; };
 		B3ED37862A06C20C00E4786C /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED37852A06C20C00E4786C /* CustomTableViewCell.swift */; };
 		B3ED37882A06C26000E4786C /* DeletePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED37872A06C26000E4786C /* DeletePopUpViewController.swift */; };
 		B3ED378A2A06C28100E4786C /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED37892A06C28100E4786C /* CartViewController.swift */; };
@@ -66,7 +65,6 @@
 		B3E9250B2A05FDFD007CF3DD /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		B3ED377F2A06C1A100E4786C /* CartModelPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModelPresenter.swift; sourceTree = "<group>"; };
 		B3ED37812A06C1CF00E4786C /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
-		B3ED37832A06C1E100E4786C /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		B3ED37852A06C20C00E4786C /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		B3ED37872A06C26000E4786C /* DeletePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePopUpViewController.swift; sourceTree = "<group>"; };
 		B3ED37892A06C28100E4786C /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				B3ED37812A06C1CF00E4786C /* CartModel.swift */,
-				B3ED37832A06C1E100E4786C /* Cart.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -366,7 +363,6 @@
 				B3D1FFA52A03AA9A00335742 /* RecommendedCell.swift in Sources */,
 				B3D1FF9F2A03A9E000335742 /* HotDealsOfTheTableViewCell.swift in Sources */,
 				B3D1FF902A03A83000335742 /* HomeViewController.swift in Sources */,
-				B3ED37842A06C1E100E4786C /* Cart.swift in Sources */,
 				B3297ED829F1400500D5E555 /* API.swift in Sources */,
 				B3297ED329F13F6D00D5E555 /* Constants.swift in Sources */,
 				B3D1FF992A03A97300335742 /* CategoryCell.swift in Sources */,

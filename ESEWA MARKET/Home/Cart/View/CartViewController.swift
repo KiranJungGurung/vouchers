@@ -8,11 +8,7 @@ import UIKit
 class CartViewController: UIViewController, AddItemToCartProtocol {
     
     var presenter: AddCartItemPresenter?
-    var model = [AddCartItemModel]()
-//    var Item = [ItemList]
-    
-    //    let pc = HomeViewController()
-    
+    var model: [AddCartItemModel] = []
     
 //    var item = 2
 //    var count = 1
@@ -27,7 +23,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         return myfooterView
     }()
     
-    private let myCheckOutTotal: UILabel = {
+    private let itemCheckOutTotal: UILabel = {
         let total = UILabel()
         total.text = "Checkout Total"
         total.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +33,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         return total
     }()
     
-    private let totalPriceLabel: UILabel = {
+    private let itemTotalPriceLabel: UILabel = {
         let totalPrice = UILabel()
         totalPrice.text = "Rs.52,500"
         totalPrice.translatesAutoresizingMaskIntoConstraints = false
@@ -47,7 +43,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         return totalPrice
     }()
     
-    private let myCheckOutButton: UIButton = {
+    private let itemCheckOutButton: UIButton = {
         let checkOutButton = UIButton()
         checkOutButton.translatesAutoresizingMaskIntoConstraints = false
         checkOutButton.setTitle("CHECKOUT", for: .normal)
@@ -97,9 +93,9 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         // add tableview to view
         view.addSubview(tableView)
         view.addSubview(footerView)
-        view.addSubview(myCheckOutTotal)
-        view.addSubview(totalPriceLabel)
-        view.addSubview(myCheckOutButton)
+        view.addSubview(itemCheckOutTotal)
+        view.addSubview(itemTotalPriceLabel)
+        view.addSubview(itemCheckOutButton)
         
         
         
@@ -113,7 +109,20 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
         setupFooterView()
-        updateTotalPriceLabel()
+//        updateTotalPriceLabel()
+        
+    }
+   
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        // object created
+        presenter = AddCartItemPresenter(delegate: self, view: self)
+        presenter?.updateView()
+        
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableView.separatorColor = .clear
         
     }
     func displayItemList(model: [AddCartItemModel]) {
@@ -121,17 +130,6 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         tableView.reloadData()
     }
     
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.presenter = AddCartItemPresenter(delegate: self)
-        presenter?.populateTableView()
-        
-        tableView.backgroundColor = .clear
-        tableView.separatorStyle = .none
-        tableView.separatorColor = .clear
-        
-    }
     
     @objc func backButtonPressed() {
         self.navigationController?.popViewController(animated: true)
@@ -140,10 +138,10 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         
     }
     
-    private func updateTotalPriceLabel() {
-        totalPriceLabel.text = "Rs.\(totalPrice)"
-
-    }
+//    private func updateTotalPriceLabel() {
+//        itemTotalPriceLabel.text = "Rs.\(totalPrice)"
+//
+//    }
     private func setupFooterView() {
         
         NSLayoutConstraint.activate([
@@ -158,21 +156,21 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
             
             // pin checkouttotal label
             
-            myCheckOutTotal.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 8),
-            myCheckOutTotal.leadingAnchor.constraint(equalTo: self.footerView.leadingAnchor, constant:8),
-            myCheckOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -8),
+            itemCheckOutTotal.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 8),
+            itemCheckOutTotal.leadingAnchor.constraint(equalTo: self.footerView.leadingAnchor, constant:8),
+            itemCheckOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -8),
             
             // totalPriceLabel
-            totalPriceLabel.topAnchor.constraint(equalTo: myCheckOutTotal.bottomAnchor),
-            totalPriceLabel.leadingAnchor.constraint(equalTo: myCheckOutTotal.leadingAnchor),
-            totalPriceLabel.heightAnchor.constraint(equalToConstant: 30),
+            itemTotalPriceLabel.topAnchor.constraint(equalTo: itemCheckOutTotal.bottomAnchor),
+            itemTotalPriceLabel.leadingAnchor.constraint(equalTo: itemCheckOutTotal.leadingAnchor),
+            itemTotalPriceLabel.heightAnchor.constraint(equalToConstant: 30),
             
             // pin Checkout button
-            myCheckOutButton.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 16),
-            myCheckOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: 16),
-            myCheckOutButton.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -16),
-            myCheckOutButton.widthAnchor.constraint(equalToConstant: 170),
-            myCheckOutButton.heightAnchor.constraint(equalToConstant: 40)
+            itemCheckOutButton.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 16),
+            itemCheckOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: 16),
+            itemCheckOutButton.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -16),
+            itemCheckOutButton.widthAnchor.constraint(equalToConstant: 170),
+            itemCheckOutButton.heightAnchor.constraint(equalToConstant: 40)
             
         ])
     }
@@ -219,12 +217,16 @@ extension CartViewController: UITableViewDataSource {
 //    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count + 1
+        return model.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
 //        let item = model[indexPath.row]
+        
+                let item = model[indexPath.row]
+                cell.configure(with: item)
+        
         cell.backgroundColor = .clear
         
         
@@ -236,11 +238,11 @@ extension CartViewController: UITableViewDataSource {
         //            }
         //        }
         
-        cell.countChanged = { price in
-            self.totalPrice += price
-            self.updateTotalPriceLabel()
-
-        }
+//        cell.countChanged = { price in
+//            self.totalPrice += price
+//            self.updateTotalPriceLabel()
+//
+//        }
         
         // update the view
         return cell
@@ -253,18 +255,7 @@ extension CartViewController: UITableViewDataSource {
         
     }
     
-    
-    //* reference for shop page
-    
-    //    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-    //        let footerView = UIView()
-    //        footerView.backgroundColor = .cyan
-    //        return footerView
-    //    }
-    //
-    //    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    //        return 120
-    //    }
+
     
 }
 

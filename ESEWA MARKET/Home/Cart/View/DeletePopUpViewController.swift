@@ -13,14 +13,14 @@ class DeletePopUpViewController: UIViewController {
 //    var onDeleteClicked: (()->())?
     var onDeleteClicked: ((DeletePopUpViewController) -> ())?
 
-    private let deleteView:UIView = {
+    private let itemDeleteView:UIView = {
         let deleteStackView = UIView ()
         deleteStackView.translatesAutoresizingMaskIntoConstraints = false
         deleteStackView.layer.cornerRadius = 16
         return deleteStackView
     }()
     
-    private let titleLabel: UILabel = {
+    private let itemName: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Delete from cart"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +30,7 @@ class DeletePopUpViewController: UIViewController {
         return titleLabel
     }()
     
-    private let deleteLabel: UILabel = {
+    private let itemDeleteLabel: UILabel = {
         let deleteTextLabel = UILabel()
         deleteTextLabel.text = "Are you sure you want to delete item(s)."
         deleteTextLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +40,7 @@ class DeletePopUpViewController: UIViewController {
         return deleteTextLabel
     }()
     
-    private let cancelButton: UIButton = {
+    private let itemCancelButton: UIButton = {
         let cancelbtn = UIButton()
         cancelbtn.translatesAutoresizingMaskIntoConstraints = false
         
@@ -53,7 +53,7 @@ class DeletePopUpViewController: UIViewController {
         
     }()
     // add cancel icon
-    private let cancelImage: UIImageView = {
+    private let itemCancelImage: UIImageView = {
         let cancelImg = UIImageView()
         cancelImg.image = UIImage(systemName: "xmark")
         cancelImg.tintColor = .black
@@ -63,7 +63,7 @@ class DeletePopUpViewController: UIViewController {
     }()
     
     
-    private let deleteButton: UIButton = {
+    private let itemDeleteButton: UIButton = {
         let deletebtn = UIButton()
         deletebtn.setTitle("DELETE", for: .normal)
         deletebtn.translatesAutoresizingMaskIntoConstraints = false
@@ -84,16 +84,12 @@ class DeletePopUpViewController: UIViewController {
         setupConstraints()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCancelImageTap))
-        cancelImage.addGestureRecognizer(tapGesture)
+        itemCancelImage.addGestureRecognizer(tapGesture)
         
+    
+        itemCancelButton.addTarget(self, action: #selector(dismissVc), for: .touchUpInside)
         
-        
-        
-        // create a image button view (x from sfsymbol)
-        //        cancelButton.setImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
-        cancelButton.addTarget(self, action: #selector(dismissVc), for: .touchUpInside)
-        
-        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        itemDeleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         
     }
     
@@ -117,13 +113,13 @@ class DeletePopUpViewController: UIViewController {
     }
     
     func setupConstraints() {
-        view.addSubview(deleteView)
-        deleteView.backgroundColor = .white
-        deleteView.addSubview(titleLabel)
-        deleteView.addSubview(deleteLabel)
-        deleteView.addSubview(cancelButton)
-        deleteView.addSubview(deleteButton)
-        deleteView.addSubview(cancelImage)
+        view.addSubview(itemDeleteView)
+        itemDeleteView.backgroundColor = .white
+        itemDeleteView.addSubview(itemName)
+        itemDeleteView.addSubview(itemDeleteLabel)
+        itemDeleteView.addSubview(itemCancelButton)
+        itemDeleteView.addSubview(itemDeleteButton)
+        itemDeleteView.addSubview(itemCancelImage)
         
         
         NSLayoutConstraint.activate([
@@ -131,42 +127,41 @@ class DeletePopUpViewController: UIViewController {
             
             //pin deleteview
             
-            deleteView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            deleteView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            deleteView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            deleteView.heightAnchor.constraint(equalToConstant: 200),
+            itemDeleteView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            itemDeleteView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            itemDeleteView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            itemDeleteView.heightAnchor.constraint(equalToConstant: 200),
             
             // pin titleLabel
-            titleLabel.topAnchor.constraint(equalTo: deleteView.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: deleteView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: deleteView.trailingAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 100),
+            itemName.topAnchor.constraint(equalTo: itemDeleteView.topAnchor),
+            itemName.leadingAnchor.constraint(equalTo: itemDeleteView.leadingAnchor),
+            itemName.trailingAnchor.constraint(equalTo: itemDeleteView.trailingAnchor),
+            itemName.heightAnchor.constraint(equalToConstant: 100),
             
             // pin deleteLabel
-            deleteLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            deleteLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            deleteLabel.heightAnchor.constraint(equalToConstant: 140),
+            itemDeleteLabel.leadingAnchor.constraint(equalTo: itemName.leadingAnchor),
+            itemDeleteLabel.trailingAnchor.constraint(equalTo: itemName.trailingAnchor),
+            itemDeleteLabel.heightAnchor.constraint(equalToConstant: 140),
             
             //pin cancel button
-            cancelButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            cancelButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 20),
-            cancelButton.widthAnchor.constraint(equalToConstant: 140),
-            cancelButton.heightAnchor.constraint(equalToConstant: 50),
+            itemCancelButton.topAnchor.constraint(equalTo: itemName.bottomAnchor),
+            itemCancelButton.leadingAnchor.constraint(equalTo: itemName.leadingAnchor, constant: 20),
+            itemCancelButton.widthAnchor.constraint(equalToConstant: 140),
+            itemCancelButton.heightAnchor.constraint(equalToConstant: 50),
             
             //pin delete button
-            deleteButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            deleteButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: -20),
-            deleteButton.widthAnchor.constraint(equalToConstant: 140),
-            deleteButton.heightAnchor.constraint(equalToConstant: 50),
+            itemDeleteButton.topAnchor.constraint(equalTo: itemName.bottomAnchor),
+            itemDeleteButton.trailingAnchor.constraint(equalTo: itemName.trailingAnchor, constant: -20),
+            itemDeleteButton.widthAnchor.constraint(equalToConstant: 140),
+            itemDeleteButton.heightAnchor.constraint(equalToConstant: 50),
             
             //          pin cancel icon
             
-            cancelImage.topAnchor.constraint(equalTo: self.deleteView.topAnchor, constant: 10),
-            cancelImage.trailingAnchor.constraint(equalTo: self.deleteView.trailingAnchor, constant: -10),
-            cancelImage.heightAnchor.constraint(equalToConstant: 24),
-            cancelImage.widthAnchor.constraint(equalToConstant: 24)
-            
-            
+            itemCancelImage.topAnchor.constraint(equalTo: self.itemDeleteView.topAnchor, constant: 10),
+            itemCancelImage.trailingAnchor.constraint(equalTo: self.itemDeleteView.trailingAnchor, constant: 10),
+            itemCancelImage.heightAnchor.constraint(equalToConstant: 24),
+            itemCancelImage.widthAnchor.constraint(equalToConstant: 24)
+        
             
             
         ])
