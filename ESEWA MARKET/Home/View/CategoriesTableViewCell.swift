@@ -11,7 +11,8 @@ import UIKit
 class CategoriesTableViewCell: UITableViewCell {
 
     private let cellReuseIdentifier = "CategoriesTableViewCell"
-//    var model = [Category]()
+    
+    var model = [Category]()
     
     private let categoriesCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
@@ -70,7 +71,7 @@ class CategoriesTableViewCell: UITableViewCell {
 extension CategoriesTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

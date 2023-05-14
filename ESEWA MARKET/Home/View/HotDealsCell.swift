@@ -20,7 +20,7 @@ class HotDealsCell: UICollectionViewCell {
     }()
     private let hotDealsImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "hoodie")
+        imageView.image = UIImage(named: "hoddie")
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 20
@@ -167,8 +167,8 @@ class HotDealsCell: UICollectionViewCell {
             
         }
     func configure(with model: HotDealsOfTheDay) {
-        productTitleLabel.text = model.productName
-        productSubTitleLabel.text = model.productDesc
+        productTitleLabel.text = model.title
+        productSubTitleLabel.text = model.description
         priceLabel.text = "Price: \(model.price ?? 1)"
     }
         

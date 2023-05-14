@@ -75,7 +75,7 @@ extension PopularBrandTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! PopularBrandCell
         let item = model[indexPath.row]
-        cell.productTitleLabel.text = item.productName
+        cell.productTitleLabel.text = item.title
 //        cell.configure(with: item)
         return cell
     }

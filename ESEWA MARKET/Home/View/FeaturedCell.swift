@@ -179,8 +179,8 @@ class FeaturedCell: UICollectionViewCell {
 //        if let url = URL(string: model.images.first.url ?? "") {
 //            featuredImageView.kf.setImage(with: url)
 //        }
-        productTitleLabel.text = model.productName
-        productSubTitleLabel.text = model.productDesc
+        productTitleLabel.text = model.title
+        productSubTitleLabel.text = model.category
         priceLabel.text = "Price: \(model.price ?? 1)"
     }
     

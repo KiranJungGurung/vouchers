@@ -25,7 +25,6 @@ class RecommendedCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 20
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-
         return imageView
         
     }()
@@ -162,8 +161,6 @@ class RecommendedCell: UICollectionViewCell {
             addButton.widthAnchor.constraint(equalToConstant: 20),
             addButton.heightAnchor.constraint(equalToConstant: 20)
             
-        
-            
             ])
         
         }
@@ -174,8 +171,8 @@ class RecommendedCell: UICollectionViewCell {
         }
     
     func configure(with model: RecommendedForYou) {
-        productTitleLabel.text = model.productName
-        productSubTitleLabel.text = model.productDesc
+        productTitleLabel.text = model.title
+        productSubTitleLabel.text = model.description
         priceLabel.text = "Price: \(model.price ?? 1)"
     }
         

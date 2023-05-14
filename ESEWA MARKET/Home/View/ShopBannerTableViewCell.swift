@@ -13,6 +13,7 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
     //    private var list: [BannerModel]?
     
     let pageControl = UIPageControl()
+    
     var model = [HotDealBanner]()
     // Add collectionView
     private let homeCollectionView: UICollectionView = {
@@ -30,6 +31,7 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
         collectionView.collectionViewLayout = layout
         return collectionView
     }()
+    
     static let reuseIdentifier = "ShopBannerTableViewCell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -11,8 +11,9 @@ class FeaturedTableViewCell: UITableViewCell {
     
     private let cellReuseIdentifier = "FeaturedTableViewCell"
     
-    var model: [FeaturedProduct]?
-    var productClicked: ((FeaturedProduct) -> ())?
+    var model : [FeaturedProduct]?
+    
+//    var productClicked: ((FeaturedProduct) -> ())?
     
     
     private let featuredCollectionView: UICollectionView = {
@@ -68,12 +69,11 @@ class FeaturedTableViewCell: UITableViewCell {
 extension FeaturedTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! FeaturedCell
-        
         if let item = model?[indexPath.row] {
             cell.configure(with: item)
             

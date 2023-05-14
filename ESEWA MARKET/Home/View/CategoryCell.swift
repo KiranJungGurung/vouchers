@@ -10,7 +10,7 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     
     static let identifier = "CategoryCell"
-
+    
     
     private let categoryImageView: UIImageView = {
         let imageView = UIImageView()
@@ -21,21 +21,21 @@ class CategoryCell: UICollectionViewCell {
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 14
-    return imageView
-                                  
+        return imageView
+        
     }()
-                                  
+    
     private let categoryLabel: UILabel = {
         let label = UILabel()
-//        label.text = "Mobile"
+        //        label.text = "Mobile"
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-     }()
-
-                                
-
+    }()
+    
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .systemGray6
@@ -44,26 +44,26 @@ class CategoryCell: UICollectionViewCell {
         contentView.addSubview(categoryLabel)
         
         NSLayoutConstraint.activate([
-         categoryImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-         categoryImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-         categoryImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-         categoryImageView.heightAnchor.constraint(equalToConstant: 70),
-         categoryLabel.topAnchor.constraint(equalTo: categoryImageView.bottomAnchor, constant: 10),
-         categoryLabel.heightAnchor.constraint(equalToConstant: 20),
-         categoryLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+            categoryImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            categoryImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            categoryImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            categoryImageView.heightAnchor.constraint(equalToConstant: 70),
+            categoryLabel.topAnchor.constraint(equalTo: categoryImageView.bottomAnchor, constant: 10),
+            categoryLabel.heightAnchor.constraint(equalToConstant: 20),
+            categoryLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
         
-    
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-
+        
     }
 //    func configure(with model: Category) {
-//       categoryLabel.text = model.categoryName
+//        categoryLabel.text = model.categoryName
+//
         
-//       
-//    }
-}
-
-
+        
+        //    }
+    }
+    

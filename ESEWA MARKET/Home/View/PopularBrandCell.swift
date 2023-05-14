@@ -174,8 +174,8 @@ class PopularBrandCell: UICollectionViewCell {
             
         }
     func configure(with model: PopularBrand) {
-        productTitleLabel.text = model.productName
-        productSubTitleLabel.text = model.productDesc
+        productTitleLabel.text = model.title
+        productSubTitleLabel.text = model.description
         priceLabel.text = "Price: \(model.price ?? 1)"
     }
 //    
