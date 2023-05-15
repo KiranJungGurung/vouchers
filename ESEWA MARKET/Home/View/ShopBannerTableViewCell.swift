@@ -71,27 +71,18 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
         
     }
     
-    func configure(model: [HotDealBanner]) {
-            self.model = model
-        homeCollectionView.reloadData()
-        }
-    
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 extension ShopBannerTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.count
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BannerCell", for: indexPath) as! BannerCell
-        let item = model[indexPath.row]
-        cell.setupCollectionCell(with: "\(item.image ?? "")")
         return cell
     }
     

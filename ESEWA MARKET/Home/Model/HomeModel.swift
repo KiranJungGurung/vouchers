@@ -3,7 +3,7 @@
 //  ESEWA MARKET
 //
 //  Created by Kiran Gurung on 06/05/2023.
-//
+
 
 import Alamofire
 import Foundation
@@ -29,7 +29,6 @@ struct Product {
         self.rating = Rate(json: json["rate"])
     }
 }
-
 
 struct Rate {
     let rate: Float?
@@ -95,7 +94,6 @@ struct HotDealsOfTheDay {
 struct HotDealBanner {
     var image: String?
 }
-
 
 struct PopularBrand {
     let id: Int?

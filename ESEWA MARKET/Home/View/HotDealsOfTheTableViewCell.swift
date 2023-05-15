@@ -13,7 +13,7 @@ class HotDealsTableViewCell: UITableViewCell {
 
     private let cellReuseIdentifier = "HotDealsTableViewCell"
     
-    var model = [HotDealsOfTheDay]()
+    var model : [FeaturedProduct]?
     
     private let hotDealsCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
@@ -52,9 +52,9 @@ class HotDealsTableViewCell: UITableViewCell {
         hotDealsCollectionView.register(HotDealsCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
 
     }
-    func configure(model: [HotDealsOfTheDay]) {
-            self.model = model
-            hotDealsCollectionView.reloadData()
+    func configure(model: [FeaturedProduct]) {
+        self.model = model
+        hotDealsCollectionView.reloadData()
         }
 
     
@@ -65,14 +65,21 @@ class HotDealsTableViewCell: UITableViewCell {
 extension HotDealsTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.count
+        return model?.count ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! HotDealsCell
-        let item = model[indexPath.row]
-        cell.productTitleLabel.text = item.title
-        cell.configure(with: item)
+        
+//
+        
+//        if let item = model?[indexPath.row] {
+//            cell.configure(with: item)
+//            
+//        }
+//        let item = model?[indexPath.row]
+////        cell.productTitleLabel.text = item.title
+//        cell.configure(with: item)
         return cell
        
     }

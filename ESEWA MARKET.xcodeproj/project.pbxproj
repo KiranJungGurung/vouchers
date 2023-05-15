@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		79F7A7B6E52077943A07E064 /* Pods_ESEWA_MARKET.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78D0181DFC68B6240FC51DC2 /* Pods_ESEWA_MARKET.framework */; };
 		B3297ED329F13F6D00D5E555 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3297ED229F13F6D00D5E555 /* Constants.swift */; };
-		B3297ED829F1400500D5E555 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3297ED729F1400500D5E555 /* API.swift */; };
 		B3D1FF902A03A83000335742 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1FF8F2A03A83000335742 /* HomeViewController.swift */; };
 		B3D1FF932A03A8DF00335742 /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1FF922A03A8DF00335742 /* BannerCell.swift */; };
 		B3D1FF952A03A91C00335742 /* ShopBannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1FF942A03A91C00335742 /* ShopBannerTableViewCell.swift */; };
@@ -29,7 +28,6 @@
 		B3D51CEA29EE847A00435BB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3D51CE829EE847A00435BB3 /* LaunchScreen.storyboard */; };
 		B3E9250A2A05FDB7007CF3DD /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E925092A05FDB7007CF3DD /* HomeModel.swift */; };
 		B3E9250C2A05FDFD007CF3DD /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E9250B2A05FDFD007CF3DD /* HomePresenter.swift */; };
-		B3F60D562A0BB238003984D0 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F60D552A0BB238003984D0 /* APIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +35,6 @@
 		7015CA9D8A7B491C5C31F51E /* Pods-ESEWA MARKET.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESEWA MARKET.debug.xcconfig"; path = "Target Support Files/Pods-ESEWA MARKET/Pods-ESEWA MARKET.debug.xcconfig"; sourceTree = "<group>"; };
 		78D0181DFC68B6240FC51DC2 /* Pods_ESEWA_MARKET.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESEWA_MARKET.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3297ED229F13F6D00D5E555 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B3297ED729F1400500D5E555 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		B3D1FF8F2A03A83000335742 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B3D1FF922A03A8DF00335742 /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
 		B3D1FF942A03A91C00335742 /* ShopBannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBannerTableViewCell.swift; sourceTree = "<group>"; };
@@ -59,7 +56,6 @@
 		B3D51CEB29EE847A00435BB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3E925092A05FDB7007CF3DD /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		B3E9250B2A05FDFD007CF3DD /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
-		B3F60D552A0BB238003984D0 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +85,6 @@
 				B3D51CE629EE847A00435BB3 /* Assets.xcassets */,
 				B3D51CE829EE847A00435BB3 /* LaunchScreen.storyboard */,
 				B3297ED229F13F6D00D5E555 /* Constants.swift */,
-				B3297ED729F1400500D5E555 /* API.swift */,
-				B3F60D552A0BB238003984D0 /* APIManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -306,7 +300,6 @@
 				B3E9250A2A05FDB7007CF3DD /* HomeModel.swift in Sources */,
 				B3D1FF952A03A91C00335742 /* ShopBannerTableViewCell.swift in Sources */,
 				B3D1FFA32A03AA6F00335742 /* PopularBrandCell.swift in Sources */,
-				B3F60D562A0BB238003984D0 /* APIManager.swift in Sources */,
 				B3D1FFA12A03AA3200335742 /* HotDealsCell.swift in Sources */,
 				B3E9250C2A05FDFD007CF3DD /* HomePresenter.swift in Sources */,
 				B3D1FFA92A03AAE400335742 /* RecommendedTableViewCell.swift in Sources */,
@@ -315,7 +308,6 @@
 				B3D1FFA52A03AA9A00335742 /* RecommendedCell.swift in Sources */,
 				B3D1FF9F2A03A9E000335742 /* HotDealsOfTheTableViewCell.swift in Sources */,
 				B3D1FF902A03A83000335742 /* HomeViewController.swift in Sources */,
-				B3297ED829F1400500D5E555 /* API.swift in Sources */,
 				B3297ED329F13F6D00D5E555 /* Constants.swift in Sources */,
 				B3D1FF992A03A97300335742 /* CategoryCell.swift in Sources */,
 				B3D1FF9D2A03A9BD00335742 /* FeaturedTableViewCell.swift in Sources */,

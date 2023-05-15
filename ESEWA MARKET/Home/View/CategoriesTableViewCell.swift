@@ -12,7 +12,7 @@ class CategoriesTableViewCell: UITableViewCell {
 
     private let cellReuseIdentifier = "CategoriesTableViewCell"
     
-    var model = [Category]()
+    var model = [Categories]()
     
     private let categoriesCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
@@ -55,30 +55,20 @@ class CategoriesTableViewCell: UITableViewCell {
         categoriesCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
 
     }
-//    func configure(model: [Category]) {
-//            self.model = model
-//            categoriesCollectionView.reloadData()
-//        }
-
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-
-    
 }
 extension CategoriesTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
-        
-//        let item = model[indexPath.row]
-//        cell.configure(with: item)
+    
         return cell
     }
     

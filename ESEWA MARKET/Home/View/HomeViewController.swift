@@ -1,7 +1,6 @@
 
 //  HomViewController.swift
 //  ESEWA MARKET
-//
 //  Created by Kiran Gurung on 20/04/2023.
 
 import Alamofire
@@ -9,6 +8,7 @@ import SwiftyJSON
 import UIKit
 
 class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDelegate {
+   
     
     var searchController = UISearchController(searchResultsController: nil)
     
@@ -59,6 +59,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     func didFetchProduct(model: [FeaturedProduct]) {
         //        self.model = model
         self.featuredProduct = model
+        
         homeTableView.reloadData()
         
     }
@@ -186,11 +187,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
 
 extension HomeViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 6
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return featuredProduct.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -209,33 +210,28 @@ extension HomeViewController: UITableViewDataSource {
             return ""
         case 5:
             return "Popular Brands"
-        case 6:
+        default :
             return "Recommended for you"
-        default:
-            return nil
         }
     }
     
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //        let sectionType = model[indexPath.section].category?.categoryName
         //        switch sectionType {
         switch indexPath.section {
-        case 2:
+            
+        case 0:
             let cell = homeTableView.dequeueReusableCell(withIdentifier: ShopBannerTableViewCell.reuseIdentifier, for: indexPath) as! ShopBannerTableViewCell
-            cell.configure(model: self.hotDealBanner)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
         case 1:
             let cell = homeTableView.dequeueReusableCell(withIdentifier: CategoriesTableViewCell.reuseIdentifier, for: indexPath) as! CategoriesTableViewCell
-            
-            
-            //            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             cell.backgroundColor = .red
             return cell
             
-        case 0:
+        case 2:
             let cell = homeTableView.dequeueReusableCell(withIdentifier: FeaturedTableViewCell.reuseIdentifier, for: indexPath) as! FeaturedTableViewCell
             
             //need to add sthg
@@ -252,6 +248,9 @@ extension HomeViewController: UITableViewDataSource {
             
             //            if let item = featuredProduct[indexPath.row] {
             cell.configure(model: self.featuredProduct)
+//            let vc = ProductDetailViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
+            
             //            }
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
@@ -259,30 +258,28 @@ extension HomeViewController: UITableViewDataSource {
             
         case 3 :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: HotDealsTableViewCell.reuseIdentifier, for: indexPath) as! HotDealsTableViewCell
-            cell.configure(model: self.hotDeal)
+            cell.configure(model: self.featuredProduct)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
-        case 5:
-            
+        case 4:
             let cell = homeTableView.dequeueReusableCell(withIdentifier: ShopBannerTableViewCell.reuseIdentifier, for: indexPath) as! ShopBannerTableViewCell
-            cell.configure(model: self.hotDealBanner)
+//            cell.configure(model: self.hotDealBanner)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
-        case 6 :
+        case 5 :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: PopularBrandTableViewCell.reuseIdentifier, for: indexPath) as! PopularBrandTableViewCell
-            cell.configure(model: self.popularBrand)
+//            cell.configure(model: self.popularBrand)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
         default :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: RecommendedTableViewCell.reuseIdentifier, for: indexPath) as! RecommendedTableViewCell
-            cell.configure(model: self.recommendedForYou)
+//            cell.configure(model: self.recommendedForYou)
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
         }
     }
-    
     
 }

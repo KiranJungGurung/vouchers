@@ -10,8 +10,7 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     
     static let identifier = "CategoryCell"
-    
-    
+
     private let categoryImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "iphone.rear.camera")
@@ -27,14 +26,12 @@ class CategoryCell: UICollectionViewCell {
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        //        label.text = "Mobile"
+        label.text = "Mobile"
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,11 +56,6 @@ class CategoryCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
         
     }
-//    func configure(with model: Category) {
-//        categoryLabel.text = model.categoryName
-//
-        
-        
-        //    }
-    }
+    
+}
     

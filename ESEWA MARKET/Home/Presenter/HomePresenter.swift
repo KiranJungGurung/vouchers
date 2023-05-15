@@ -4,70 +4,6 @@
 //
 //  Created by Kiran Gurung on 06/05/2023.
 //
-
-//
-//
-// import Foundation
-// import UIKit
-// import Alamofire
-// import SwiftyJSON
-//
-// protocol HomeProtocolDelegate: AnyObject {
-// func didFetchProduct(model:[FeaturedProduct])
-//
-// }
-//
-//class HomePresenter {
-//    weak var delegate: HomeProtocolDelegate?
-//
-//
-//    init(delegate: HomeProtocolDelegate? = nil) {
-//        self.delegate = delegate
-//
-//    }
-//
-//
-//    func fetch() {
-//        fetchProducts {[weak self] result in
-//            switch result {
-//            case .success(let model):
-//                print(model)
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//
-//        }
-//    }
-//
-//    func fetchProducts(completion: @escaping (Result<[FeaturedProduct], Error>) -> Void) {
-//
-//        let url = "\(baseURL)/products"
-//        AF.request(url).responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                let json = JSON(value)
-//                let products = json.arrayValue.map { FeaturedProduct(json: $0)}
-//                self.delegate?.didFetchProduct(model: products)
-//            case .failure(let error):
-//                print("Error: \(error)")
-//
-//            }
-//
-//        }
-//
-//    }
-//
-//}
-
-
-//
-//  HomePresenter.swift
-//  ESEWA MARKET
-//
-//  Created by Kiran Gurung on 06/05/2023.
-//
-
-
 import Alamofire
 import Foundation
 import SwiftyJSON
@@ -75,7 +11,7 @@ import UIKit
 
  protocol HomeProtocolDelegate: AnyObject {
  func didFetchProduct(model:[FeaturedProduct])
-     
+
  }
 
 class HomePresenter {
@@ -101,7 +37,6 @@ class HomePresenter {
     }
     
     func fetchProducts(completion: @escaping (Result<[FeaturedProduct], Error>) -> Void) {
-        
         let url = "\(baseURL)products"
         AF.request(url).responseJSON { response in
             switch response.result {
@@ -119,8 +54,3 @@ class HomePresenter {
     }
     
 }
-
-//
-//if let item = featuredProduct[indexPath.row] {
-//    cell.configure(model: self.featuredProduct)
-//}

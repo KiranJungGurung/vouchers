@@ -5,7 +5,6 @@
 //  Created by Kiran Gurung on 28/04/2023.
 //
 
-
 import UIKit
 
 class PopularBrandCell: UICollectionViewCell {
@@ -33,7 +32,7 @@ class PopularBrandCell: UICollectionViewCell {
     
     var productTitleLabel: UILabel = {
         let label = UILabel()
-//        label.text = "Nivea Body Lotion"
+        label.text = "Nivea Body Lotion"
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +42,7 @@ class PopularBrandCell: UICollectionViewCell {
     
     var productSubTitleLabel: UILabel = {
         let subLabel = UILabel()
-//        subLabel.text = "75 ML - NIVEA"
+        subLabel.text = "75 ML - NIVEA"
         subLabel.textColor = .gray
         subLabel.font = .systemFont(ofSize: 10, weight: .medium)
         subLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +52,7 @@ class PopularBrandCell: UICollectionViewCell {
     
     var priceLabel: UILabel = {
         let priceLabel = UILabel()
-//        priceLabel.text = "Rs.134.00"
+        priceLabel.text = "Rs.134.00"
         priceLabel.font = UIFont.systemFont(ofSize: 16)
         priceLabel.textAlignment = .left
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +60,7 @@ class PopularBrandCell: UICollectionViewCell {
         return priceLabel
     }()
     var likeButton: UIButton = {
-            let likeButton = UIButton()
+        let likeButton = UIButton()
           likeButton.contentMode = .scaleAspectFit
           likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
           likeButton.translatesAutoresizingMaskIntoConstraints = false

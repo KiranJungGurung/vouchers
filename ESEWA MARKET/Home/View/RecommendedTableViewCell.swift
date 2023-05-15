@@ -56,8 +56,9 @@ class RecommendedTableViewCell: UITableViewCell {
 
     }
     func configure(model: [RecommendedForYou]) {
-            self.model = model
-            recommendedCollectionView.reloadData()
+        self.model = model
+        recommendedCollectionView.reloadData()
+        
         }
 
     
@@ -70,14 +71,14 @@ class RecommendedTableViewCell: UITableViewCell {
 extension RecommendedTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        model.count
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! RecommendedCell
-        let item = model[indexPath.row]
-        cell.productTitleLabel.text = item.title
-        cell.configure(with: item)
+//        let item = model[indexPath.row]
+//        cell.productTitleLabel.text = item.title
+//        cell.configure(with: item)
         return cell
     }
     

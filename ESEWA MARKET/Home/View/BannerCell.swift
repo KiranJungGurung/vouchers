@@ -1,4 +1,4 @@
-//
+///
 //  BannerCell.swift
 //  ESEWA MARKET
 //
@@ -12,7 +12,7 @@ class BannerCell: UICollectionViewCell {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "bannerCollection1")
+        imageView.image = UIImage(named: "banner1")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,12 +27,11 @@ class BannerCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.backgroundColor = .clear
         
-        
         NSLayoutConstraint.activate([
-                 imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-                 imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-                 imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-                 imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+                 imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                 imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                 imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                 imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
                  imageView.heightAnchor.constraint(equalToConstant: 150)
              ])
     }

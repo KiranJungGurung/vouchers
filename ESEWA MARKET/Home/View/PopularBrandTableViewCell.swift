@@ -55,8 +55,8 @@ class PopularBrandTableViewCell: UITableViewCell {
 
     }
     func configure(model: [PopularBrand]) {
-            self.model = model
-            brandCollectionView.reloadData()
+        self.model = model
+        brandCollectionView.reloadData()
         }
 
     
@@ -69,13 +69,13 @@ class PopularBrandTableViewCell: UITableViewCell {
 extension PopularBrandTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.count
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! PopularBrandCell
-        let item = model[indexPath.row]
-        cell.productTitleLabel.text = item.title
+//        let item = model[indexPath.row]
+//        cell.productTitleLabel.text = item.title
 //        cell.configure(with: item)
         return cell
     }
