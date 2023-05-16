@@ -14,7 +14,7 @@ class FeaturedTableViewCell: UITableViewCell {
     
     var model : [FeaturedProduct]?
     
-//    var productClicked: ((FeaturedProduct) -> ())?
+    var productClicked: ((FeaturedProduct) -> ())?
     
     
     private let featuredCollectionView: UICollectionView = {
@@ -82,7 +82,12 @@ extension FeaturedTableViewCell: UICollectionViewDataSource {
 //        cell.configure(with: item)
         return cell
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let item = model?[indexPath.row]
+            if let item = item {
+                self.productClicked?(item)
+            }
+        }
     
 }
 
@@ -93,4 +98,6 @@ extension FeaturedTableViewCell: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 180, height: 300)
     }
 }
+
+
 

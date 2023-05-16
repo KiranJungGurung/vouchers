@@ -1,19 +1,20 @@
 
+
 //  RecommendedTableViewCell.swift
 //  ESEWA MARKET
 //
 //  Created by Kiran Gurung on 28/04/2023.
 //
 
-
-
+import Kingfisher
 import UIKit
 
 class RecommendedTableViewCell: UITableViewCell {
 
     private let cellReuseIdentifier = "RecommendedTableViewCell"
     
-    var model = [RecommendedForYou]()
+    var model :[FeaturedProduct]?
+    
     
     private let recommendedCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
@@ -55,7 +56,7 @@ class RecommendedTableViewCell: UITableViewCell {
         recommendedCollectionView.register(RecommendedCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
 
     }
-    func configure(model: [RecommendedForYou]) {
+    func configure(model: [FeaturedProduct]) {
         self.model = model
         recommendedCollectionView.reloadData()
         
@@ -65,17 +66,20 @@ class RecommendedTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
 }
 extension RecommendedTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return model?.count ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! RecommendedCell
+        
+        if let item = model?[indexPath.row] {
+            cell.configure(with: item)
+        }
 //        let item = model[indexPath.row]
 //        cell.productTitleLabel.text = item.title
 //        cell.configure(with: item)
@@ -91,7 +95,4 @@ extension RecommendedTableViewCell: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 180, height: 300)
     }
 }
-
-
-
 

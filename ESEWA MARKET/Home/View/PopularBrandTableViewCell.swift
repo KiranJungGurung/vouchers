@@ -6,14 +6,12 @@
 //
 
 
- import UIKit
-
-
+import UIKit
 class PopularBrandTableViewCell: UITableViewCell {
 
     private let cellReuseIdentifier = "PopularBrandTableViewCell"
     
-    var model = [PopularBrand]()
+    var model :[FeaturedProduct]?
 
     private let brandCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
@@ -54,7 +52,7 @@ class PopularBrandTableViewCell: UITableViewCell {
         brandCollectionView.register(PopularBrandCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
 
     }
-    func configure(model: [PopularBrand]) {
+    func configure(model: [FeaturedProduct]) {
         self.model = model
         brandCollectionView.reloadData()
         }
@@ -69,11 +67,14 @@ class PopularBrandTableViewCell: UITableViewCell {
 extension PopularBrandTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return model?.count ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! PopularBrandCell
+        if let item = model?[indexPath.row] {
+            cell.configure(with: item)
+        }
 //        let item = model[indexPath.row]
 //        cell.productTitleLabel.text = item.title
 //        cell.configure(with: item)
@@ -81,14 +82,16 @@ extension PopularBrandTableViewCell: UICollectionViewDataSource {
     }
     
 }
-
-
 extension PopularBrandTableViewCell: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 180, height: 300)
     }
 }
+
+
+
+
 
 
 

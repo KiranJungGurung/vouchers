@@ -1,3 +1,4 @@
+
 //
 //  PopularBrandCell.swift
 //  ESEWA MARKET
@@ -17,7 +18,7 @@ class PopularBrandCell: UICollectionViewCell {
         return containerView
     }()
     
-    var PopularBrandImageView: UIImageView = {
+    var popularBrandImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "nivea")
         imageView.contentMode = .scaleAspectFit
@@ -32,7 +33,7 @@ class PopularBrandCell: UICollectionViewCell {
     
     var productTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Nivea Body Lotion"
+//        label.text = "Nivea Body Lotion"
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +43,7 @@ class PopularBrandCell: UICollectionViewCell {
     
     var productSubTitleLabel: UILabel = {
         let subLabel = UILabel()
-        subLabel.text = "75 ML - NIVEA"
+//        subLabel.text = "75 ML - NIVEA"
         subLabel.textColor = .gray
         subLabel.font = .systemFont(ofSize: 10, weight: .medium)
         subLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +53,7 @@ class PopularBrandCell: UICollectionViewCell {
     
     var priceLabel: UILabel = {
         let priceLabel = UILabel()
-        priceLabel.text = "Rs.134.00"
+//        priceLabel.text = "Rs.134.00"
         priceLabel.font = UIFont.systemFont(ofSize: 16)
         priceLabel.textAlignment = .left
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -77,22 +78,20 @@ class PopularBrandCell: UICollectionViewCell {
         addView.translatesAutoresizingMaskIntoConstraints = false
         addView.backgroundColor  = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
         addView.layer.cornerRadius = 9
-
         addView.layer.maskedCorners = [.layerMinXMinYCorner]
 
         return addView
     }()
+    private let addButton: UIButton = {
+        let addButton = UIButton()
+        addButton.contentMode = .scaleAspectFit
+        addButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.tintColor = .white
+        addButton.isUserInteractionEnabled = true
+        return addButton
+    }()
     
-        private let addButton: UIButton = {
-            let addButton = UIButton()
-            addButton.contentMode = .scaleAspectFit
-            addButton.setImage(UIImage(systemName: "plus"), for: .normal)
-            addButton.translatesAutoresizingMaskIntoConstraints = false
-            addButton.tintColor = .white
-            addButton.isUserInteractionEnabled = true
-            return addButton
-        }()
-        
         
         
         
@@ -101,7 +100,7 @@ class PopularBrandCell: UICollectionViewCell {
         contentView.backgroundColor = .systemFill
         contentView.layer.cornerRadius = 10
         
-        contentView.addSubview(PopularBrandImageView)
+        contentView.addSubview(popularBrandImageView)
         contentView.addSubview(containerView)
         containerView.addSubview(productTitleLabel)
         containerView.addSubview(productSubTitleLabel)
@@ -115,15 +114,15 @@ class PopularBrandCell: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
             
-           PopularBrandImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
-           PopularBrandImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant:0),
-           PopularBrandImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
-           PopularBrandImageView.widthAnchor.constraint(equalToConstant: 30),
-           PopularBrandImageView.heightAnchor.constraint(equalToConstant: 160),
+           popularBrandImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
+           popularBrandImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant:0),
+           popularBrandImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
+           popularBrandImageView.widthAnchor.constraint(equalToConstant: 30),
+           popularBrandImageView.heightAnchor.constraint(equalToConstant: 160),
             
             
             
-            containerView.topAnchor.constraint(equalTo: PopularBrandImageView.bottomAnchor, constant: 16),
+            containerView.topAnchor.constraint(equalTo: popularBrandImageView.bottomAnchor, constant: 16),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
@@ -164,7 +163,7 @@ class PopularBrandCell: UICollectionViewCell {
             addButton.heightAnchor.constraint(equalToConstant: 20)
             
             
-        ])
+            ])
         
         }
         
@@ -172,12 +171,15 @@ class PopularBrandCell: UICollectionViewCell {
             fatalError("init(coder:) has not been implemented")
             
         }
-    func configure(with model: PopularBrand) {
+    func configure(with model: FeaturedProduct) {
+        if let url = URL(string: model.image ?? "") {
+            popularBrandImageView.kf.setImage(with: url)
+           }
         productTitleLabel.text = model.title
         productSubTitleLabel.text = model.description
         priceLabel.text = "Price: \(model.price ?? 1)"
     }
-//    
+
         
     }
 

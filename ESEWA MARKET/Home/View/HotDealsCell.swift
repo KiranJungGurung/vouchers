@@ -1,36 +1,36 @@
-//
+
 //  HotDealsCell.swift
 //  ESEWA MARKET
 //
 //  Created by Kiran Gurung on 27/04/2023.
 //
 
-
 import UIKit
 
 class HotDealsCell: UICollectionViewCell {
     
     static let identifier = "HotDealsCell"
+    
     private let containerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         return containerView
     }()
+    
     private let hotDealsImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "hoddie")
+//        imageView.image = UIImage(named: "jacket")
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 20
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         return imageView
-        
     }()
     
     var productTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Jacket"
+//        label.text = "50 T-shirt"
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -38,9 +38,9 @@ class HotDealsCell: UICollectionViewCell {
         return label
     }()
     
-    private let productSubTitleLabel: UILabel = {
+     var productSubTitleLabel: UILabel = {
         let subLabel = UILabel()
-        subLabel.text = "IN STOCK - 99 SHOP"
+//        subLabel.text = "IN STOCK - 99 SHOP"
         subLabel.textColor = .gray
         subLabel.font = .systemFont(ofSize: 10, weight: .medium)
         subLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -48,9 +48,9 @@ class HotDealsCell: UICollectionViewCell {
         return subLabel
     }()
     
-    private let priceLabel: UILabel = {
+     var priceLabel: UILabel = {
         let priceLabel = UILabel()
-        priceLabel.text = "Rs.3000.00"
+//        priceLabel.text = "Rs.840.00"
         priceLabel.font = UIFont.systemFont(ofSize: 16)
         priceLabel.textAlignment = .left
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -60,11 +60,10 @@ class HotDealsCell: UICollectionViewCell {
     
     private let likeButton: UIButton = {
         let likeButton = UIButton()
-        likeButton.contentMode = .scaleAspectFit
+        likeButton.contentMode = .scaleAspectFill
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         likeButton.translatesAutoresizingMaskIntoConstraints = false
         likeButton.tintColor = .gray
-        likeButton.isUserInteractionEnabled = true
         return likeButton
     }()
     
@@ -89,6 +88,8 @@ class HotDealsCell: UICollectionViewCell {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.tintColor = .white
         addButton.isUserInteractionEnabled = true
+        //            addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        
         return addButton
     }()
     
@@ -106,14 +107,14 @@ class HotDealsCell: UICollectionViewCell {
         containerView.addSubview(addContainerView)
         addContainerView.addSubview(addButton)
         containerView.backgroundColor = .white
-        
         NSLayoutConstraint.activate([
             
             hotDealsImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
-            hotDealsImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant:0),
+            hotDealsImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
             hotDealsImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
-            hotDealsImageView.widthAnchor.constraint(equalToConstant: 30),
             hotDealsImageView.heightAnchor.constraint(equalToConstant: 160),
+            
+            //
             
             containerView.topAnchor.constraint(equalTo: hotDealsImageView.bottomAnchor, constant: 16),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
@@ -135,8 +136,7 @@ class HotDealsCell: UICollectionViewCell {
             
             likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 10),
             likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -110),
-            //            likeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-            likeButton.widthAnchor.constraint(equalToConstant: 30),
+            likeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
             likeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
             
             
@@ -162,13 +162,31 @@ class HotDealsCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
         
     }
-    func configure(with model: HotDealsOfTheDay) {
+//    func setupViewWithData(model: EmbeddedEvents) {
+//
+//            if let url = URL(string: model.images?.first?.url ?? "") {
+//                eventImageView.kf.setImage(with: url)
+//            }
+//
+//            titleLabel.text = model.name
+//            dateLabel.text = model.dates?.start?.localDate
+//            locationLabel.text = model.embedded?.venues?.first?.name
+//            priceLabel.text = String("$\(model.priceRanges?.first?.min ?? 0.0)")
+//        }
+    
+    func configure(with model: FeaturedProduct) {
+//        if let url = URL(string: model.images.first.url ?? "") {
+//            featuredImageView.kf.setImage(with: url)
+//        }
+        if let url = URL(string: model.image ?? "") {
+            hotDealsImageView.kf.setImage(with: url)
+           }
         productTitleLabel.text = model.title
         productSubTitleLabel.text = model.category
         priceLabel.text = "Price: \(model.price ?? 1)"
     }
     
+    
+    
 }
-
-
 

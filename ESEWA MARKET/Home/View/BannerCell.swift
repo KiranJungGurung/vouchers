@@ -20,8 +20,6 @@ class BannerCell: UICollectionViewCell {
         return imageView
     
     }()
-    
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
@@ -35,12 +33,11 @@ class BannerCell: UICollectionViewCell {
                  imageView.heightAnchor.constraint(equalToConstant: 150)
              ])
     }
-    
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
     func setupCollectionCell(with image: String) {
         imageView.image = UIImage(named: image)
     }
 }
+

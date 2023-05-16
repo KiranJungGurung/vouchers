@@ -1,4 +1,4 @@
-//
+
 //  CategoriesTableViewCell.swift
 //  ESEWA MARKET
 //
@@ -82,3 +82,5 @@ extension CategoriesTableViewCell: UICollectionViewDelegateFlowLayout {
      }
     
 }
+
+

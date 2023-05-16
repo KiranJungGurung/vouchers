@@ -1,10 +1,11 @@
 //
+//
 //  RecommendedCell.swift
 //  ESEWA MARKET
 //
-//  Created by Kiran Gurung on 28/04/2023.
-//
+//  Created by Kiran Gurung on 28/04/2023
 
+import Kingfisher
 import UIKit
 
 class RecommendedCell: UICollectionViewCell {
@@ -19,7 +20,7 @@ class RecommendedCell: UICollectionViewCell {
     }()
      var recommendedImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "riva")
+//        imageView.image = UIImage(named: "riva")
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 20
@@ -76,9 +77,7 @@ class RecommendedCell: UICollectionViewCell {
         addView.translatesAutoresizingMaskIntoConstraints = false
         addView.backgroundColor  = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
         addView.layer.cornerRadius = 9
-
         addView.layer.maskedCorners = [.layerMinXMinYCorner]
-
         return addView
     }()
     
@@ -91,10 +90,7 @@ class RecommendedCell: UICollectionViewCell {
             addButton.isUserInteractionEnabled = true
             return addButton
         }()
-        
-        
-        
-        
+  
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .systemFill
@@ -170,13 +166,19 @@ class RecommendedCell: UICollectionViewCell {
             
         }
     
-    func configure(with model: RecommendedForYou) {
+    func configure(with model: FeaturedProduct) {
+        if let url = URL(string: model.image ?? "") {
+            recommendedImageView.kf.setImage(with: url)
+           }
         productTitleLabel.text = model.title
-        productSubTitleLabel.text = model.description
+        productSubTitleLabel.text = model.category
         priceLabel.text = "Price: \(model.price ?? 1)"
     }
         
 }
+
+
+
 
 
 

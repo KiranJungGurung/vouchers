@@ -1,4 +1,4 @@
-//
+
 //  ShopBannerTableViewCell.swift
 //  ESEWA MARKET
 //
@@ -10,11 +10,12 @@ import UIKit
 class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
     
     private let cellReuseIdentifier = "ShopBannerTableViewCell"
-    //    private var list: [BannerModel]?
     
     let pageControl = UIPageControl()
     
     var model = [HotDealBanner]()
+
+
     // Add collectionView
     private let homeCollectionView: UICollectionView = {
         
@@ -49,7 +50,6 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
         
         
         // add datasource and delegate protocol
-        
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
         
@@ -100,4 +100,6 @@ extension ShopBannerTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+
 

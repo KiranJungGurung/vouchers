@@ -11,16 +11,12 @@ import UIKit
 
  protocol HomeProtocolDelegate: AnyObject {
  func didFetchProduct(model:[FeaturedProduct])
-
  }
 
 class HomePresenter {
     weak var delegate: HomeProtocolDelegate?
-    
-    
     init(delegate: HomeProtocolDelegate? = nil) {
         self.delegate = delegate
-        
     }
     
     func fetch() {
@@ -32,13 +28,13 @@ class HomePresenter {
             case .failure(let error):
                 print(error.localizedDescription)
             }
-            
         }
     }
     
     func fetchProducts(completion: @escaping (Result<[FeaturedProduct], Error>) -> Void) {
-        let url = "\(baseURL)products"
-        AF.request(url).responseJSON { response in
+//        let url = "\(baseURL)products"
+        let url = URL(string: "https://fakestoreapi.com/products")
+        AF.request(url!).responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -48,9 +44,8 @@ class HomePresenter {
                 print("Error: \(error)")
                 completion(.failure(error))
             }
-            
         }
-        
     }
-    
 }
+
+

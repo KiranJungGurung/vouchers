@@ -1,4 +1,4 @@
-//
+
 //  CategoryCell.swift
 //  ESEWA MARKET
 //
@@ -50,12 +50,12 @@ class CategoryCell: UICollectionViewCell {
             categoryLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
         
-        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         
     }
-    
 }
     
+
+

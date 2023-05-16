@@ -1,11 +1,10 @@
-//
+
 //  FeaturedCell.swift
 //  ESEWA MARKET
 //
 //  Created by Kiran Gurung on 26/04/2023.
 //
-
-
+import Kingfisher
 import UIKit
 
 class FeaturedCell: UICollectionViewCell {
@@ -20,12 +19,13 @@ class FeaturedCell: UICollectionViewCell {
     
     private let featuredImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "jacket")
+//        imageView.image = UIImage(named: "jacket")
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 20
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        imageView.backgroundColor = .white
         return imageView
     }()
     
@@ -176,7 +176,11 @@ class FeaturedCell: UICollectionViewCell {
 //        }
     
     func configure(with model: FeaturedProduct) {
-//        if let url = URL(string: model.images.first.url ?? "") {
+        
+        if let url = URL(string: model.image ?? "") {
+               featuredImageView.kf.setImage(with: url)
+           }
+//        if let url = URL(string: model.image?.first?.url ?? "") {
 //            featuredImageView.kf.setImage(with: url)
 //        }
         productTitleLabel.text = model.title
