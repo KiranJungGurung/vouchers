@@ -1,5 +1,4 @@
-//
-//
+
 //  DescriptionView.swift
 //  ESEWA MARKET
 //
@@ -9,8 +8,10 @@
 import UIKit
 
 class DescriptionView: UITableViewCell {
-
-    private let checkImage: UIImageView = {
+    
+    var containerView = UIView()
+    
+    var checkImage: UIImageView = {
         let checkImage = UIImageView()
         checkImage.image = UIImage(systemName: "checkmark.circle.fill")
         checkImage.contentMode = .scaleAspectFit
@@ -18,21 +19,16 @@ class DescriptionView: UITableViewCell {
         checkImage.translatesAutoresizingMaskIntoConstraints = false
         checkImage.tintColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
         return checkImage
-            
     }()
     
-     var descLabel: UILabel = {
+    var descLabel: UILabel = {
         let desclbl = UILabel()
         desclbl.translatesAutoresizingMaskIntoConstraints = false
         desclbl.font = .systemFont(ofSize: 16, weight: .medium)
         desclbl.textColor = .black
         desclbl.numberOfLines = 2
         return desclbl
-        
     }()
-    
-    var containerView = UIView()
-    
     
     static let reuseIdentifier = "DescriptionView"
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -44,14 +40,12 @@ class DescriptionView: UITableViewCell {
         super.init(coder: aDecoder)
         setupView()
     }
-    
-    
-    
+ 
     func setupView() {
         self.selectionStyle = .none
         containerView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(containerView)
-  
+        
         self.addSubview(checkImage)
         self.addSubview(descLabel)
         
@@ -60,25 +54,20 @@ class DescriptionView: UITableViewCell {
             containerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
             containerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
             containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8),
-           
             
             checkImage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
             checkImage.widthAnchor.constraint(equalToConstant: 24),
             checkImage.heightAnchor.constraint(equalToConstant: 24),
             checkImage.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: 0),
-      
+            
             descLabel.centerYAnchor.constraint(equalTo: checkImage.centerYAnchor, constant: 0),
             descLabel.leadingAnchor.constraint(equalTo: checkImage.trailingAnchor, constant: 4),
             descLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 4),
-            
         ])
         
     }
     @objc func moreViewTapped() {
-        
-        
+        //printtssd
     }
-    
-
-    
 }
+

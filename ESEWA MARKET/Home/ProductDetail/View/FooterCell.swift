@@ -1,3 +1,4 @@
+//
 //  FooterCell.swift
 //  ESEWA MARKET
 //
@@ -7,22 +8,20 @@
 import UIKit
 
 class FooterCell: UITableViewCell {
-
     
     private let identifier = "FooterCell"
 
     // MARK: - Add Custom FooterView
     
-    private var footerView: UIView = {
+    var footerView: UIView = {
         let myfooterView = UIView()
         myfooterView.translatesAutoresizingMaskIntoConstraints = false
         myfooterView.backgroundColor = .white
         return myfooterView
     }()
     
-    private let checkOutTotal: UILabel = {
+    var checkOutTotal: UILabel = {
         let total = UILabel()
-//        total.text = "Jacket in Nylon - Celene"
         total.translatesAutoresizingMaskIntoConstraints = false
         total.textAlignment = .left
         total.font = .systemFont(ofSize: 16, weight: .bold)
@@ -30,9 +29,8 @@ class FooterCell: UITableViewCell {
         return total
     }()
     
-    private let totalPriceLabel: UILabel = {
+    var totalPriceLabel: UILabel = {
         let totalPrice = UILabel()
-//        totalPrice.text = "Rs.52,500.00"
         totalPrice.translatesAutoresizingMaskIntoConstraints = false
         totalPrice.textAlignment = .left
         totalPrice.font = .systemFont(ofSize: 18, weight: .medium)
@@ -40,7 +38,7 @@ class FooterCell: UITableViewCell {
         return totalPrice
     }()
     
-    private let checkOutButton: UIButton = {
+    var checkOutButton: UIButton = {
         let checkOutButton = UIButton()
         checkOutButton.translatesAutoresizingMaskIntoConstraints = false
         checkOutButton.setTitle("ADD TO CART", for: .normal)
@@ -61,7 +59,7 @@ class FooterCell: UITableViewCell {
         footerView.addSubview(totalPriceLabel)
         footerView.addSubview(checkOutButton)
         
-        //MARK: - ADD CONSTRAINTS INTO DESCRIPTION CONTAINERVIEW
+    //MARK: - ADD CONSTRAINTS INTO DESCRIPTION CONTAINERVIEW
         
         NSLayoutConstraint.activate([
             footerView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
@@ -69,8 +67,7 @@ class FooterCell: UITableViewCell {
             footerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             footerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
             footerView.heightAnchor.constraint(equalToConstant: 100),
-            
-            
+          
             checkOutTotal.topAnchor.constraint(equalTo: self.footerView.topAnchor, constant: 8),
             checkOutTotal.leadingAnchor.constraint(equalTo: self.footerView.leadingAnchor, constant:8),
             checkOutTotal.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -8),
@@ -86,15 +83,8 @@ class FooterCell: UITableViewCell {
             checkOutButton.trailingAnchor.constraint(equalTo: self.footerView.trailingAnchor, constant: -16),
             checkOutButton.widthAnchor.constraint(equalToConstant: 170),
             checkOutButton.heightAnchor.constraint(equalToConstant: 40),
-            
-            
-            
-            
-            
-            
-            
         ])
-}
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -103,7 +93,6 @@ class FooterCell: UITableViewCell {
         checkOutTotal.text = model.productName
         totalPriceLabel.text = "\(model.price ?? 00)"
 
-        
       }
-            
 }
+

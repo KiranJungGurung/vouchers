@@ -7,9 +7,7 @@
 import UIKit
 
 class ProductInfoTableViewCell: UITableViewCell {
-    
     private let identifier = "ProductInfoTableViewCell"
-    
 
     var productContainerView: UIView = {
         let myContainerView = UIView()
@@ -21,7 +19,6 @@ class ProductInfoTableViewCell: UITableViewCell {
     
     var productTitleLabel: UILabel = {
         let productTitle = UILabel()
-//        productTitle.text = "Jacket In Nylon"
         productTitle.translatesAutoresizingMaskIntoConstraints = false
         productTitle.textAlignment = .left
         productTitle.font = .systemFont(ofSize: 18, weight: .bold)
@@ -31,7 +28,6 @@ class ProductInfoTableViewCell: UITableViewCell {
     
     var priceLabel: UILabel = {
         let pricelbl = UILabel()
-//        pricelbl.text = "Rs.2500.00"
         pricelbl.translatesAutoresizingMaskIntoConstraints = false
         pricelbl.textAlignment = .left
         pricelbl.font = .systemFont(ofSize: 26, weight: .medium)
@@ -87,15 +83,11 @@ class ProductInfoTableViewCell: UITableViewCell {
             priceCrossedLabel.centerYAnchor.constraint(equalTo: productContainerView.centerYAnchor, constant: 16),
             priceCrossedLabel.centerXAnchor.constraint(equalTo: productContainerView.centerXAnchor, constant: 16),
             priceCrossedLabel.bottomAnchor.constraint(equalTo: productContainerView.bottomAnchor, constant: -16),
-            
-            
-        ])
-        
-     
-    }
-    
 
-    
+        ])
+
+    }
+ 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -108,3 +100,4 @@ class ProductInfoTableViewCell: UITableViewCell {
       }
     
 }
+
