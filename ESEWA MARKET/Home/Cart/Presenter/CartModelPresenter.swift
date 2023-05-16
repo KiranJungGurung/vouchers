@@ -1,4 +1,4 @@
-//
+////
 //  CartPresenter.swift
 //  ESEWA MARKET
 //
@@ -14,15 +14,16 @@ protocol AddItemToCartProtocol: NSObject {
 class AddCartItemPresenter {
     var cartItemsList: [AddCartItemModel] = [
         
-        AddCartItemModel(itemName: "iphone", itemDescription: "This is my iphone", itemCount: 1, itemPrice: 2000.0),
+        AddCartItemModel(itemImage: UIImage(named: "inductionStove"),itemName: "Induction Stove", itemDescription: "IN STOCK - BALTRA", itemCount: 1, itemPrice: 3987.0),
         
-        AddCartItemModel(itemName: "Airpods", itemDescription: "This is my airpods", itemCount: 1, itemPrice: 1000.0)
+        AddCartItemModel(itemImage: UIImage(named: "nike"),itemName: "Nike Air Monrch", itemDescription: "IN STOCK - NIKE", itemCount: 1, itemPrice: 8200.0),
+        
+        AddCartItemModel(itemImage: UIImage(named: "Oppo"),itemName: "Oppo A74 (6GB)", itemDescription: "IN STOCK - OPPO", itemCount: 1, itemPrice: 27_800.0)
+        
     ]
     
-    
     var delegate: AddItemToCartProtocol?
-    
-     weak var view: CartViewController?
+    weak var view: CartViewController?
     
     init(delegate: AddItemToCartProtocol, view: CartViewController) {
         self.delegate = delegate
@@ -32,11 +33,9 @@ class AddCartItemPresenter {
     func updateView() {
         self.delegate?.displayCartItemList(model: cartItemsList)
     }
-    
-   
 }
-    
-    
+
+
     
 
 

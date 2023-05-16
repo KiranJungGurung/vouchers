@@ -7,20 +7,19 @@
 
 import UIKit
 
-
 class DeletePopUpViewController: UIViewController {
     
-//    var onDeleteClicked: (()->())?
-    var onDeleteClicked: ((DeletePopUpViewController) -> ())?
+    var onDeleteClicked: ((String) -> ())?
+    var onCancelled: (() -> ())?
 
-    private let itemDeleteView:UIView = {
+   var itemDeleteView:UIView = {
         let deleteStackView = UIView ()
         deleteStackView.translatesAutoresizingMaskIntoConstraints = false
         deleteStackView.layer.cornerRadius = 16
         return deleteStackView
     }()
     
-    private let itemName: UILabel = {
+    var itemName: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Delete from cart"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +29,7 @@ class DeletePopUpViewController: UIViewController {
         return titleLabel
     }()
     
-    private let itemDeleteLabel: UILabel = {
+    var itemDeleteLabel: UILabel = {
         let deleteTextLabel = UILabel()
         deleteTextLabel.text = "Are you sure you want to delete item(s)."
         deleteTextLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -40,10 +39,9 @@ class DeletePopUpViewController: UIViewController {
         return deleteTextLabel
     }()
     
-    private let itemCancelButton: UIButton = {
+    var itemCancelButton: UIButton = {
         let cancelbtn = UIButton()
         cancelbtn.translatesAutoresizingMaskIntoConstraints = false
-        
         cancelbtn.setTitle("CANCEL", for: .normal)
         cancelbtn.setTitleColor(.white, for: .normal)
         cancelbtn.backgroundColor = .darkGray
@@ -52,17 +50,8 @@ class DeletePopUpViewController: UIViewController {
         return cancelbtn
         
     }()
-    // add cancel icon
-//    private let itemCancelImage: UIImageView = {
-//        let cancelImg = UIImageView()
-//        cancelImg.image = UIImage(systemName: "xmark")
-//        cancelImg.tintColor = .black
-//        cancelImg.translatesAutoresizingMaskIntoConstraints = false
-//        cancelImg.isUserInteractionEnabled = true
-//        return cancelImg
-//    }()
     
-    private let itemDeleteButton: UIButton = {
+    var itemDeleteButton: UIButton = {
         let deletebtn = UIButton()
         deletebtn.setTitle("DELETE", for: .normal)
         deletebtn.translatesAutoresizingMaskIntoConstraints = false
@@ -74,44 +63,33 @@ class DeletePopUpViewController: UIViewController {
         
     }()
     
-    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
         setupConstraints()
-        
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCancelImageTap))
-//        itemCancelImage.addGestureRecognizer(tapGesture)
-//
-//        
-        
     
         itemCancelButton.addTarget(self, action: #selector(dismissVc), for: .touchUpInside)
-        
         itemDeleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-        
     }
     
     func setupView() {
         view.backgroundColor = .clear
-        
+    
     }
     
     @objc func handleCancelImageTap(_ sender: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
-        
-        
+    
     }
     
     @objc func dismissVc() {
-        self.dismiss(animated: true)
+//        self.dismiss(animated: true)
+        onCancelled?()
     }
     @objc func deleteButtonTapped() {
-        print("Tapped delete button")
-        
-        onDeleteClicked?(self)
+        onDeleteClicked?("Tapped delete button")
     }
     
     func setupConstraints() {
@@ -121,14 +99,9 @@ class DeletePopUpViewController: UIViewController {
         itemDeleteView.addSubview(itemDeleteLabel)
         itemDeleteView.addSubview(itemCancelButton)
         itemDeleteView.addSubview(itemDeleteButton)
-//        itemDeleteView.addSubview(itemCancelImage)
-        
         
         NSLayoutConstraint.activate([
-            
-            
             //pin deleteview
-            
             itemDeleteView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             itemDeleteView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             itemDeleteView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -156,16 +129,6 @@ class DeletePopUpViewController: UIViewController {
             itemDeleteButton.trailingAnchor.constraint(equalTo: itemName.trailingAnchor, constant: -20),
             itemDeleteButton.widthAnchor.constraint(equalToConstant: 140),
             itemDeleteButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            //          pin cancel icon
-            
-//            itemCancelImage.topAnchor.constraint(equalTo: self.itemDeleteView.topAnchor, constant: 10),
-//            itemCancelImage.trailingAnchor.constraint(equalTo: self.itemDeleteView.trailingAnchor, constant: 10),
-//            itemCancelImage.heightAnchor.constraint(equalToConstant: 24),
-//            itemCancelImage.widthAnchor.constraint(equalToConstant: 24)
-//
-            
-            
         ])
     }
 }

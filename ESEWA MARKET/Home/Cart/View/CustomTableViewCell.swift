@@ -6,21 +6,16 @@
 //
 import UIKit
 
-//struct Cart {
-//    var quanity: Int?
-//    var productPrice: Double?
-//    var itemCountLabel: Int?
-//}
-
-
 class CustomTableViewCell: UITableViewCell {
     
+     // MARK: - Properties
     
     static let identifier = "CustomCartableViewCell"
-    
     var countChanged: ((Double)-> Void)?
-    
-    
+    var model: AddCartItemModel?
+    var quantity = 1
+    var productPrice =  2000.00
+
     
     // MARK: - Add ContainerView
     
@@ -33,14 +28,12 @@ class CustomTableViewCell: UITableViewCell {
         containerView.layer.shadowOpacity = 0.4
         containerView.layer.shadowOffset = .zero
         containerView.backgroundColor = .white
-
         return containerView
         
     }()
     
      var itemImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "jacket")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
@@ -51,7 +44,6 @@ class CustomTableViewCell: UITableViewCell {
     
     var itemName: UILabel = {
         let itemLabel = UILabel()
-        //        itemLabel.text = "Jacket on Nylon"
         itemLabel.textColor = .black
         itemLabel.font = .systemFont(ofSize: 17, weight: .bold)
         itemLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -104,7 +96,6 @@ class CustomTableViewCell: UITableViewCell {
     
     var itemCountLabel: UILabel = {
         let count = UILabel()
-        //        count.text = "01"
         count.font = UIFont.systemFont(ofSize: 14)
         count.textAlignment = .center
         count.translatesAutoresizingMaskIntoConstraints = false
@@ -123,11 +114,6 @@ class CustomTableViewCell: UITableViewCell {
         
     }()
     
-        var quantity = 1
-        var productPrice =  2000.00
-    
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .clear//.systemBackground
@@ -137,32 +123,29 @@ class CustomTableViewCell: UITableViewCell {
         contentView.addSubview(itemName)
         contentView.addSubview(itemDescription)
         contentView.addSubview(itemPrice)
-        
-        
+
         contentView.addSubview(itemCountView)
         contentView.addSubview(itemSubButton)
         contentView.addSubview(itemCountLabel)
         contentView.addSubview(itemAddButton)
     }
-       
-    
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         
     }
     func configure(with model: AddCartItemModel) {
+        itemImage.image = model.itemImage
         itemName.text = model.itemName
         itemDescription.text = model.itemDescription
-        itemPrice.text = "Rs\(model.itemPrice)"
-        itemCountLabel.text = "\(model.itemCount)"
+        itemPrice.text = "Rs\(model.itemPrice ?? 00)"
+        itemCountLabel.text = "Rs\(model.itemCount ?? 00)"
         
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         setupViews()
-        
         itemAddButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         itemSubButton.addTarget(self, action: #selector(subButtonTapped), for: .touchUpInside)
     }
@@ -187,7 +170,6 @@ class CustomTableViewCell: UITableViewCell {
             itemImage.heightAnchor.constraint(equalToConstant: 100),
             
             // pin title label
-            
             itemName.leadingAnchor.constraint(equalTo: itemImage.trailingAnchor, constant: 8),
             itemName.heightAnchor.constraint(equalToConstant: 80),
             
@@ -203,14 +185,12 @@ class CustomTableViewCell: UITableViewCell {
             // MARK: - Add Constraints to CounterView
             
             // pin CounterView:
-            
             itemCountView.topAnchor.constraint(equalTo: self.itemContainerView.topAnchor, constant: 0),
             itemCountView.leadingAnchor.constraint(equalTo: self.itemContainerView.trailingAnchor, constant: -38),
             itemCountView.bottomAnchor.constraint(equalTo: self.itemContainerView.bottomAnchor, constant: 0),
             itemCountView.widthAnchor.constraint(equalToConstant: 38),
             
             // pin mySubButton in myCountView
-            
             itemSubButton.topAnchor.constraint(equalTo: itemCountView.topAnchor, constant: 10),
             itemSubButton.leadingAnchor.constraint(equalTo: itemCountView.leadingAnchor, constant: 10),
             itemSubButton.trailingAnchor.constraint(equalTo: itemCountView.trailingAnchor, constant: -10),
@@ -228,7 +208,7 @@ class CustomTableViewCell: UITableViewCell {
             itemAddButton.widthAnchor.constraint(equalToConstant: 10)
         ])
     }
-
+    
     func calculatePrice(quantity: Int) -> Double {
         let productQuantityLabel = productPrice * Double(quantity)
         return productQuantityLabel
@@ -245,6 +225,7 @@ class CustomTableViewCell: UITableViewCell {
         quantity += 1
         updatePriceLabel()
         updateCount()
+        
     }
     
     private func updateCount() {
