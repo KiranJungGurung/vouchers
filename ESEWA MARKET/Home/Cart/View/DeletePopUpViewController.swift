@@ -11,15 +11,15 @@ class DeletePopUpViewController: UIViewController {
     
     var onDeleteClicked: ((String) -> ())?
     var onCancelled: (() -> ())?
-
-   var itemDeleteView:UIView = {
+    
+    let itemDeleteView:UIView = {
         let deleteStackView = UIView ()
         deleteStackView.translatesAutoresizingMaskIntoConstraints = false
         deleteStackView.layer.cornerRadius = 16
         return deleteStackView
     }()
     
-    var itemName: UILabel = {
+    let itemName: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Delete from cart"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +29,7 @@ class DeletePopUpViewController: UIViewController {
         return titleLabel
     }()
     
-    var itemDeleteLabel: UILabel = {
+    let itemDeleteLabel: UILabel = {
         let deleteTextLabel = UILabel()
         deleteTextLabel.text = "Are you sure you want to delete item(s)."
         deleteTextLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +39,7 @@ class DeletePopUpViewController: UIViewController {
         return deleteTextLabel
     }()
     
-    var itemCancelButton: UIButton = {
+    let itemCancelButton: UIButton = {
         let cancelbtn = UIButton()
         cancelbtn.translatesAutoresizingMaskIntoConstraints = false
         cancelbtn.setTitle("CANCEL", for: .normal)
@@ -51,7 +51,7 @@ class DeletePopUpViewController: UIViewController {
         
     }()
     
-    var itemDeleteButton: UIButton = {
+    let itemDeleteButton: UIButton = {
         let deletebtn = UIButton()
         deletebtn.setTitle("DELETE", for: .normal)
         deletebtn.translatesAutoresizingMaskIntoConstraints = false
@@ -69,23 +69,18 @@ class DeletePopUpViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupConstraints()
-    
+        
         itemCancelButton.addTarget(self, action: #selector(dismissVc), for: .touchUpInside)
         itemDeleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
     
     func setupView() {
         view.backgroundColor = .clear
-    
-    }
-    
-    @objc func handleCancelImageTap(_ sender: UITapGestureRecognizer) {
-        self.dismiss(animated: true, completion: nil)
-    
+        
     }
     
     @objc func dismissVc() {
-//        self.dismiss(animated: true)
+        self.dismiss(animated: true)
         onCancelled?()
     }
     @objc func deleteButtonTapped() {
@@ -132,4 +127,6 @@ class DeletePopUpViewController: UIViewController {
         ])
     }
 }
+
+
 

@@ -8,18 +8,23 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
     
-     // MARK: - Properties
+    // MARK: - Properties
     
     static let identifier = "CustomCartableViewCell"
     var countChanged: ((Double)-> Void)?
+//    var totalPrice: ((Int)-> Void)?
+    
     var model: AddCartItemModel?
+    
+    var priceUpdated: ((Double) -> ())?
+
     var quantity = 1
     var productPrice =  2000.00
 
-    
+
     // MARK: - Add ContainerView
     
-    var itemContainerView: UIView = {
+    let itemContainerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layer.cornerRadius = 16
@@ -27,12 +32,12 @@ class CustomTableViewCell: UITableViewCell {
         containerView.layer.shadowRadius = 10
         containerView.layer.shadowOpacity = 0.4
         containerView.layer.shadowOffset = .zero
-        containerView.backgroundColor = .white
+        containerView.backgroundColor = .systemGray6
         return containerView
         
     }()
     
-     var itemImage: UIImageView = {
+    let itemImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -42,7 +47,7 @@ class CustomTableViewCell: UITableViewCell {
         
     }()
     
-    var itemName: UILabel = {
+    let itemName: UILabel = {
         let itemLabel = UILabel()
         itemLabel.textColor = .black
         itemLabel.font = .systemFont(ofSize: 17, weight: .bold)
@@ -51,7 +56,7 @@ class CustomTableViewCell: UITableViewCell {
         return itemLabel
     }()
     
-    var itemDescription: UILabel = {
+    let itemDescription: UILabel = {
         let desc = UILabel()
         desc.textColor = .gray
         desc.font = .systemFont(ofSize: 10, weight: .medium)
@@ -60,7 +65,7 @@ class CustomTableViewCell: UITableViewCell {
         return desc
     }()
     
-    var itemPrice: UILabel = {
+    let itemPrice: UILabel = {
         let price = UILabel()
         price.font = UIFont.systemFont(ofSize: 16)
         price.textAlignment = .left
@@ -73,7 +78,7 @@ class CustomTableViewCell: UITableViewCell {
     
     // MARK: - Add CountView
     
-    var itemCountView: UIView = {
+    let itemCountView: UIView = {
         let countView = UIView()
         countView.translatesAutoresizingMaskIntoConstraints = false
         countView.backgroundColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
@@ -84,7 +89,7 @@ class CustomTableViewCell: UITableViewCell {
         
     }()
     
-    var itemSubButton: UIButton = {
+    let itemSubButton: UIButton = {
         let subButton = UIButton()
         subButton.contentMode = .scaleAspectFit
         subButton.setImage(UIImage(systemName: "minus"), for: .normal)
@@ -94,7 +99,7 @@ class CustomTableViewCell: UITableViewCell {
         return subButton
     }()
     
-    var itemCountLabel: UILabel = {
+    let itemCountLabel: UILabel = {
         let count = UILabel()
         count.font = UIFont.systemFont(ofSize: 14)
         count.textAlignment = .center
@@ -103,7 +108,7 @@ class CustomTableViewCell: UITableViewCell {
         return count
     }()
     
-    var itemAddButton: UIButton = {
+    let itemAddButton: UIButton = {
         let addButton = UIButton()
         addButton.contentMode = .scaleAspectFit
         addButton.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -114,6 +119,16 @@ class CustomTableViewCell: UITableViewCell {
         
     }()
     
+//    var quantity: Int = 0 {
+//          didSet {
+//              itemCountLabel.text = "\(quantity)"
+//              itemSubButton.isEnabled = (quantity > 0)
+//              totalPrice?(quantity)
+//          }
+//      }
+//
+
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .clear//.systemBackground
@@ -123,31 +138,51 @@ class CustomTableViewCell: UITableViewCell {
         contentView.addSubview(itemName)
         contentView.addSubview(itemDescription)
         contentView.addSubview(itemPrice)
-
+        
         contentView.addSubview(itemCountView)
         contentView.addSubview(itemSubButton)
         contentView.addSubview(itemCountLabel)
         contentView.addSubview(itemAddButton)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         
     }
+    
+//    @objc func subButtonTapped() {
+//            if quantity > 0 {
+//                quantity -= 1
+//                let price = Double(itemPrice.text!.replacingOccurrences(of: "Rs", with: "")) ?? 0.0
+//                let updatedPrice = price * Double(quantity)
+//
+//                priceUpdated?(updatedPrice)
+//            }
+//        }
+        
+//        @objc func addButtonTapped() {
+//            if quantity >= 0 {
+//                quantity += 1
+//                let price = Double(itemPrice.text!.replacingOccurrences(of: "Rs", with: "")) ?? 0.0
+//                let updatedPrice = price * Double(quantity)
+//
+//                priceUpdated?(updatedPrice)
+//            }
+//        }
+    
     func configure(with model: AddCartItemModel) {
         itemImage.image = model.itemImage
         itemName.text = model.itemName
         itemDescription.text = model.itemDescription
-        itemPrice.text = "Rs\(model.itemPrice ?? 00)"
-        itemCountLabel.text = "Rs\(model.itemCount ?? 00)"
+        itemPrice.text = "Rs\(model.itemPrice ?? 00.00)"
+        itemCountLabel.text = "Rs\(model.itemCount ?? 1)"
         
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         setupViews()
-        itemAddButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-        itemSubButton.addTarget(self, action: #selector(subButtonTapped), for: .touchUpInside)
+    
     }
     
     private func setupViews() {
@@ -207,8 +242,10 @@ class CustomTableViewCell: UITableViewCell {
             itemAddButton.bottomAnchor.constraint(equalTo: itemCountView.bottomAnchor, constant: -8),
             itemAddButton.widthAnchor.constraint(equalToConstant: 10)
         ])
+        
+        itemAddButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        itemSubButton.addTarget(self, action: #selector(subButtonTapped), for: .touchUpInside)
     }
-    
     func calculatePrice(quantity: Int) -> Double {
         let productQuantityLabel = productPrice * Double(quantity)
         return productQuantityLabel
@@ -217,30 +254,31 @@ class CustomTableViewCell: UITableViewCell {
     
     func updatePriceLabel() {
         let updatedPrice = calculatePrice(quantity: quantity)
-        itemPrice.text = "$\(updatedPrice)"
+        itemPrice.text = "Rs\(updatedPrice)"
         countChanged?(Double(updatedPrice))
     }
-
-    @objc func addButtonTapped(_ sender: UIButton) {
+    
+    @objc func addButtonTapped() {
         quantity += 1
         updatePriceLabel()
         updateCount()
-        
+
     }
     
     private func updateCount() {
         itemCountLabel.text = "\(quantity)"
     }
 
-    @objc func subButtonTapped(_ sender: UIButton) {
+    @objc func subButtonTapped() {
         if quantity > 1 {
             quantity -= 1
             updatePriceLabel()
             updateCount()
         }
     }
-    
-    
+
 }
+
+
 
 
