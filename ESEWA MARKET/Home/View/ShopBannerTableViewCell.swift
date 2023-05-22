@@ -1,4 +1,5 @@
 
+
 //  ShopBannerTableViewCell.swift
 //  ESEWA MARKET
 //
@@ -14,8 +15,8 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
     let pageControl = UIPageControl()
     
     var model = [HotDealBanner]()
-
-
+    
+    
     // Add collectionView
     private let homeCollectionView: UICollectionView = {
         
@@ -30,6 +31,7 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
         collectionView.isPagingEnabled = true
         collectionView.backgroundColor = .white
         collectionView.collectionViewLayout = layout
+        collectionView.layer.cornerRadius = 20
         return collectionView
     }()
     
@@ -39,14 +41,7 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .white
         contentView.addSubview(homeCollectionView)
-        
-        
-        pageControl.numberOfPages = 3
-        pageControl.currentPage = 0
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.pageIndicatorTintColor = .black
-        pageControl.currentPageIndicatorTintColor = .red
-        contentView.addSubview(pageControl)
+        configurePageControl()
         
         
         // add datasource and delegate protocol
@@ -54,21 +49,29 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
         homeCollectionView.dataSource = self
         
         NSLayoutConstraint.activate([
-            homeCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            homeCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            homeCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            homeCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             homeCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             homeCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            homeCollectionView.heightAnchor.constraint(equalToConstant: 150),
+            homeCollectionView.heightAnchor.constraint(equalToConstant: 190),
             
             
             // pin pagecontrol to homeCollectionView
-            pageControl.topAnchor.constraint(equalTo: homeCollectionView.bottomAnchor),
+            pageControl.topAnchor.constraint(equalTo: homeCollectionView.bottomAnchor, constant: -4),
             pageControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
             
         ])
         
         homeCollectionView.register(BannerCell.self, forCellWithReuseIdentifier: BannerCell.identifier)
-        
+    }
+    
+    func configurePageControl() {
+        pageControl.numberOfPages = 3
+        pageControl.currentPage = 0
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.pageIndicatorTintColor = .gray
+        pageControl.currentPageIndicatorTintColor = .green
+        contentView.addSubview(pageControl)
     }
     
     required init?(coder: NSCoder) {
@@ -98,6 +101,7 @@ extension ShopBannerTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
+    
     
 }
 

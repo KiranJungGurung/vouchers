@@ -1,4 +1,6 @@
 
+
+//
 //  CategoriesTableViewCell.swift
 //  ESEWA MARKET
 //
@@ -9,36 +11,29 @@
 import UIKit
 
 class CategoriesTableViewCell: UITableViewCell {
-
+    
     private let cellReuseIdentifier = "CategoriesTableViewCell"
     
     var model = [Categories]()
     
     private let categoriesCollectionView: UICollectionView = {
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collectionView.translatesAutoresizingMaskIntoConstraints = false
-            collectionView.backgroundColor = .clear
-            collectionView.showsHorizontalScrollIndicator = false
-            return collectionView
-        
-        }()
-        
-        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
+    
     static let reuseIdentifier = "CategoriesTableViewCell"
-
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = .clear
         contentView.backgroundColor = .white
-
+        
         contentView.addSubview(categoriesCollectionView)
-        
-
-        
         // add datasource and delegate protocol
         
         categoriesCollectionView.delegate = self
@@ -46,14 +41,14 @@ class CategoriesTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             categoriesCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-               categoriesCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-               categoriesCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            categoriesCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            categoriesCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             categoriesCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-               categoriesCollectionView.heightAnchor.constraint(equalToConstant: 120),
-           ])
+            categoriesCollectionView.heightAnchor.constraint(equalToConstant: 120),
+        ])
         
         categoriesCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
-
+        
     }
     
     required init?(coder: NSCoder) {
@@ -68,7 +63,7 @@ extension CategoriesTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
-    
+        
         return cell
     }
     
@@ -76,11 +71,10 @@ extension CategoriesTableViewCell: UICollectionViewDataSource {
 
 
 extension CategoriesTableViewCell: UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 120)
-     }
+    }
     
 }
-
 

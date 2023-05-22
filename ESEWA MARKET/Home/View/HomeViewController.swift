@@ -12,6 +12,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     // MARK: - Properties
     
     var searchController = UISearchController(searchResultsController: nil)
+    
     let footerView = UIView()
     var presenter: HomePresenter?
     var model = [Product]()
@@ -23,7 +24,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     
     // MARK: - HomeTableView
     
-    private let homeTableView: UITableView = {
+    let homeTableView: UITableView = {
         let homeTable = UITableView()
         homeTable.backgroundColor = .white//.systemFill
         homeTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -36,19 +37,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         super.viewDidLoad()
         view.addSubview(homeTableView)
         view.addSubview(footerView)
+        //        setupNavigationBarItems()
         setupTableView()
         searchBar()
         setupFooterView()
         
-    // MARK: -  Navigation
+        // MARK: -  NavigationBar Setup
         
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         let button = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: nil)
         let notificationButton =  UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: nil)
         button.tintColor = .black
-        navigationItem.rightBarButtonItem = button
+        //        navigationItem.rightBarButtonItem = button
         navigationItem.rightBarButtonItem = notificationButton
         navigationItem.title = "Market"
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -69,11 +72,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         homeTableView.rowHeight = UITableView.automaticDimension
         homeTableView.backgroundColor = .clear
         homeTableView.separatorStyle = .none
+        
         self.presenter = HomePresenter(delegate: self)
         presenter?.fetch()
         
-        
-    // MARK: - Register Cells
+        // MARK: - Register Cells
         
         homeTableView.register(ShopBannerTableViewCell.self, forCellReuseIdentifier: ShopBannerTableViewCell.reuseIdentifier)
         homeTableView.register(CategoriesTableViewCell.self, forCellReuseIdentifier: CategoriesTableViewCell.reuseIdentifier)
@@ -96,7 +99,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         footerView.translatesAutoresizingMaskIntoConstraints = false
         footerView.backgroundColor = .white
         
-        let homeButton: UIButton = {
+        lazy var homeButton: UIButton = {
             let homeButton = UIButton()
             homeButton.translatesAutoresizingMaskIntoConstraints = false
             homeButton.setImage(UIImage(systemName: "house"), for: .normal)
@@ -104,7 +107,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
             return homeButton
         }()
         
-        let cartButton: UIButton = {
+        lazy var cartButton: UIButton = {
             let cartButton = UIButton()
             cartButton.translatesAutoresizingMaskIntoConstraints = false
             cartButton.tintColor = .black
@@ -112,7 +115,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
             return cartButton
         }()
         
-        let likeButton: UIButton = {
+        lazy var likeButton: UIButton = {
             let likeButton = UIButton()
             likeButton.translatesAutoresizingMaskIntoConstraints = false
             likeButton.tintColor = .black
@@ -120,22 +123,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
             return likeButton
         }()
         
-        let moreButton: UIButton = {
-            let moreButton = UIButton()
-            moreButton.translatesAutoresizingMaskIntoConstraints = false
-            moreButton.tintColor = .black
-            moreButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-            return moreButton
+        lazy var menuButton: UIButton = {
+            let menuButton = UIButton()
+            menuButton.translatesAutoresizingMaskIntoConstraints = false
+            menuButton.tintColor = .black
+            menuButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+            return menuButton
         }()
         
-        //        cartButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+        cartButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
         
         view.addSubview(footerView)
         footerView.addSubview(homeButton)
         footerView.addSubview(cartButton)
         footerView.addSubview(likeButton)
-        footerView.addSubview(moreButton)
-        //
+        footerView.addSubview(menuButton)
+        
         NSLayoutConstraint.activate([
             
             footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -152,19 +155,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
             likeButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
             likeButton.leadingAnchor.constraint(equalTo: cartButton.leadingAnchor, constant: 90),
             
-            moreButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
-            moreButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -50),
-            
+            menuButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
+            menuButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -50),
             
         ])
     }
     
+    @objc func didTap() {
+        let vc = CartViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-//    func didTap() {
-//        let viewcontroller = CartViewController()
-//        navigationController?.pushViewController(viewcontroller, animated: true)
-//}
-
+}
 
 extension HomeViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -193,7 +194,7 @@ extension HomeViewController: UITableViewDataSource {
             return "Recommended for you"
         }
     }
-
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
@@ -211,36 +212,24 @@ extension HomeViewController: UITableViewDataSource {
         case 2:
             let cell = homeTableView.dequeueReusableCell(withIdentifier: FeaturedTableViewCell.reuseIdentifier, for: indexPath) as! FeaturedTableViewCell
             cell.configure(model: self.featuredProduct)
-            
             cell.productClicked = { item in
                 let vc = ProductDetailViewController()
-//                vc.product = item
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-//            let vc = ProductDetailViewController()
-//            self.navigationController?.pushViewController(vc, animated: true)
-//
-            //            }
-            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
-            
             
         case 3 :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: HotDealsTableViewCell.reuseIdentifier, for: indexPath) as! HotDealsTableViewCell
             cell.configure(model: self.featuredProduct)
-            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
         case 4:
             let cell = homeTableView.dequeueReusableCell(withIdentifier: ShopBannerTableViewCell.reuseIdentifier, for: indexPath) as! ShopBannerTableViewCell
-//            cell.configure(model: self.hotDeal)
-            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
         case 5 :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: PopularBrandTableViewCell.reuseIdentifier, for: indexPath) as! PopularBrandTableViewCell
             cell.configure(model: self.featuredProduct)
-            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
         default :
