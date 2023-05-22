@@ -12,14 +12,15 @@ class DeletePopUpViewController: UIViewController {
     var onDeleteClicked: ((String) -> ())?
     var onCancelled: (() -> ())?
     
-    let itemDeleteView:UIView = {
+    
+    lazy var itemDeleteView:UIView = {
         let deleteStackView = UIView ()
         deleteStackView.translatesAutoresizingMaskIntoConstraints = false
         deleteStackView.layer.cornerRadius = 16
         return deleteStackView
     }()
     
-    let itemName: UILabel = {
+    lazy var itemName: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Delete from cart"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +30,7 @@ class DeletePopUpViewController: UIViewController {
         return titleLabel
     }()
     
-    let itemDeleteLabel: UILabel = {
+    lazy var itemDeleteLabel: UILabel = {
         let deleteTextLabel = UILabel()
         deleteTextLabel.text = "Are you sure you want to delete item(s)."
         deleteTextLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +40,7 @@ class DeletePopUpViewController: UIViewController {
         return deleteTextLabel
     }()
     
-    let itemCancelButton: UIButton = {
+    lazy var itemCancelButton: UIButton = {
         let cancelbtn = UIButton()
         cancelbtn.translatesAutoresizingMaskIntoConstraints = false
         cancelbtn.setTitle("CANCEL", for: .normal)
@@ -48,10 +49,9 @@ class DeletePopUpViewController: UIViewController {
         cancelbtn.layer.cornerRadius = 14
         cancelbtn.clipsToBounds = true
         return cancelbtn
-        
     }()
     
-    let itemDeleteButton: UIButton = {
+    lazy var itemDeleteButton: UIButton = {
         let deletebtn = UIButton()
         deletebtn.setTitle("DELETE", for: .normal)
         deletebtn.translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +60,6 @@ class DeletePopUpViewController: UIViewController {
         deletebtn.layer.cornerRadius = 14
         deletebtn.clipsToBounds = true
         return deletebtn
-        
     }()
     
     // MARK: - Lifecycle

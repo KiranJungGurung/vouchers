@@ -1,3 +1,4 @@
+
 //
 //  CustomCartableViewCell.swift
 //  ESEWA MARKET
@@ -24,7 +25,7 @@ class CustomTableViewCell: UITableViewCell {
 
     // MARK: - Add ContainerView
     
-    let itemContainerView: UIView = {
+    lazy var itemContainerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layer.cornerRadius = 16
@@ -34,20 +35,18 @@ class CustomTableViewCell: UITableViewCell {
         containerView.layer.shadowOffset = .zero
         containerView.backgroundColor = .systemGray6
         return containerView
-        
     }()
     
-    let itemImage: UIImageView = {
+    lazy var itemImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-        
     }()
     
-    let itemName: UILabel = {
+    lazy var itemName: UILabel = {
         let itemLabel = UILabel()
         itemLabel.textColor = .black
         itemLabel.font = .systemFont(ofSize: 17, weight: .bold)
@@ -56,7 +55,7 @@ class CustomTableViewCell: UITableViewCell {
         return itemLabel
     }()
     
-    let itemDescription: UILabel = {
+    lazy var itemDescription: UILabel = {
         let desc = UILabel()
         desc.textColor = .gray
         desc.font = .systemFont(ofSize: 10, weight: .medium)
@@ -65,20 +64,18 @@ class CustomTableViewCell: UITableViewCell {
         return desc
     }()
     
-    let itemPrice: UILabel = {
+    lazy var itemPrice: UILabel = {
         let price = UILabel()
         price.font = UIFont.systemFont(ofSize: 16)
         price.textAlignment = .left
         price.translatesAutoresizingMaskIntoConstraints = false
         price.textColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
         return price
-        
     }()
-    
-    
+  
     // MARK: - Add CountView
     
-    let itemCountView: UIView = {
+    lazy var itemCountView: UIView = {
         let countView = UIView()
         countView.translatesAutoresizingMaskIntoConstraints = false
         countView.backgroundColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
@@ -86,10 +83,9 @@ class CustomTableViewCell: UITableViewCell {
         countView.layer.maskedCorners = [.layerMaxXMaxYCorner,
                                          .layerMinXMinYCorner, .layerMaxXMinYCorner]
         return countView
-        
     }()
     
-    let itemSubButton: UIButton = {
+    lazy var itemSubButton: UIButton = {
         let subButton = UIButton()
         subButton.contentMode = .scaleAspectFit
         subButton.setImage(UIImage(systemName: "minus"), for: .normal)
@@ -99,7 +95,7 @@ class CustomTableViewCell: UITableViewCell {
         return subButton
     }()
     
-    let itemCountLabel: UILabel = {
+    lazy var itemCountLabel: UILabel = {
         let count = UILabel()
         count.font = UIFont.systemFont(ofSize: 14)
         count.textAlignment = .center
@@ -108,7 +104,7 @@ class CustomTableViewCell: UITableViewCell {
         return count
     }()
     
-    let itemAddButton: UIButton = {
+    lazy var itemAddButton: UIButton = {
         let addButton = UIButton()
         addButton.contentMode = .scaleAspectFit
         addButton.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -116,22 +112,10 @@ class CustomTableViewCell: UITableViewCell {
         addButton.tintColor = .white
         addButton.isUserInteractionEnabled = true
         return addButton
-        
     }()
-    
-//    var quantity: Int = 0 {
-//          didSet {
-//              itemCountLabel.text = "\(quantity)"
-//              itemSubButton.isEnabled = (quantity > 0)
-//              totalPrice?(quantity)
-//          }
-//      }
-//
-
-    
+   
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .clear//.systemBackground
         
         contentView.addSubview(itemContainerView)
         contentView.addSubview(itemImage)
@@ -143,47 +127,28 @@ class CustomTableViewCell: UITableViewCell {
         contentView.addSubview(itemSubButton)
         contentView.addSubview(itemCountLabel)
         contentView.addSubview(itemAddButton)
+        
+        // selectionStyle equals to none remove the selection color from the cell when cell is tapped.
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        
     }
-    
-//    @objc func subButtonTapped() {
-//            if quantity > 0 {
-//                quantity -= 1
-//                let price = Double(itemPrice.text!.replacingOccurrences(of: "Rs", with: "")) ?? 0.0
-//                let updatedPrice = price * Double(quantity)
-//
-//                priceUpdated?(updatedPrice)
-//            }
-//        }
-        
-//        @objc func addButtonTapped() {
-//            if quantity >= 0 {
-//                quantity += 1
-//                let price = Double(itemPrice.text!.replacingOccurrences(of: "Rs", with: "")) ?? 0.0
-//                let updatedPrice = price * Double(quantity)
-//
-//                priceUpdated?(updatedPrice)
-//            }
-//        }
-    
+
     func configure(with model: AddCartItemModel) {
         itemImage.image = model.itemImage
         itemName.text = model.itemName
         itemDescription.text = model.itemDescription
         itemPrice.text = "Rs\(model.itemPrice ?? 00.00)"
         itemCountLabel.text = "Rs\(model.itemCount ?? 1)"
-        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         setupViews()
-    
     }
+
     
     private func setupViews() {
         
@@ -246,10 +211,10 @@ class CustomTableViewCell: UITableViewCell {
         itemAddButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         itemSubButton.addTarget(self, action: #selector(subButtonTapped), for: .touchUpInside)
     }
+    
     func calculatePrice(quantity: Int) -> Double {
         let productQuantityLabel = productPrice * Double(quantity)
         return productQuantityLabel
-        
     }
     
     func updatePriceLabel() {
@@ -278,7 +243,6 @@ class CustomTableViewCell: UITableViewCell {
     }
 
 }
-
 
 
 

@@ -8,22 +8,22 @@ import UIKit
 class CartViewController: UIViewController, AddItemToCartProtocol {
     
     // MARK: - Properties
-    
-    var presenter: AddCartItemPresenter?
+  
+    var presenter: AddCartItemPresenter!
     var model: [AddCartItemModel] = []
-    var totalPrice = 0.0
     
+    var totalPrice = 0.0
     
     // MARK: - Add Custom FooterView
     
-    let cartFooterView: UIView = {
+    lazy var cartFooterView: UIView = {
         let footerView = UIView()
         footerView.translatesAutoresizingMaskIntoConstraints = false
         footerView.backgroundColor = .white
         return footerView
     }()
     
-    let itemCheckOutTotal: UILabel = {
+    lazy var itemCheckOutTotal: UILabel = {
         let total = UILabel()
         total.text = "Checkout Total"
         total.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         return total
     }()
     
-    let itemTotalPriceLabel: UILabel = {
+    lazy var itemTotalPriceLabel: UILabel = {
         let totalPrice = UILabel()
 //        totalPrice.text = "Rs.52,500"
         totalPrice.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +43,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         return totalPrice
     }()
     
-    let itemCheckOutButton: UIButton = {
+    lazy var itemCheckOutButton: UIButton = {
         let checkOutButton = UIButton()
         checkOutButton.translatesAutoresizingMaskIntoConstraints = false
         checkOutButton.setTitle("CHECKOUT", for: .normal)
@@ -57,7 +57,6 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
     
     let tableView: UITableView = {
         let table = UITableView()
-        //table.backgroundColor = .clear//.systemFill
         table.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         return table
     }()
@@ -67,9 +66,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGray6.withAlphaComponent(1)
-        
-        
-        
+
         //MARK: - ADD NABBAR INTO VIEWCONTROLLER
         
         let button = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: nil)
@@ -104,6 +101,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.separatorColor = .none
+        
         presenter = AddCartItemPresenter(delegate: self, view: self)
         presenter?.updateView()
         
@@ -190,7 +188,7 @@ extension CartViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Items(\(presenter?.cartItemsList.count))"
+        return "Items(\(presenter.cartItemsList.count))"
         
     }
     
@@ -203,8 +201,6 @@ extension CartViewController: UITableViewDataSource {
         
         let item = model[indexPath.row]
         cell.configure(with: item)
-        cell.backgroundColor = .clear
-        
         cell.countChanged = { price in
             self.totalPrice = (price + price)
             self.updateTotalPriceLabel()
