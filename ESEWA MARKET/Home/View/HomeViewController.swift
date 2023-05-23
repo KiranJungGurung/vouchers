@@ -7,7 +7,7 @@ import Alamofire
 import SwiftyJSON
 import UIKit
 
-class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDelegate {
+class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDelegate, CategoryProtocolDelegate {
     
     // MARK: - Properties
     
@@ -15,7 +15,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     
     let footerView = UIView()
     var presenter: HomePresenter?
+    var presenter1: CategoryPresenter?
     var model = [Product]()
+    var category: [Categories]?
     var featuredProduct = [FeaturedProduct]()
     var hotDeal = [HotDealsOfTheDay]()
     var hotDealBanner = [HotDealBanner]()
@@ -26,7 +28,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     
     let homeTableView: UITableView = {
         let homeTable = UITableView()
-        homeTable.backgroundColor = .white//.systemFill
+        homeTable.backgroundColor = .gray
         homeTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return homeTable
     }()
@@ -37,13 +39,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         super.viewDidLoad()
         view.addSubview(homeTableView)
         view.addSubview(footerView)
-        //        setupNavigationBarItems()
+//        setupNavigationBarItems()
         setupTableView()
         searchBar()
         setupFooterView()
         
         // MARK: -  NavigationBar Setup
-        
+
         view.backgroundColor = .systemGray6
         let button = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: nil)
         let notificationButton =  UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: nil)
@@ -64,6 +66,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         self.featuredProduct = model
         homeTableView.reloadData()
     }
+    // categories method
+    func displayCategory(model: [Categories]) {
+        self.category = model
+        homeTableView.reloadData()
+    }
     
     private func setupTableView() {
         homeTableView.delegate = self
@@ -76,6 +83,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         self.presenter = HomePresenter(delegate: self)
         presenter?.fetch()
         
+        self.presenter1 = CategoryPresenter(delegate: self, view: self)
+        presenter1?.updateView()
+
         // MARK: - Register Cells
         
         homeTableView.register(ShopBannerTableViewCell.self, forCellReuseIdentifier: ShopBannerTableViewCell.reuseIdentifier)
@@ -85,7 +95,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         homeTableView.register(PopularBrandTableViewCell.self, forCellReuseIdentifier: PopularBrandTableViewCell.reuseIdentifier)
         homeTableView.register(RecommendedTableViewCell.self, forCellReuseIdentifier: RecommendedTableViewCell.reuseIdentifier)
     }
-    
+ 
     private func searchBar() {
         navigationItem.searchController = UISearchController()
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -157,12 +167,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
             
             menuButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
             menuButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -50),
-            
+    
         ])
     }
     
     @objc func didTap() {
         let vc = CartViewController()
+        vc.navTitle = "My Cart"
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -194,7 +205,7 @@ extension HomeViewController: UITableViewDataSource {
             return "Recommended for you"
         }
     }
-    
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
@@ -206,7 +217,10 @@ extension HomeViewController: UITableViewDataSource {
             
         case 1:
             let cell = homeTableView.dequeueReusableCell(withIdentifier: CategoriesTableViewCell.reuseIdentifier, for: indexPath) as! CategoriesTableViewCell
-            cell.backgroundColor = .red
+            if let model = category {
+                cell.configure(model: model)
+            }
+            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
         case 2:
@@ -214,22 +228,27 @@ extension HomeViewController: UITableViewDataSource {
             cell.configure(model: self.featuredProduct)
             cell.productClicked = { item in
                 let vc = ProductDetailViewController()
+                vc.featureData = self.featuredProduct[indexPath.row]
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
         case 3 :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: HotDealsTableViewCell.reuseIdentifier, for: indexPath) as! HotDealsTableViewCell
             cell.configure(model: self.featuredProduct)
+            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
         case 4:
             let cell = homeTableView.dequeueReusableCell(withIdentifier: ShopBannerTableViewCell.reuseIdentifier, for: indexPath) as! ShopBannerTableViewCell
+            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
         case 5 :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: PopularBrandTableViewCell.reuseIdentifier, for: indexPath) as! PopularBrandTableViewCell
             cell.configure(model: self.featuredProduct)
+            cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
         default :
@@ -241,5 +260,4 @@ extension HomeViewController: UITableViewDataSource {
     }
     
 }
-
 

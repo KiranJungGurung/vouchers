@@ -41,13 +41,13 @@ struct Rate {
 }
 
 struct Categories {
-    //    var categoryImage: String?
+    var categoryImage: UIImage?
     var categoryName: String?
 
-    init(json: JSON) {
-    self.categoryName = json["categoryName"].string
-      
-    }
+//    init(json: JSON) {
+//    self.categoryName = json["categoryName"].string
+//      
+//    }
 }
 
 struct FeaturedProduct {

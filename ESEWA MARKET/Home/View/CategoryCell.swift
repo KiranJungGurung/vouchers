@@ -7,26 +7,24 @@
 
 import UIKit
 
-class CategoryCell: UICollectionViewCell {
+class CategoriesCell: UICollectionViewCell {
     
-    static let identifier = "CategoryCell"
-    
+    static let identifier = "CategoriesCell"
+
     private let categoryImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "iphone.rear.camera")
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .systemFill
-        imageView.tintColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
+        imageView.tintColor = .white
+//        imageView.alpha = 0.3
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 14
         return imageView
-        
     }()
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "Mobile"
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -49,15 +47,22 @@ class CategoryCell: UICollectionViewCell {
             categoryLabel.heightAnchor.constraint(equalToConstant: 20),
             categoryLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
-        
-        
+ 
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         
     }
+    func configure(with model: Categories) {
+        categoryImageView.image = model.categoryImage
+        categoryLabel.text = model.categoryName
+      
+    }
     
 }
+    
+
+
 
 
 
