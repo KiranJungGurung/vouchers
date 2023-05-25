@@ -11,19 +11,18 @@ class HotDealsCell: UICollectionViewCell {
     
     static let identifier = "HotDealsCell"
     
-    private let containerView: UIView = {
+   var containerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layer.cornerRadius = 10
         containerView.backgroundColor = .white
-        containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
-        containerView.layer.shadowRadius = 10
+        containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         containerView.layer.shadowOpacity = 0.4
         containerView.layer.shadowOffset = .zero
         return containerView
     }()
     
-    private let hotDealsImageView: UIImageView = {
+    var hotDealsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -42,7 +41,7 @@ class HotDealsCell: UICollectionViewCell {
         return label
     }()
     
-    var productSubTitleLabel: UILabel = {
+     var productSubTitleLabel: UILabel = {
         let subLabel = UILabel()
         subLabel.textColor = .gray
         subLabel.font = .systemFont(ofSize: 13, weight: .medium)
@@ -51,7 +50,7 @@ class HotDealsCell: UICollectionViewCell {
         return subLabel
     }()
     
-    var priceLabel: UILabel = {
+     var priceLabel: UILabel = {
         let priceLabel = UILabel()
         priceLabel.font = UIFont.systemFont(ofSize: 16)
         priceLabel.textAlignment = .left
@@ -107,7 +106,7 @@ class HotDealsCell: UICollectionViewCell {
         containerView.addSubview(likeButton)
         containerView.addSubview(addContainerView)
         addContainerView.addSubview(addButton)
-        
+
         NSLayoutConstraint.activate([
             
             hotDealsImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
@@ -115,7 +114,7 @@ class HotDealsCell: UICollectionViewCell {
             hotDealsImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
             hotDealsImageView.heightAnchor.constraint(equalToConstant: 160),
             
-            
+
             
             containerView.topAnchor.constraint(equalTo: hotDealsImageView.bottomAnchor, constant: 16),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
@@ -132,11 +131,11 @@ class HotDealsCell: UICollectionViewCell {
             productTitleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             
             priceLabel.topAnchor.constraint(equalTo: productSubTitleLabel.bottomAnchor, constant: 8),
-            priceLabel.leadingAnchor.constraint(equalTo: productSubTitleLabel.leadingAnchor, constant: 8),
+            priceLabel.leadingAnchor.constraint(equalTo: productSubTitleLabel.leadingAnchor, constant: 0),
             priceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             priceLabel.heightAnchor.constraint(equalToConstant: 17),
             
-            likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 8),
+            likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
             likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -110),
             likeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             likeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
@@ -166,17 +165,14 @@ class HotDealsCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
         
     }
-    
+
     func configure(with model: FeaturedProduct) {
-        //        if let url = URL(string: model.images.first.url ?? "") {
-        //            featuredImageView.kf.setImage(with: url)
-        //        }
         if let url = URL(string: model.image ?? "") {
             hotDealsImageView.kf.setImage(with: url)
-        }
+           }
         productTitleLabel.text = model.title
         productSubTitleLabel.text = model.category
-        priceLabel.text = "Price: Rs.\(model.price ?? 1)"
+        priceLabel.text = "Rs.\(model.price ?? 1)"
     }
     
     

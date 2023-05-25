@@ -1,4 +1,5 @@
 
+
 //  HomViewController.swift
 //  ESEWA MARKET
 //  Created by Kiran Gurung on 20/04/2023.
@@ -29,6 +30,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     let homeTableView: UITableView = {
         let homeTable = UITableView()
         homeTable.backgroundColor = .gray
+        
         homeTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return homeTable
     }()
@@ -50,7 +52,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         let button = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: nil)
         let notificationButton =  UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: nil)
         button.tintColor = .black
-        //        navigationItem.rightBarButtonItem = button
         navigationItem.rightBarButtonItem = notificationButton
         navigationItem.title = "Market"
         
@@ -62,11 +63,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     }
     
     func didFetchProduct(model: [FeaturedProduct]) {
-        //        self.model = model
         self.featuredProduct = model
         homeTableView.reloadData()
     }
-    // categories method
     func displayCategory(model: [Categories]) {
         self.category = model
         homeTableView.reloadData()
@@ -79,6 +78,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         homeTableView.rowHeight = UITableView.automaticDimension
         homeTableView.backgroundColor = .clear
         homeTableView.separatorStyle = .none
+        homeTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            homeTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            homeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            homeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            homeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+        ])
         
         self.presenter = HomePresenter(delegate: self)
         presenter?.fetch()
@@ -120,7 +127,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         lazy var cartButton: UIButton = {
             let cartButton = UIButton()
             cartButton.translatesAutoresizingMaskIntoConstraints = false
-            cartButton.tintColor = .black
+            cartButton.tintColor = .green
             cartButton.setImage(UIImage(systemName: "cart"), for: .normal)
             return cartButton
         }()
@@ -128,7 +135,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         lazy var likeButton: UIButton = {
             let likeButton = UIButton()
             likeButton.translatesAutoresizingMaskIntoConstraints = false
-            likeButton.tintColor = .black
+            likeButton.tintColor = .red
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
             return likeButton
         }()
@@ -136,13 +143,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         lazy var menuButton: UIButton = {
             let menuButton = UIButton()
             menuButton.translatesAutoresizingMaskIntoConstraints = false
-            menuButton.tintColor = .black
+            menuButton.tintColor = .blue
             menuButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
             return menuButton
         }()
         
         cartButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
-        
+    
         view.addSubview(footerView)
         footerView.addSubview(homeButton)
         footerView.addSubview(cartButton)
@@ -150,11 +157,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         footerView.addSubview(menuButton)
         
         NSLayoutConstraint.activate([
-            
+            footerView.topAnchor.constraint(equalTo: view.bottomAnchor),
             footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            footerView.heightAnchor.constraint(equalToConstant: 70),
+            footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
+            footerView.heightAnchor.constraint(equalToConstant: 80),
             
             homeButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
             homeButton.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 50),
@@ -167,7 +174,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
             
             menuButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
             menuButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -50),
-    
         ])
     }
     
@@ -206,7 +212,13 @@ extension HomeViewController: UITableViewDataSource {
         }
     }
 
-    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UITableViewHeaderFooterView()
+        headerView.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        headerView.textLabel?.text = tableView.dataSource?.tableView?(tableView, titleForHeaderInSection: section)
+        return headerView
+    }
+ 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
             
@@ -228,7 +240,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.configure(model: self.featuredProduct)
             cell.productClicked = { item in
                 let vc = ProductDetailViewController()
-                vc.featureData = self.featuredProduct[indexPath.row]
+                vc.featureData = item
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
@@ -259,5 +271,8 @@ extension HomeViewController: UITableViewDataSource {
         }
     }
     
+    
 }
+
+
 

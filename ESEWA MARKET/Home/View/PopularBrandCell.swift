@@ -1,5 +1,4 @@
 
-
 //
 //  PopularBrandCell.swift
 //  ESEWA MARKET
@@ -18,8 +17,8 @@ class PopularBrandCell: UICollectionViewCell {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layer.cornerRadius = 10
         containerView.backgroundColor = .white
-        containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
-        containerView.layer.shadowRadius = 10
+        containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+//        containerView.layer.shadowRadius = 10
         containerView.layer.shadowOpacity = 0.4
         containerView.layer.shadowOffset = .zero
         return containerView
@@ -134,7 +133,7 @@ class PopularBrandCell: UICollectionViewCell {
             priceLabel.leadingAnchor.constraint(equalTo: productSubTitleLabel.leadingAnchor, constant: 0),
             priceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             
-            likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 8),
+            likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
             likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -110),
             likeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             likeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
@@ -172,9 +171,10 @@ class PopularBrandCell: UICollectionViewCell {
         }
         productTitleLabel.text = model.title
         productSubTitleLabel.text = model.category
-        priceLabel.text = "Price: Rs.\(model.price ?? 1)"
+        priceLabel.text = "Rs.\(model.price ?? 1)"
     }
     
     
 }
+
 

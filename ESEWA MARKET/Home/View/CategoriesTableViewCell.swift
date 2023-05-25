@@ -1,11 +1,11 @@
 
+
 //
 //  CategoriesTableViewCell.swift
 //  ESEWA MARKET
 //
 //  Created by Kiran Gurung on 26/04/2023.
 //
-
 
 import UIKit
 
@@ -41,10 +41,10 @@ class CategoriesTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             categoriesCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-               categoriesCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-               categoriesCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            categoriesCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            categoriesCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             categoriesCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-               categoriesCollectionView.heightAnchor.constraint(equalToConstant: 120),
+            categoriesCollectionView.heightAnchor.constraint(equalToConstant: 120),
            ])
         
         categoriesCollectionView.register(CategoriesCell.self, forCellWithReuseIdentifier:cellReuseIdentifier)
@@ -56,9 +56,7 @@ class CategoriesTableViewCell: UITableViewCell {
             categoriesCollectionView.reloadData()
 
         }
-//        self.model = model
-//        categoriesCollectionView.reloadData()
-        }
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -86,5 +84,4 @@ extension CategoriesTableViewCell: UICollectionViewDelegateFlowLayout {
      }
     
 }
-
 

@@ -1,4 +1,5 @@
 
+/
 //  BannerCell.swift
 //  ESEWA MARKET
 //
@@ -8,32 +9,29 @@ import UIKit
 
 class BannerCell: UICollectionViewCell {
     
-    //    private let imageNames = ["eBanner", "banner2", "ecommerce"]
-    
-    
     static let identifier = "BannerCell"
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "ebanner")
+        imageView.image = UIImage(named:"ebanner")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 14
+        imageView.layer.cornerRadius = 12
         return imageView
-        
+    
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
-        
+    
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 180)
-        ])
+                 imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+                 imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:0),
+                 imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+                 imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+                 imageView.heightAnchor.constraint(equalToConstant: 180)
+             ])
     }
     
     required init?(coder: NSCoder) {
@@ -43,3 +41,4 @@ class BannerCell: UICollectionViewCell {
         imageView.image = UIImage(named: image)
     }
 }
+

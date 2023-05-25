@@ -1,5 +1,6 @@
 
 
+
 //
 //  RecommendedCell.swift
 //  ESEWA MARKET
@@ -18,14 +19,14 @@ class RecommendedCell: UICollectionViewCell {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layer.cornerRadius = 10
         containerView.backgroundColor = .white
-        containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
-        containerView.layer.shadowRadius = 10
+        containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+//        containerView.layer.shadowRadius = 10
         containerView.layer.shadowOpacity = 0.4
         containerView.layer.shadowOffset = .zero
         return containerView
     }()
     
-    var recommendedImageView: UIImageView = {
+     var recommendedImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -64,16 +65,16 @@ class RecommendedCell: UICollectionViewCell {
     }()
     
     var likeButton: UIButton = {
-        let likeButton = UIButton()
-        likeButton.contentMode = .scaleAspectFill
-        likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        likeButton.translatesAutoresizingMaskIntoConstraints = false
-        likeButton.tintColor = .gray
-        return likeButton
-    }()
+            let likeButton = UIButton()
+          likeButton.contentMode = .scaleAspectFill
+          likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+          likeButton.translatesAutoresizingMaskIntoConstraints = false
+          likeButton.tintColor = .gray
+            return likeButton
+        }()
     
     
-    //need to make separate uiview and pin add button there
+        //need to make separate uiview and pin add button there
     
     var addContainerView: UIView = {
         let addView = UIView()
@@ -84,16 +85,16 @@ class RecommendedCell: UICollectionViewCell {
         return addView
     }()
     
-    private let addButton: UIButton = {
-        let addButton = UIButton()
-        addButton.contentMode = .scaleAspectFit
-        addButton.setImage(UIImage(systemName: "plus"), for: .normal)
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        addButton.tintColor = .white
-        addButton.isUserInteractionEnabled = true
-        return addButton
-    }()
-    
+        private let addButton: UIButton = {
+            let addButton = UIButton()
+            addButton.contentMode = .scaleAspectFit
+            addButton.setImage(UIImage(systemName: "plus"), for: .normal)
+            addButton.translatesAutoresizingMaskIntoConstraints = false
+            addButton.tintColor = .white
+            addButton.isUserInteractionEnabled = true
+            return addButton
+        }()
+  
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .white
@@ -108,7 +109,7 @@ class RecommendedCell: UICollectionViewCell {
         containerView.addSubview(addContainerView)
         addContainerView.addSubview(addButton)
         
-        
+    
         NSLayoutConstraint.activate([
             
             recommendedImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
@@ -124,25 +125,23 @@ class RecommendedCell: UICollectionViewCell {
             productTitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
             productTitleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
             productTitleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-            
+
             
             productSubTitleLabel.topAnchor.constraint(equalTo: productTitleLabel.bottomAnchor, constant: 8),
             productSubTitleLabel.leadingAnchor.constraint(equalTo: productTitleLabel.leadingAnchor, constant: 0),
             productTitleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             
             priceLabel.topAnchor.constraint(equalTo: productSubTitleLabel.bottomAnchor, constant: 8),
-            priceLabel.leadingAnchor.constraint(equalTo: productSubTitleLabel.leadingAnchor, constant: 8),
+            priceLabel.leadingAnchor.constraint(equalTo: productSubTitleLabel.leadingAnchor, constant: 0),
             priceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             
-            likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 8),
-            likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -110),
+            likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
+            likeButton.leadingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: 0),
             likeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             likeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
             likeButton.widthAnchor.constraint(equalToConstant: 25),
             likeButton.heightAnchor.constraint(equalToConstant: 25),
-            
-            
-            
+  
             // pin addContainerView
             
             addContainerView.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: -20),
@@ -158,23 +157,23 @@ class RecommendedCell: UICollectionViewCell {
             addButton.widthAnchor.constraint(equalToConstant: 40),
             addButton.heightAnchor.constraint(equalToConstant: 40)
             
-        ])
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+            ])
+        }
         
-    }
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+            
+        }
     
     func configure(with model: FeaturedProduct) {
         if let url = URL(string: model.image ?? "") {
             recommendedImageView.kf.setImage(with: url)
-        }
+           }
         productTitleLabel.text = model.title
         productSubTitleLabel.text = model.category
-        priceLabel.text = "Price: Rs.\(model.price ?? 1)"
+        priceLabel.text = "Rs.\(model.price ?? 1)"
     }
-    
+        
 }
 
 

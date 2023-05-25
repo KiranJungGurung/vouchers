@@ -13,10 +13,8 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
     private let cellReuseIdentifier = "ShopBannerTableViewCell"
     
     let pageControl = UIPageControl()
-    
     var model = [HotDealBanner]()
-    
-    
+
     // Add collectionView
     private let homeCollectionView: UICollectionView = {
         
@@ -27,8 +25,8 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         collectionView.isPagingEnabled = true
-        collectionView.backgroundColor = .white
         collectionView.layer.cornerRadius = 20
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
@@ -52,8 +50,8 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = .green
         contentView.addSubview(pageControl)
-        
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = round(scrollView.contentOffset.x / scrollView.frame.width)
         pageControl.currentPage = Int(pageIndex)
@@ -64,7 +62,6 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
         pageControl.currentPage = visibleIndex
     }
     
-    
     func setupConstraints() {
         
         NSLayoutConstraint.activate([
@@ -74,15 +71,9 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
             homeCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             homeCollectionView.heightAnchor.constraint(equalToConstant: 190),
             
-            
-            // pin pagecontrol to homeCollectionView
-//            pageControl.topAnchor.constraint(equalTo: homeCollectionView.bottomAnchor, constant: -4),
-//            pageControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
-            
             pageControl.topAnchor.constraint(equalTo: homeCollectionView.bottomAnchor),
             pageControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             pageControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
         ])
         
         homeCollectionView.register(BannerCell.self, forCellWithReuseIdentifier: BannerCell.identifier)
@@ -95,7 +86,7 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
 extension ShopBannerTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

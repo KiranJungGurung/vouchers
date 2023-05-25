@@ -1,4 +1,5 @@
 
+
 //  PopularBrandTableViewCell.swift
 //  ESEWA MARKET
 //
@@ -75,9 +76,7 @@ extension PopularBrandTableViewCell: UICollectionViewDataSource {
         if let item = model?[indexPath.row] {
             cell.configure(with: item)
         }
-        //        let item = model[indexPath.row]
-        //        cell.productTitleLabel.text = item.title
-        //        cell.configure(with: item)
+     
         return cell
     }
     
@@ -88,5 +87,4 @@ extension PopularBrandTableViewCell: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 180, height: 300)
     }
 }
-
 

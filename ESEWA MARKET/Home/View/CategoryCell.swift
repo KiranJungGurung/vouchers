@@ -1,3 +1,4 @@
+
 //
 //  CategoryCell.swift
 //  ESEWA MARKET
@@ -14,9 +15,8 @@ class CategoriesCell: UICollectionViewCell {
     private let categoryImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .systemFill
+        imageView.backgroundColor = .systemGray6
         imageView.tintColor = .white
-//        imageView.alpha = 0.3
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 14
@@ -26,14 +26,17 @@ class CategoriesCell: UICollectionViewCell {
     private let categoryLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = .systemFont(ofSize: 17, weight: .medium)
+        label.textAlignment = .left
+        label.numberOfLines = 2
+        label.lineBreakMode = .byTruncatingTail
+        label.font = .systemFont(ofSize: 12, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .systemGray6
+        contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 14
         contentView.addSubview(categoryImageView)
         contentView.addSubview(categoryLabel)
@@ -43,9 +46,16 @@ class CategoriesCell: UICollectionViewCell {
             categoryImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             categoryImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             categoryImageView.heightAnchor.constraint(equalToConstant: 70),
+            
             categoryLabel.topAnchor.constraint(equalTo: categoryImageView.bottomAnchor, constant: 10),
+            categoryLabel.leadingAnchor.constraint(equalTo: categoryImageView.leadingAnchor, constant: 4),
+            categoryLabel.trailingAnchor.constraint(equalTo: categoryImageView.trailingAnchor, constant: -4),
+            categoryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             categoryLabel.heightAnchor.constraint(equalToConstant: 20),
-            categoryLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+            categoryLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            
+//            categoryLabel.contentCompressionResistancePriority(for: )
+//            categoryLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         ])
  
     }
@@ -61,7 +71,6 @@ class CategoriesCell: UICollectionViewCell {
     
 }
     
-
 
 
 
