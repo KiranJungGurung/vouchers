@@ -1,4 +1,3 @@
-
 //
 //  CustomCartableViewCell.swift
 //  ESEWA MARKET
@@ -39,7 +38,7 @@ class CustomTableViewCell: UITableViewCell {
     
     lazy var itemImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -243,6 +242,7 @@ class CustomTableViewCell: UITableViewCell {
     }
 
 }
+
 
 
 

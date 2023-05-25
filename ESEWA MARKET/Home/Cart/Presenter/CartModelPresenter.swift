@@ -36,33 +36,3 @@ class AddCartItemPresenter {
 }
 
 
-    
-
-
-/*
-
-import Alamofire
-import SwiftyJSON
-
-class CartPresenter {
-    func fetchCarts() {
-        AF.request("https://fakestoreapi.com/carts").responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                var cartsArray: [Cart] = []
-                let cartsJSON = json.arrayValue
-                for cartJSON in cartsJSON {
-                    let cart = Cart(json: cartJSON)
-                    cartsArray.append(cart)
-                }
-                // Pass the array of carts to the view
-                // or delegate method to display the data
-                // on the screen.
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-}
-*/

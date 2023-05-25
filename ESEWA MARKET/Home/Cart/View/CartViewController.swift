@@ -11,6 +11,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
   
     var presenter: AddCartItemPresenter!
     var model: [AddCartItemModel] = []
+    var navTitle: String?
     
     var totalPrice = 0.0
     
@@ -76,7 +77,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         //        self.navigationController?.popViewController(animated: true)
         navigationItem.rightBarButtonItem = button
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.title = "My Cart"
+        navigationItem.title = navTitle//"My Cart"
         
         // add tableview to view
         view.addSubview(tableView)
@@ -205,6 +206,7 @@ extension CartViewController: UITableViewDataSource {
             self.totalPrice = (price + price)
             self.updateTotalPriceLabel()
         }
+        cell.backgroundColor = .clear
         return cell
     }
     
