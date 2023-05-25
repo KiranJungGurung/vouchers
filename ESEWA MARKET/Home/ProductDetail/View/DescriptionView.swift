@@ -1,4 +1,6 @@
 
+//
+//
 //  DescriptionView.swift
 //  ESEWA MARKET
 //
@@ -11,7 +13,7 @@ class DescriptionView: UITableViewCell {
     
     var containerView = UIView()
     
-    var checkImage: UIImageView = {
+    let checkImage: UIImageView = {
         let checkImage = UIImageView()
         checkImage.image = UIImage(systemName: "checkmark.circle.fill")
         checkImage.contentMode = .scaleAspectFit
@@ -21,12 +23,13 @@ class DescriptionView: UITableViewCell {
         return checkImage
     }()
     
-    var descLabel: UILabel = {
+    let descLabel: UILabel = {
         let desclbl = UILabel()
         desclbl.translatesAutoresizingMaskIntoConstraints = false
         desclbl.font = .systemFont(ofSize: 16, weight: .medium)
         desclbl.textColor = .black
         desclbl.numberOfLines = 2
+        
         return desclbl
     }()
     
@@ -35,6 +38,7 @@ class DescriptionView: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -62,12 +66,13 @@ class DescriptionView: UITableViewCell {
             
             descLabel.centerYAnchor.constraint(equalTo: checkImage.centerYAnchor, constant: 0),
             descLabel.leadingAnchor.constraint(equalTo: checkImage.trailingAnchor, constant: 4),
-            descLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 4),
+            descLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -4),
         ])
-        
+    
     }
-    @objc func moreViewTapped() {
-        //printtssd
-    }
+    func configure(with model: FeaturedProduct) {
+        descLabel.text = model.description
+      }
+    
 }
 

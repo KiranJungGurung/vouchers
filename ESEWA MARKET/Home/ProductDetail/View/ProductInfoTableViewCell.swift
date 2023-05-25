@@ -9,15 +9,14 @@ import UIKit
 class ProductInfoTableViewCell: UITableViewCell {
     private let identifier = "ProductInfoTableViewCell"
 
-    var productContainerView: UIView = {
+    let productContainerView: UIView = {
         let myContainerView = UIView()
         myContainerView.translatesAutoresizingMaskIntoConstraints = false
         myContainerView.backgroundColor = .white
         return myContainerView
-        
     }()
     
-    var productTitleLabel: UILabel = {
+    let productTitleLabel: UILabel = {
         let productTitle = UILabel()
         productTitle.translatesAutoresizingMaskIntoConstraints = false
         productTitle.textAlignment = .left
@@ -26,7 +25,7 @@ class ProductInfoTableViewCell: UITableViewCell {
         return productTitle
     }()
     
-    var priceLabel: UILabel = {
+    let priceLabel: UILabel = {
         let pricelbl = UILabel()
         pricelbl.translatesAutoresizingMaskIntoConstraints = false
         pricelbl.textAlignment = .left
@@ -35,20 +34,19 @@ class ProductInfoTableViewCell: UITableViewCell {
         return pricelbl
     }()
     
-    var priceCrossedLabel: UILabel = {
+    let priceCrossedLabel: UILabel = {
         let crossedPricelbl = UILabel()
         crossedPricelbl.translatesAutoresizingMaskIntoConstraints = false
         crossedPricelbl.textAlignment = .left
         crossedPricelbl.font = .systemFont(ofSize: 16, weight: .medium)
         crossedPricelbl.textColor = .gray
+        
         let attributedText = NSAttributedString(
             string: "Rs.500.00",
             attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue])
         crossedPricelbl.attributedText = attributedText
         return crossedPricelbl
     }()
-    
-    
 
     static let reuseIdentifier = "ProductInfoTableViewCell"
     
@@ -56,20 +54,18 @@ class ProductInfoTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.backgroundColor = .clear
-        
         contentView.addSubview(productContainerView)
         productContainerView.addSubview(productTitleLabel)
         productContainerView.addSubview(priceLabel)
         productContainerView.addSubview(priceCrossedLabel)
         
-        
         NSLayoutConstraint.activate([
-            productContainerView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            productContainerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            productContainerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            productContainerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-            productContainerView.heightAnchor.constraint(equalToConstant: 120),
-            
+            productContainerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            productContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            productContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            productContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            productContainerView.heightAnchor.constraint(equalToConstant: 120),
+
             productTitleLabel.topAnchor.constraint(equalTo: productContainerView.topAnchor, constant: 10),
             productTitleLabel.leadingAnchor.constraint(equalTo: productContainerView.leadingAnchor, constant: 10),
             productTitleLabel.trailingAnchor.constraint(equalTo: productContainerView.trailingAnchor, constant: -10),
@@ -83,21 +79,18 @@ class ProductInfoTableViewCell: UITableViewCell {
             priceCrossedLabel.centerYAnchor.constraint(equalTo: productContainerView.centerYAnchor, constant: 16),
             priceCrossedLabel.centerXAnchor.constraint(equalTo: productContainerView.centerXAnchor, constant: 16),
             priceCrossedLabel.bottomAnchor.constraint(equalTo: productContainerView.bottomAnchor, constant: -16),
-
         ])
-
     }
  
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with model: ProductDetail) {
-        productTitleLabel.text = model.productName
-        priceLabel.text = "\(model.price ?? 00)"
-        priceCrossedLabel.text = "\(model.discountpriceLabel ?? 00)"
-        
+    func configure(with model: FeaturedProduct) {
+        productTitleLabel.text = model.title
+        priceLabel.text = "Rs.\(model.price ?? 00)"
       }
     
 }
+
 
