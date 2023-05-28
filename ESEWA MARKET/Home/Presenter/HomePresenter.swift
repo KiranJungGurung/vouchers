@@ -32,8 +32,9 @@ class HomePresenter {
     }
     
     func fetchProducts(completion: @escaping (Result<[FeaturedProduct], Error>) -> Void) {
-//        let url = "\(baseURL)products"
-        let url = URL(string: "https://fakestoreapi.com/products")
+        let url = "\(baseURL)products"
+//        let url = URL(string: "https://fakestoreapi.com/products")
+        
         AF.request(url!).responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -56,7 +57,7 @@ protocol CategoryProtocolDelegate: AnyObject {
 
 class CategoryPresenter {
     
-    var categories = [Categories(categoryImage: UIImage(named: "iphone"), categoryName: "mobile"),
+    var categories = [Categories(categoryImage: UIImage(named: "iphonec"), categoryName: "mobile"),
                       Categories(categoryImage: UIImage(named: "j"), categoryName: "jewelery"),
                       Categories(categoryImage: UIImage(named: "fashion"), categoryName: "men's cloth"),
                       Categories(categoryImage: UIImage(named: "womencloth"), categoryName: "women's cloth"),

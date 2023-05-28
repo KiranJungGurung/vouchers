@@ -1,5 +1,4 @@
 
-/
 //  BannerCell.swift
 //  ESEWA MARKET
 //
@@ -13,7 +12,7 @@ class BannerCell: UICollectionViewCell {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named:"ebanner")
+        imageView.image = UIImage(named:"banner2")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
