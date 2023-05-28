@@ -17,6 +17,7 @@
 		B320F7682A2373660057EBCB /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320F7672A2373660057EBCB /* PhotoTableViewCell.swift */; };
 		B320F76A2A2373830057EBCB /* ProductInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320F7692A2373830057EBCB /* ProductInfoTableViewCell.swift */; };
 		B320F76C2A23739D0057EBCB /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320F76B2A23739D0057EBCB /* DescriptionTableViewCell.swift */; };
+		B320F76E2A237AA50057EBCB /* CategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320F76D2A237AA50057EBCB /* CategoryPresenter.swift */; };
 		B3297ED329F13F6D00D5E555 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3297ED229F13F6D00D5E555 /* Constants.swift */; };
 		B3D1FF902A03A83000335742 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1FF8F2A03A83000335742 /* HomeViewController.swift */; };
 		B3D1FF932A03A8DF00335742 /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1FF922A03A8DF00335742 /* BannerCell.swift */; };
@@ -52,6 +53,7 @@
 		B320F7672A2373660057EBCB /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotoTableViewCell.swift; path = "ESEWA MARKET/AddToCart/Model/PhotoTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		B320F7692A2373830057EBCB /* ProductInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductInfoTableViewCell.swift; path = "ESEWA MARKET/AddToCart/Model/ProductInfoTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		B320F76B2A23739D0057EBCB /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DescriptionTableViewCell.swift; path = "ESEWA MARKET/AddToCart/Model/DescriptionTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
+		B320F76D2A237AA50057EBCB /* CategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPresenter.swift; sourceTree = "<group>"; };
 		B3297ED229F13F6D00D5E555 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B3D1FF8F2A03A83000335742 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B3D1FF922A03A8DF00335742 /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				B3E9250B2A05FDFD007CF3DD /* HomePresenter.swift */,
+				B320F76D2A237AA50057EBCB /* CategoryPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B320F76E2A237AA50057EBCB /* CategoryPresenter.swift in Sources */,
 				B320F75B2A2372310057EBCB /* DeletePopUpViewController.swift in Sources */,
 				B3D1FF972A03A94300335742 /* CategoriesTableViewCell.swift in Sources */,
 				B320F75F2A23727F0057EBCB /* CartModelPresenter.swift in Sources */,
