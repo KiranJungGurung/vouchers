@@ -11,9 +11,9 @@ import UIKit
 
 class DescriptionTableViewCell: UITableViewCell {
     
-    var containerView = UIView()
+    lazy var containerView = UIView()
     
-    let checkImage: UIImageView = {
+    lazy var checkImage: UIImageView = {
         let checkImage = UIImageView()
         checkImage.image = UIImage(systemName: "checkmark.circle.fill")
         checkImage.contentMode = .scaleAspectFit
@@ -23,13 +23,12 @@ class DescriptionTableViewCell: UITableViewCell {
         return checkImage
     }()
     
-    let descLabel: UILabel = {
+    lazy var descLabel: UILabel = {
         let desclbl = UILabel()
         desclbl.translatesAutoresizingMaskIntoConstraints = false
         desclbl.font = .systemFont(ofSize: 16, weight: .medium)
         desclbl.textColor = .black
         desclbl.numberOfLines = 2
-        
         return desclbl
     }()
     
@@ -38,7 +37,6 @@ class DescriptionTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -73,6 +71,5 @@ class DescriptionTableViewCell: UITableViewCell {
     func configure(with model: FeaturedProduct) {
         descLabel.text = model.description
       }
-    
 }
 

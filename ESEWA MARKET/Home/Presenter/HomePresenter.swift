@@ -30,10 +30,8 @@ class HomePresenter {
             }
         }
     }
-    
     func fetchProducts(completion: @escaping (Result<[FeaturedProduct], Error>) -> Void) {
-//        let url = "\(baseURL)products"
-        let url = URL(string: "https://fakestoreapi.com/products")
+        let url = URL(string: getProductURL)
         
         AF.request(url!).responseJSON { response in
             switch response.result {

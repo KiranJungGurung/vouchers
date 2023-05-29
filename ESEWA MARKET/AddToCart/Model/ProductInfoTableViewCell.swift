@@ -7,16 +7,17 @@
 import UIKit
 
 class ProductInfoTableViewCell: UITableViewCell {
+    
     private let identifier = "ProductInfoTableViewCell"
 
-    let productContainerView: UIView = {
+    lazy var productContainerView: UIView = {
         let myContainerView = UIView()
         myContainerView.translatesAutoresizingMaskIntoConstraints = false
         myContainerView.backgroundColor = .white
         return myContainerView
     }()
     
-    let productTitleLabel: UILabel = {
+    lazy var productTitleLabel: UILabel = {
         let productTitle = UILabel()
         productTitle.translatesAutoresizingMaskIntoConstraints = false
         productTitle.textAlignment = .left
@@ -25,7 +26,7 @@ class ProductInfoTableViewCell: UITableViewCell {
         return productTitle
     }()
     
-    let priceLabel: UILabel = {
+    lazy var priceLabel: UILabel = {
         let pricelbl = UILabel()
         pricelbl.translatesAutoresizingMaskIntoConstraints = false
         pricelbl.textAlignment = .left
@@ -34,13 +35,12 @@ class ProductInfoTableViewCell: UITableViewCell {
         return pricelbl
     }()
     
-    let priceCrossedLabel: UILabel = {
+    lazy var priceCrossedLabel: UILabel = {
         let crossedPricelbl = UILabel()
         crossedPricelbl.translatesAutoresizingMaskIntoConstraints = false
         crossedPricelbl.textAlignment = .left
         crossedPricelbl.font = .systemFont(ofSize: 16, weight: .medium)
         crossedPricelbl.textColor = .gray
-        
         let attributedText = NSAttributedString(
             string: "Rs.500.00",
             attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue])
@@ -64,7 +64,6 @@ class ProductInfoTableViewCell: UITableViewCell {
             productContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             productContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             productContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            productContainerView.heightAnchor.constraint(equalToConstant: 120),
 
             productTitleLabel.topAnchor.constraint(equalTo: productContainerView.topAnchor, constant: 10),
             productTitleLabel.leadingAnchor.constraint(equalTo: productContainerView.leadingAnchor, constant: 10),

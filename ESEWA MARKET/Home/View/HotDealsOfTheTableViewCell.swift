@@ -14,11 +14,9 @@ class HotDealsTableViewCell: UITableViewCell {
     private let cellReuseIdentifier = "HotDealsTableViewCell"
     
     var model : [FeaturedProduct]?
-    
     var productClicked: ((FeaturedProduct) -> ())?
     
-    
-    private let HotDealsTableViewCell: UICollectionView = {
+    lazy var HotDealsTableViewCell: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -37,12 +35,9 @@ class HotDealsTableViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
         contentView.addSubview(HotDealsTableViewCell)
         
-        
         // add datasource and delegate protocol
-        
         HotDealsTableViewCell.delegate = self
         HotDealsTableViewCell.dataSource = self
-        
         
         NSLayoutConstraint.activate([
             HotDealsTableViewCell.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -53,7 +48,6 @@ class HotDealsTableViewCell: UITableViewCell {
            ])
         
         HotDealsTableViewCell.register(HotDealsCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-
     }
  
     func configure(model: [FeaturedProduct]) {
@@ -64,7 +58,6 @@ class HotDealsTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 extension HotDealsTableViewCell: UICollectionViewDataSource {
     
@@ -77,7 +70,6 @@ extension HotDealsTableViewCell: UICollectionViewDataSource {
         if let item = model?[indexPath.row] {
             cell.configure(with: item)
         }
-        
         return cell
     }
 }

@@ -13,7 +13,7 @@ class FeaturedCell: UICollectionViewCell {
     
     static let identifier = "FeaturedCell"
     
-    private let containerView: UIView = {
+    lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layer.cornerRadius = 10
@@ -24,7 +24,7 @@ class FeaturedCell: UICollectionViewCell {
         return containerView
     }()
     
-    var featuredImageView: UIImageView = {
+    lazy var featuredImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -34,7 +34,7 @@ class FeaturedCell: UICollectionViewCell {
         return imageView
     }()
     
-    var productTitleLabel: UILabel = {
+    lazy var productTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .bold)
@@ -43,7 +43,7 @@ class FeaturedCell: UICollectionViewCell {
         return label
     }()
     
-    var productSubTitleLabel: UILabel = {
+    lazy var productSubTitleLabel: UILabel = {
         let subLabel = UILabel()
         subLabel.textColor = .gray
         subLabel.font = .systemFont(ofSize: 13, weight: .medium)
@@ -52,7 +52,7 @@ class FeaturedCell: UICollectionViewCell {
         return subLabel
     }()
     
-    var priceLabel: UILabel = {
+   lazy var priceLabel: UILabel = {
         let priceLabel = UILabel()
         priceLabel.font = UIFont.systemFont(ofSize: 16)
         priceLabel.textAlignment = .left
@@ -61,7 +61,7 @@ class FeaturedCell: UICollectionViewCell {
         return priceLabel
     }()
     
-    private let likeButton: UIButton = {
+    lazy var likeButton: UIButton = {
         let likeButton = UIButton()
         likeButton.contentMode = .scaleAspectFill
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -70,7 +70,7 @@ class FeaturedCell: UICollectionViewCell {
         return likeButton
     }()
     
-    private let addContainerView: UIView = {
+   lazy var addContainerView: UIView = {
         let addView = UIView()
         addView.translatesAutoresizingMaskIntoConstraints = false
         addView.backgroundColor  = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
@@ -79,7 +79,7 @@ class FeaturedCell: UICollectionViewCell {
         return addView
     }()
     
-    private let addButton: UIButton = {
+    lazy var addButton: UIButton = {
         let addButton = UIButton()
         addButton.contentMode = .scaleAspectFit
         addButton.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -113,7 +113,6 @@ class FeaturedCell: UICollectionViewCell {
             featuredImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
             featuredImageView.heightAnchor.constraint(equalToConstant: 160),
             
-            
             containerView.topAnchor.constraint(equalTo: featuredImageView.bottomAnchor, constant: 16),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
@@ -122,7 +121,6 @@ class FeaturedCell: UICollectionViewCell {
             productTitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
             productTitleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
             productTitleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-            
             
             productSubTitleLabel.topAnchor.constraint(equalTo: productTitleLabel.bottomAnchor, constant: 8),
             productSubTitleLabel.leadingAnchor.constraint(equalTo: productTitleLabel.leadingAnchor, constant: 0),
@@ -133,7 +131,6 @@ class FeaturedCell: UICollectionViewCell {
             priceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             priceLabel.heightAnchor.constraint(equalToConstant: 17),
             
-        
             likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
             likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -110),
             likeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
@@ -141,9 +138,6 @@ class FeaturedCell: UICollectionViewCell {
             likeButton.widthAnchor.constraint(equalToConstant: 25),
             likeButton.heightAnchor.constraint(equalToConstant: 25),
 
-            
-            // pin addContainerView
-            
             addContainerView.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: -20),
             addContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             addContainerView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),

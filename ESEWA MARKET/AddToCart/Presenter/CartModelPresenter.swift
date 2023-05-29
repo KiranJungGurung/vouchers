@@ -14,6 +14,7 @@ protocol AddItemToCartProtocol: AnyObject {
 
 }
 class AddCartItemPresenter {
+    
     var cartItemsList: [AddCartItemModel] = [
         
         AddCartItemModel(itemImage: UIImage(named: "inductionStove"),itemName: "Induction Stove", itemDescription: "IN STOCK - BALTRA", itemCount: 1, itemPrice: 3987.0),

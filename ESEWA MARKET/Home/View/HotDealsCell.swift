@@ -4,14 +4,14 @@
 //
 //  Created by Kiran Gurung on 27/04/2023.
 //
-
+import Kingfisher
 import UIKit
 
 class HotDealsCell: UICollectionViewCell {
     
     static let identifier = "HotDealsCell"
     
-   var containerView: UIView = {
+   lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layer.cornerRadius = 10
@@ -22,7 +22,7 @@ class HotDealsCell: UICollectionViewCell {
         return containerView
     }()
     
-    var hotDealsImageView: UIImageView = {
+    lazy var hotDealsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -32,7 +32,7 @@ class HotDealsCell: UICollectionViewCell {
         return imageView
     }()
     
-    var productTitleLabel: UILabel = {
+    lazy var productTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .bold)
@@ -41,7 +41,7 @@ class HotDealsCell: UICollectionViewCell {
         return label
     }()
     
-     var productSubTitleLabel: UILabel = {
+     lazy var productSubTitleLabel: UILabel = {
         let subLabel = UILabel()
         subLabel.textColor = .gray
         subLabel.font = .systemFont(ofSize: 13, weight: .medium)
@@ -50,7 +50,7 @@ class HotDealsCell: UICollectionViewCell {
         return subLabel
     }()
     
-     var priceLabel: UILabel = {
+     lazy var priceLabel: UILabel = {
         let priceLabel = UILabel()
         priceLabel.font = UIFont.systemFont(ofSize: 16)
         priceLabel.textAlignment = .left
@@ -59,7 +59,7 @@ class HotDealsCell: UICollectionViewCell {
         return priceLabel
     }()
     
-    private let likeButton: UIButton = {
+    lazy var likeButton: UIButton = {
         let likeButton = UIButton()
         likeButton.contentMode = .scaleAspectFill
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -67,9 +67,6 @@ class HotDealsCell: UICollectionViewCell {
         likeButton.tintColor = .gray
         return likeButton
     }()
-    
-    
-    //need to make separate uiview and pin add button there
     
     private let addContainerView: UIView = {
         let addView = UIView()
@@ -113,9 +110,7 @@ class HotDealsCell: UICollectionViewCell {
             hotDealsImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
             hotDealsImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
             hotDealsImageView.heightAnchor.constraint(equalToConstant: 160),
-            
-
-            
+        
             containerView.topAnchor.constraint(equalTo: hotDealsImageView.bottomAnchor, constant: 16),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
@@ -124,7 +119,6 @@ class HotDealsCell: UICollectionViewCell {
             productTitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
             productTitleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
             productTitleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-            
             
             productSubTitleLabel.topAnchor.constraint(equalTo: productTitleLabel.bottomAnchor, constant: 8),
             productSubTitleLabel.leadingAnchor.constraint(equalTo: productTitleLabel.leadingAnchor, constant: 0),
@@ -142,9 +136,6 @@ class HotDealsCell: UICollectionViewCell {
             likeButton.widthAnchor.constraint(equalToConstant: 25),
             likeButton.heightAnchor.constraint(equalToConstant: 25),
             
-            
-            // pin addContainerView
-            
             addContainerView.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: -20),
             addContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             addContainerView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
@@ -158,12 +149,9 @@ class HotDealsCell: UICollectionViewCell {
             addButton.widthAnchor.constraint(equalToConstant: 40),
             addButton.heightAnchor.constraint(equalToConstant: 40)
         ])
-        
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        
     }
 
     func configure(with model: FeaturedProduct) {
@@ -173,9 +161,6 @@ class HotDealsCell: UICollectionViewCell {
         productTitleLabel.text = model.title
         productSubTitleLabel.text = model.category
         priceLabel.text = "Rs.\(model.price ?? 1)"
-    }
-    
-    
-    
+    } 
 }
 

@@ -10,7 +10,7 @@ class BannerCell: UICollectionViewCell {
     
     static let identifier = "BannerCell"
     
-    private let imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named:"banner2")
         imageView.contentMode = .scaleAspectFill

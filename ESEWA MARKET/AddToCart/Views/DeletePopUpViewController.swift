@@ -13,7 +13,6 @@ class DeletePopUpViewController: UIViewController {
     var onDeleteClicked: ((String) -> ())?
     var onCancelled: (() -> ())?
     
-    
     lazy var itemDeleteView:UIView = {
         let deleteStackView = UIView ()
         deleteStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,30 +95,26 @@ class DeletePopUpViewController: UIViewController {
         itemDeleteView.addSubview(itemDeleteButton)
         
         NSLayoutConstraint.activate([
-            //pin deleteview
+
             itemDeleteView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             itemDeleteView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             itemDeleteView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             itemDeleteView.heightAnchor.constraint(equalToConstant: 200),
             
-            // pin titleLabel
             itemName.topAnchor.constraint(equalTo: itemDeleteView.topAnchor),
             itemName.leadingAnchor.constraint(equalTo: itemDeleteView.leadingAnchor),
             itemName.trailingAnchor.constraint(equalTo: itemDeleteView.trailingAnchor),
             itemName.heightAnchor.constraint(equalToConstant: 100),
             
-            // pin deleteLabel
             itemDeleteLabel.leadingAnchor.constraint(equalTo: itemName.leadingAnchor),
             itemDeleteLabel.trailingAnchor.constraint(equalTo: itemName.trailingAnchor),
             itemDeleteLabel.heightAnchor.constraint(equalToConstant: 140),
             
-            //pin cancel button
             itemCancelButton.topAnchor.constraint(equalTo: itemName.bottomAnchor),
             itemCancelButton.leadingAnchor.constraint(equalTo: itemName.leadingAnchor, constant: 20),
             itemCancelButton.widthAnchor.constraint(equalToConstant: 140),
             itemCancelButton.heightAnchor.constraint(equalToConstant: 50),
             
-            //pin delete button
             itemDeleteButton.topAnchor.constraint(equalTo: itemName.bottomAnchor),
             itemDeleteButton.trailingAnchor.constraint(equalTo: itemName.trailingAnchor, constant: -20),
             itemDeleteButton.widthAnchor.constraint(equalToConstant: 140),

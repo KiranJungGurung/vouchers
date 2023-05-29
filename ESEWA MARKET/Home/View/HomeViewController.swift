@@ -27,10 +27,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     
     // MARK: - HomeTableView
     
-    let homeTableView: UITableView = {
+    lazy var homeTableView: UITableView = {
         let homeTable = UITableView()
         homeTable.backgroundColor = .gray
-        
         homeTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return homeTable
     }()
@@ -70,7 +69,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         self.category = model
         homeTableView.reloadData()
     }
-    
     private func setupTableView() {
         homeTableView.delegate = self
         homeTableView.dataSource = self
@@ -270,8 +268,6 @@ extension HomeViewController: UITableViewDataSource {
             return cell
         }
     }
-    
-    
 }
 
 

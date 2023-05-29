@@ -5,14 +5,14 @@
 //
 
 import UIKit
+
 class CartViewController: UIViewController, AddItemToCartProtocol {
     
     // MARK: - Properties
-  
+    
     var presenter: AddCartItemPresenter!
     var model: [AddCartItemModel] = []
     var navTitle: String?
-    
     var totalPrice = 0.0
     
     // MARK: - Add Custom FooterView
@@ -56,7 +56,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
     
     // MARK: - Add a table View
     
-    let tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let table = UITableView()
         table.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         return table
@@ -96,7 +96,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         
     }
     
-    private func setupTableView() {
+    func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .clear
@@ -121,7 +121,7 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         itemTotalPriceLabel.text = "Rs.\(totalPrice)"
         
     }
-    private func setupFooterView() {
+    func setupFooterView() {
         
         // MARK: - Set Constraint of footerView
         
@@ -131,18 +131,15 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
             cartFooterView.trailingAnchor.constraint(equalTo: self.tableView.trailingAnchor, constant: 0),
             cartFooterView.heightAnchor.constraint(equalToConstant: 100),
             
-            // pin checkouttotal label
             
             itemCheckOutTotal.topAnchor.constraint(equalTo: self.cartFooterView.topAnchor, constant: 8),
             itemCheckOutTotal.leadingAnchor.constraint(equalTo: self.cartFooterView.leadingAnchor, constant:8),
             itemCheckOutTotal.trailingAnchor.constraint(equalTo: self.cartFooterView.trailingAnchor, constant: -8),
             
-            // totalPriceLabel
             itemTotalPriceLabel.topAnchor.constraint(equalTo: itemCheckOutTotal.bottomAnchor),
             itemTotalPriceLabel.leadingAnchor.constraint(equalTo: itemCheckOutTotal.leadingAnchor),
             itemTotalPriceLabel.heightAnchor.constraint(equalToConstant: 30),
             
-            // pin Checkout button
             itemCheckOutButton.topAnchor.constraint(equalTo: self.cartFooterView.topAnchor, constant: 16),
             itemCheckOutTotal.trailingAnchor.constraint(equalTo: self.cartFooterView.trailingAnchor, constant: 16),
             itemCheckOutButton.trailingAnchor.constraint(equalTo: self.cartFooterView.trailingAnchor, constant: -16),
@@ -174,13 +171,11 @@ extension CartViewController: UITableViewDelegate {
                     print(deletedMessage)
                 }
             }
-
             vc.modalPresentationStyle = .popover
             vc.preferredContentSize.height = 50
             self.present(vc, animated: true, completion: nil)
         }
     }
-    
 }
 
 extension CartViewController: UITableViewDataSource {

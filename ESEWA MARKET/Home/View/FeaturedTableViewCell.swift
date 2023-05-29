@@ -16,7 +16,7 @@ class FeaturedTableViewCell: UITableViewCell {
     var model : [FeaturedProduct]?
     var productClicked: ((FeaturedProduct) -> ())?
     
-    private let featuredCollectionView: UICollectionView = {
+    lazy var featuredCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -73,11 +73,7 @@ extension FeaturedTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! FeaturedCell
         if let item = model?[indexPath.row] {
             cell.configure(with: item)
-            
         }
-        
-//        let item = model[indexPath.row]
-//        cell.configure(with: item)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

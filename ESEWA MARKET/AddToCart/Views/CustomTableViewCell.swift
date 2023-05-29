@@ -15,9 +15,7 @@ class CustomTableViewCell: UITableViewCell {
 //    var totalPrice: ((Int)-> Void)?
     
     var model: AddCartItemModel?
-    
     var priceUpdated: ((Double) -> ())?
-
     var quantity = 1
     var productPrice =  2000.00
 
@@ -152,7 +150,6 @@ class CustomTableViewCell: UITableViewCell {
     private func setupViews() {
         
         // MARK: - Set Constraints to ContainerView
-        // pin the container view
         
         NSLayoutConstraint.activate([
             
@@ -161,46 +158,38 @@ class CustomTableViewCell: UITableViewCell {
             itemContainerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
             itemContainerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
             
-            // pin image view inside containerview
             itemImage.topAnchor.constraint(equalTo: self.itemContainerView.topAnchor, constant: 8),
             itemImage.leadingAnchor.constraint(equalTo: self.itemContainerView.leadingAnchor, constant: 16),
             itemImage.bottomAnchor.constraint(equalTo: self.itemContainerView.bottomAnchor, constant: -8),
             itemImage.widthAnchor.constraint(equalToConstant: 100),
             itemImage.heightAnchor.constraint(equalToConstant: 100),
             
-            // pin title label
             itemName.leadingAnchor.constraint(equalTo: itemImage.trailingAnchor, constant: 8),
             itemName.heightAnchor.constraint(equalToConstant: 80),
             
-            // pin subtitle label
             itemDescription.leadingAnchor.constraint(equalTo: itemName.leadingAnchor),
             itemDescription.heightAnchor.constraint(equalToConstant: 120),
             
-            // pin price label
             itemPrice.leadingAnchor.constraint(equalTo: itemDescription.leadingAnchor),
             itemPrice.heightAnchor.constraint(equalToConstant: 230),
             
             
             // MARK: - Add Constraints to CounterView
             
-            // pin CounterView:
             itemCountView.topAnchor.constraint(equalTo: self.itemContainerView.topAnchor, constant: 0),
             itemCountView.leadingAnchor.constraint(equalTo: self.itemContainerView.trailingAnchor, constant: -38),
             itemCountView.bottomAnchor.constraint(equalTo: self.itemContainerView.bottomAnchor, constant: 0),
             itemCountView.widthAnchor.constraint(equalToConstant: 38),
             
-            // pin mySubButton in myCountView
             itemSubButton.topAnchor.constraint(equalTo: itemCountView.topAnchor, constant: 10),
             itemSubButton.leadingAnchor.constraint(equalTo: itemCountView.leadingAnchor, constant: 10),
             itemSubButton.trailingAnchor.constraint(equalTo: itemCountView.trailingAnchor, constant: -10),
             itemSubButton.heightAnchor.constraint(equalToConstant: 20),
             
-            // pin counter in myCountView
             itemCountLabel.leadingAnchor.constraint(equalTo: itemCountView.leadingAnchor, constant: 10),
             itemCountLabel.trailingAnchor.constraint(equalTo: itemCountView.trailingAnchor, constant: -10),
             itemCountLabel.heightAnchor.constraint(equalToConstant: 155),
             
-            //pin addbutton
             itemAddButton.leadingAnchor.constraint(equalTo: itemSubButton.trailingAnchor, constant: -14),
             itemAddButton.trailingAnchor.constraint(equalTo: itemSubButton.leadingAnchor, constant:  14),
             itemAddButton.bottomAnchor.constraint(equalTo: itemCountView.bottomAnchor, constant: -8),
@@ -229,7 +218,7 @@ class CustomTableViewCell: UITableViewCell {
 
     }
     
-    private func updateCount() {
+   func updateCount() {
         itemCountLabel.text = "\(quantity)"
     }
 
@@ -240,7 +229,6 @@ class CustomTableViewCell: UITableViewCell {
             updateCount()
         }
     }
-
 }
 
 

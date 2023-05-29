@@ -5,20 +5,21 @@
 //
 //  Created by Kiran Gurung on 30/04/2023.
 //
-
-import UIKit
 import Kingfisher
+import UIKit
+
 
 class PhotoTableViewCell: UITableViewCell {
+    
     private let identifier = "PhotoTableViewCell"
         
-    var photoContainerView: UIView = {
+    lazy var photoContainerView: UIView = {
         let photoContainerView = UIView()
         photoContainerView.translatesAutoresizingMaskIntoConstraints = false
         return photoContainerView
     }()
     
-    var productImageView: UIImageView = {
+    lazy var productImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false

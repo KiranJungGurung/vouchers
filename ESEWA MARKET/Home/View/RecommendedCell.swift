@@ -14,19 +14,18 @@ class RecommendedCell: UICollectionViewCell {
     
     static let identifier = "RecommendedCell"
     
-    private let containerView: UIView = {
+    lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layer.cornerRadius = 10
         containerView.backgroundColor = .white
         containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-//        containerView.layer.shadowRadius = 10
         containerView.layer.shadowOpacity = 0.4
         containerView.layer.shadowOffset = .zero
         return containerView
     }()
     
-     var recommendedImageView: UIImageView = {
+     lazy var recommendedImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -34,10 +33,9 @@ class RecommendedCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         return imageView
-        
     }()
     
-    var productTitleLabel: UILabel = {
+    lazy var productTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .bold)
@@ -46,7 +44,7 @@ class RecommendedCell: UICollectionViewCell {
         return label
     }()
     
-    var productSubTitleLabel: UILabel = {
+    lazy var productSubTitleLabel: UILabel = {
         let subLabel = UILabel()
         subLabel.textColor = .gray
         subLabel.font = .systemFont(ofSize: 13, weight: .medium)
@@ -55,7 +53,7 @@ class RecommendedCell: UICollectionViewCell {
         return subLabel
     }()
     
-    var priceLabel: UILabel = {
+    lazy var priceLabel: UILabel = {
         let priceLabel = UILabel()
         priceLabel.font = UIFont.systemFont(ofSize: 16)
         priceLabel.textAlignment = .left
@@ -64,19 +62,16 @@ class RecommendedCell: UICollectionViewCell {
         return priceLabel
     }()
     
-    var likeButton: UIButton = {
-            let likeButton = UIButton()
-          likeButton.contentMode = .scaleAspectFill
-          likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-          likeButton.translatesAutoresizingMaskIntoConstraints = false
-          likeButton.tintColor = .gray
-            return likeButton
-        }()
-    
-    
-        //need to make separate uiview and pin add button there
-    
-    var addContainerView: UIView = {
+    lazy var likeButton: UIButton = {
+        let likeButton = UIButton()
+        likeButton.contentMode = .scaleAspectFill
+        likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        likeButton.translatesAutoresizingMaskIntoConstraints = false
+        likeButton.tintColor = .gray
+        return likeButton
+    }()
+
+    lazy var addContainerView: UIView = {
         let addView = UIView()
         addView.translatesAutoresizingMaskIntoConstraints = false
         addView.backgroundColor  = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
@@ -85,15 +80,15 @@ class RecommendedCell: UICollectionViewCell {
         return addView
     }()
     
-        private let addButton: UIButton = {
-            let addButton = UIButton()
-            addButton.contentMode = .scaleAspectFit
-            addButton.setImage(UIImage(systemName: "plus"), for: .normal)
-            addButton.translatesAutoresizingMaskIntoConstraints = false
-            addButton.tintColor = .white
-            addButton.isUserInteractionEnabled = true
-            return addButton
-        }()
+    lazy var addButton: UIButton = {
+        let addButton = UIButton()
+        addButton.contentMode = .scaleAspectFit
+        addButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.tintColor = .white
+        addButton.isUserInteractionEnabled = true
+        return addButton
+    }()
   
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -125,7 +120,6 @@ class RecommendedCell: UICollectionViewCell {
             productTitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
             productTitleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
             productTitleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-
             
             productSubTitleLabel.topAnchor.constraint(equalTo: productTitleLabel.bottomAnchor, constant: 8),
             productSubTitleLabel.leadingAnchor.constraint(equalTo: productTitleLabel.leadingAnchor, constant: 0),
@@ -141,9 +135,7 @@ class RecommendedCell: UICollectionViewCell {
             likeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
             likeButton.widthAnchor.constraint(equalToConstant: 25),
             likeButton.heightAnchor.constraint(equalToConstant: 25),
-  
-            // pin addContainerView
-            
+              
             addContainerView.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: -20),
             addContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             addContainerView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
@@ -156,13 +148,10 @@ class RecommendedCell: UICollectionViewCell {
             addButton.bottomAnchor.constraint(equalTo: addContainerView.bottomAnchor, constant: -8),
             addButton.widthAnchor.constraint(equalToConstant: 40),
             addButton.heightAnchor.constraint(equalToConstant: 40)
-            
             ])
         }
-        
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
-            
         }
     
     func configure(with model: FeaturedProduct) {
@@ -173,7 +162,6 @@ class RecommendedCell: UICollectionViewCell {
         productSubTitleLabel.text = model.category
         priceLabel.text = "Rs.\(model.price ?? 1)"
     }
-        
 }
 
 

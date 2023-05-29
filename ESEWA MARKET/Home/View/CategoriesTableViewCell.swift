@@ -15,7 +15,7 @@ class CategoriesTableViewCell: UITableViewCell {
     
     var category: [Categories]?
     
-    private let categoriesCollectionView: UICollectionView = {
+    lazy var categoriesCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)

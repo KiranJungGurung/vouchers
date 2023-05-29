@@ -16,8 +16,7 @@ class ShopBannerTableViewCell: UITableViewCell, UICollectionViewDelegate {
     var model = [HotDealBanner]()
 
     // Add collectionView
-    private let homeCollectionView: UICollectionView = {
-        
+    lazy var homeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false

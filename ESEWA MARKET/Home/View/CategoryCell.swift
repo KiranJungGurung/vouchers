@@ -12,7 +12,7 @@ class CategoriesCell: UICollectionViewCell {
     
     static let identifier = "CategoriesCell"
 
-    private let categoryImageView: UIImageView = {
+    lazy var categoryImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .systemGray6
@@ -23,7 +23,7 @@ class CategoriesCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let categoryLabel: UILabel = {
+   lazy var categoryLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .left

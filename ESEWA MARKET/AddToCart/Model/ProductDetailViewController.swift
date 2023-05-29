@@ -5,8 +5,9 @@
 //  Created by Kiran Gurung on 21/04/2023.
 //
 
-import UIKit
 import Kingfisher
+import UIKit
+
 class ProductDetailViewController: UIViewController, UITableViewDelegate{
     
     // MARK: - Properties
@@ -16,7 +17,7 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
     
     // MARK: - Add Custom FooterView
     
-    let itemFooterView: UIView = {
+    lazy var itemFooterView: UIView = {
         let footerView = UIView()
         footerView.translatesAutoresizingMaskIntoConstraints = false
         footerView.backgroundColor = .white
@@ -25,7 +26,7 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         return footerView
     }()
     
-    let itemTitle: UILabel = {
+    lazy var itemTitle: UILabel = {
         let total = UILabel()
         total.text = "Naxasa"
         total.translatesAutoresizingMaskIntoConstraints = false
@@ -35,7 +36,7 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         return total
     }()
     
-    let itemPrice: UILabel = {
+    lazy var itemPrice: UILabel = {
         let totalPrice = UILabel()
         totalPrice.text  = "Rs.345"
         totalPrice.translatesAutoresizingMaskIntoConstraints = false
@@ -44,8 +45,8 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         totalPrice.textColor = .black
         return totalPrice
     }()
-    
-    let addToCartButton: UIButton = {
+
+    lazy var addToCartButton: UIButton = {
         let checkOutButton = UIButton()
         checkOutButton.translatesAutoresizingMaskIntoConstraints = false
         checkOutButton.setTitle("ADD TO CART", for: .normal)
@@ -55,7 +56,7 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         return checkOutButton
     }()
     
-    let productDetailTableView: UITableView = {
+    lazy var productDetailTableView: UITableView = {
         let productTable = UITableView()
         productTable.separatorStyle = .none
         productTable.separatorColor = .clear
@@ -78,7 +79,7 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         setupTableView()
         view.backgroundColor = .white
         
-        // MARK: - Navigation UI
+    // MARK: - Navigation UI
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         backButton.translatesAutoresizingMaskIntoConstraints = false
@@ -90,19 +91,18 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         cartButton.tintColor = .black
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
         
-        
-        // MARK: - Register TableCell
+    // MARK: - Register TableCell
         
         productDetailTableView.register(PhotoTableViewCell.self, forCellReuseIdentifier: PhotoTableViewCell.reuseIdentifier)
         productDetailTableView.register(ProductInfoTableViewCell.self, forCellReuseIdentifier: ProductInfoTableViewCell.reuseIdentifier)
         productDetailTableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: DescriptionTableViewCell.reuseIdentifier)
-//        productDetailTableView.register(FooterCell.self, forCellReuseIdentifier: FooterCell.reuseIdentifier)
+        
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     //MARK: - ProductDetailTableView
     
-    private func setupTableView() {
+    func setupTableView() {
         
         // add datasource and delegate
         productDetailTableView.delegate = self
@@ -148,14 +148,9 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         super.viewDidLayoutSubviews()
         productDetailTableView.frame = view.bounds
     }
-    
-//    func displayProductList(featureData: FeaturedProduct?) {
-//        self.featureData = featureData
-//        productDetailTableView.reloadData()
-//    }
 }
 
-        // MARK: - TableView Datasource
+    // MARK: - TableView Datasource
 
 extension ProductDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -255,42 +250,24 @@ extension ProductDetailViewController: UITableViewDataSource {
             }
             return cell
             
-//        default:
-//            let cell = productDetailTableView.dequeueReusableCell(withIdentifier: FooterCell.reuseIdentifier, for: indexPath) as! FooterCell
-//            if let featureData = featureData {
-//                cell.configure(with: featureData)
-//        }
-//            return cell
         }
         
     }
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            switch mySections[indexPath.section] {
-            case 0:
-                return 350 // Height for PhotoTableViewCell
-            case 1:
-                return 120 // Height for ProductInfoTableViewCell
-            case 2:
-                return 60
-//            case 3:
-//                return 90 // Height for FooterCell
-            default:
-                return UITableView.automaticDimension // For any other sections, use automatic dimension
-            }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch mySections[indexPath.section] {
+        case 0:
+            return 350
+        case 1:
+            return 120
+        case 2:
+            return 60
+        default:
+            return UITableView.automaticDimension
         }
     }
+}
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if mySections[indexPath.section] == 2 {
-//            return 60
-//
-//        } else {
-//            return UITableView.automaticDimension
-//        }
-//    }
-//
-//}
-//
+
 
 
 
