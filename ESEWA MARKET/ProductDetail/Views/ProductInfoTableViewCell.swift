@@ -1,3 +1,4 @@
+
 //  ProductInfoTableViewCell.swift
 //  ESEWA MARKET
 //
@@ -41,6 +42,7 @@ class ProductInfoTableViewCell: UITableViewCell {
         crossedPricelbl.textAlignment = .left
         crossedPricelbl.font = .systemFont(ofSize: 16, weight: .medium)
         crossedPricelbl.textColor = .gray
+        
         let attributedText = NSAttributedString(
             string: "Rs.500.00",
             attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue])
@@ -91,5 +93,4 @@ class ProductInfoTableViewCell: UITableViewCell {
       }
     
 }
-
 

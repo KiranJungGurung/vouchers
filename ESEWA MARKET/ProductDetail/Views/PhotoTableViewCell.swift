@@ -1,16 +1,14 @@
 
-
 //  PhotoTableViewCell.swift
 //  ESEWA MARKET
 //
 //  Created by Kiran Gurung on 30/04/2023.
 //
+
 import Kingfisher
 import UIKit
 
-
 class PhotoTableViewCell: UITableViewCell {
-    
     private let identifier = "PhotoTableViewCell"
         
     lazy var photoContainerView: UIView = {
@@ -61,4 +59,5 @@ class PhotoTableViewCell: UITableViewCell {
         }
     }
 }
+
 

@@ -32,7 +32,6 @@ class HomePresenter {
     }
     func fetchProducts(completion: @escaping (Result<[FeaturedProduct], Error>) -> Void) {
         let url = URL(string: getProductURL)
-        
         AF.request(url!).responseJSON { response in
             switch response.result {
             case .success(let value):

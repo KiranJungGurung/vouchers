@@ -5,8 +5,8 @@
 //  Created by Kiran Gurung on 21/04/2023.
 //
 
-import Kingfisher
 import UIKit
+import Kingfisher
 
 class ProductDetailViewController: UIViewController, UITableViewDelegate{
     
@@ -45,7 +45,7 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         totalPrice.textColor = .black
         return totalPrice
     }()
-
+    
     lazy var addToCartButton: UIButton = {
         let checkOutButton = UIButton()
         checkOutButton.translatesAutoresizingMaskIntoConstraints = false
@@ -79,7 +79,7 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         setupTableView()
         view.backgroundColor = .white
         
-    // MARK: - Navigation UI
+        // MARK: - Navigation UI
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         backButton.translatesAutoresizingMaskIntoConstraints = false
@@ -91,18 +91,18 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         cartButton.tintColor = .black
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
         
-    // MARK: - Register TableCell
+        
+        // MARK: - Register TableCell
         
         productDetailTableView.register(PhotoTableViewCell.self, forCellReuseIdentifier: PhotoTableViewCell.reuseIdentifier)
         productDetailTableView.register(ProductInfoTableViewCell.self, forCellReuseIdentifier: ProductInfoTableViewCell.reuseIdentifier)
         productDetailTableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: DescriptionTableViewCell.reuseIdentifier)
-        
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     //MARK: - ProductDetailTableView
     
-    func setupTableView() {
+    private func setupTableView() {
         
         // add datasource and delegate
         productDetailTableView.delegate = self
@@ -119,7 +119,6 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
             productDetailTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             productDetailTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
             
-            
             itemFooterView.leadingAnchor.constraint(equalTo:self.productDetailTableView.leadingAnchor, constant: 0),
             itemFooterView.bottomAnchor.constraint(equalTo: self.productDetailTableView.bottomAnchor, constant: 0),
             itemFooterView.trailingAnchor.constraint(equalTo: self.productDetailTableView.trailingAnchor, constant: 0),
@@ -133,13 +132,11 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
             itemPrice.leadingAnchor.constraint(equalTo: itemTitle.leadingAnchor),
             itemPrice.heightAnchor.constraint(equalToConstant: 30),
             
-            // pin Checkout button
             addToCartButton.topAnchor.constraint(equalTo: self.itemFooterView.topAnchor, constant: 16),
             addToCartButton.trailingAnchor.constraint(equalTo: self.itemFooterView.trailingAnchor, constant: 16),
             addToCartButton.trailingAnchor.constraint(equalTo: self.itemFooterView.trailingAnchor, constant: -16),
             addToCartButton.widthAnchor.constraint(equalToConstant: 170),
-            addToCartButton.heightAnchor.constraint(equalToConstant: 40)
-            
+            addToCartButton.heightAnchor.constraint(equalToConstant: 40),
         ])
 
     }
@@ -150,7 +147,7 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
     }
 }
 
-    // MARK: - TableView Datasource
+        // MARK: - TableView Datasource
 
 extension ProductDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -249,20 +246,19 @@ extension ProductDetailViewController: UITableViewDataSource {
                 cell.configure(with: featureData)
             }
             return cell
-            
         }
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch mySections[indexPath.section] {
         case 0:
-            return 350
+            return 350 // Height for PhotoTableViewCell
         case 1:
-            return 120
+            return 120 // Height for ProductInfoTableViewCell
         case 2:
             return 60
         default:
-            return UITableView.automaticDimension
+            return UITableView.automaticDimension // For any other sections, use automatic dimension
         }
     }
 }

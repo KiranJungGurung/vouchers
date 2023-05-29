@@ -1,7 +1,7 @@
 
 //
 //
-//  DescriptionView.swift
+//  DescriptionTableViewCell.swift
 //  ESEWA MARKET
 //
 //  Created by Kiran Gurung on 03/05/2023.
@@ -11,7 +11,7 @@ import UIKit
 
 class DescriptionTableViewCell: UITableViewCell {
     
-    lazy var containerView = UIView()
+    var containerView = UIView()
     
     lazy var checkImage: UIImageView = {
         let checkImage = UIImageView()
@@ -66,10 +66,10 @@ class DescriptionTableViewCell: UITableViewCell {
             descLabel.leadingAnchor.constraint(equalTo: checkImage.trailingAnchor, constant: 4),
             descLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -4),
         ])
-    
     }
     func configure(with model: FeaturedProduct) {
         descLabel.text = model.description
       }
+    
 }
 
