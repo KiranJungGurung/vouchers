@@ -5,8 +5,6 @@
 //
 //  Created by Kiran Gurung on 26/04/2023.
 //
-
-
 import UIKit
 
 class FeaturedTableViewCell: UITableViewCell {
@@ -15,6 +13,7 @@ class FeaturedTableViewCell: UITableViewCell {
     
     var model : [FeaturedProduct]?
     var productClicked: ((FeaturedProduct) -> ())?
+    var addItemsToCart: ((FeaturedProduct) -> ())?
     
     lazy var featuredCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
@@ -24,7 +23,6 @@ class FeaturedTableViewCell: UITableViewCell {
             collectionView.showsHorizontalScrollIndicator = false
             collectionView.backgroundColor = .systemGray6
             return collectionView
-        
         }()
     
     static let reuseIdentifier = "FeaturedTableViewCell"
@@ -34,13 +32,10 @@ class FeaturedTableViewCell: UITableViewCell {
         
         contentView.backgroundColor = .clear
         contentView.addSubview(featuredCollectionView)
-        
-        
         // add datasource and delegate protocol
         
         featuredCollectionView.delegate = self
         featuredCollectionView.dataSource = self
-        
         
         NSLayoutConstraint.activate([
             featuredCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -51,14 +46,12 @@ class FeaturedTableViewCell: UITableViewCell {
            ])
         
         featuredCollectionView.register(FeaturedCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-
     }
  
     func configure(model: [FeaturedProduct]) {
         self.model = model
         featuredCollectionView.reloadData()
-        }
-    
+    }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

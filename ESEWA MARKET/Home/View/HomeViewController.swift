@@ -14,7 +14,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     
     var searchController = UISearchController(searchResultsController: nil)
     
-    let footerView = UIView()
     var presenter: HomePresenter?
     var presenter1: CategoryPresenter?
     var model = [Product]()
@@ -52,7 +51,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         let notificationButton =  UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: nil)
         button.tintColor = .black
         navigationItem.rightBarButtonItem = notificationButton
-        navigationItem.title = "Market"
+        navigationItem.title = HomeTexts.marketTitle
         
     }
     
@@ -104,80 +103,33 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     private func searchBar() {
         navigationItem.searchController = UISearchController()
         navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.searchBar.placeholder = "What are you searching for?"
+        searchController.searchBar.placeholder = HomeTexts.searchBarPlaceholder
         searchController.searchBar.tintColor = .white
     }
     
-    // MARK: - ADD FOOTER VIEW
+//     MARK: - INITIALIZE FOOTER VIEW
     
-    private func setupFooterView() {
+    lazy var footerView: FooterView = {
+        let footerView = FooterView()
         footerView.translatesAutoresizingMaskIntoConstraints = false
-        footerView.backgroundColor = .white
-        
-        lazy var homeButton: UIButton = {
-            let homeButton = UIButton()
-            homeButton.translatesAutoresizingMaskIntoConstraints = false
-            homeButton.setImage(UIImage(systemName: "house"), for: .normal)
-            homeButton.tintColor = .black
-            return homeButton
-        }()
-        
-        lazy var cartButton: UIButton = {
-            let cartButton = UIButton()
-            cartButton.translatesAutoresizingMaskIntoConstraints = false
-            cartButton.tintColor = .green
-            cartButton.setImage(UIImage(systemName: "cart"), for: .normal)
-            return cartButton
-        }()
-        
-        lazy var likeButton: UIButton = {
-            let likeButton = UIButton()
-            likeButton.translatesAutoresizingMaskIntoConstraints = false
-            likeButton.tintColor = .red
-            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            return likeButton
-        }()
-        
-        lazy var menuButton: UIButton = {
-            let menuButton = UIButton()
-            menuButton.translatesAutoresizingMaskIntoConstraints = false
-            menuButton.tintColor = .blue
-            menuButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-            return menuButton
-        }()
-        
-        cartButton.addTarget(self, action: #selector(didTap), for: .touchUpInside)
-    
+        return footerView
+    }()
+
+    private func setupFooterView() {
         view.addSubview(footerView)
-        footerView.addSubview(homeButton)
-        footerView.addSubview(cartButton)
-        footerView.addSubview(likeButton)
-        footerView.addSubview(menuButton)
-        
+
         NSLayoutConstraint.activate([
-            footerView.topAnchor.constraint(equalTo: view.bottomAnchor),
+            footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
             footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
             footerView.heightAnchor.constraint(equalToConstant: 80),
-            
-            homeButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
-            homeButton.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 50),
-            
-            cartButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
-            cartButton.leadingAnchor.constraint(equalTo: homeButton.leadingAnchor, constant: 90),
-            
-            likeButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
-            likeButton.leadingAnchor.constraint(equalTo: cartButton.leadingAnchor, constant: 90),
-            
-            menuButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
-            menuButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -50),
         ])
     }
+
     
     @objc func didTap() {
         let vc = CartViewController()
-        vc.navTitle = "My Cart"
+        vc.navTitle = HomeTexts.cartViewControllerTitle
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -194,19 +146,19 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return ""
+            return TableViewHeaderText.section0
         case 1:
-            return "Categories"
+            return TableViewHeaderText.section1
         case 2:
-            return "Featured Products"
+            return TableViewHeaderText.section2
         case 3:
-            return "Hot Deals Of TheDay"
+            return TableViewHeaderText.section3
         case 4:
-            return ""
+            return TableViewHeaderText.section4
         case 5:
-            return "Popular Brands"
+            return TableViewHeaderText.section5
         default :
-            return "Recommended for you"
+            return TableViewHeaderText.defaultSection
         }
     }
 
@@ -241,6 +193,10 @@ extension HomeViewController: UITableViewDataSource {
                 vc.featureData = item
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+            cell.addItemsToCart = { item in
+                let vc = CartViewController()
+
+            }
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
@@ -269,6 +225,4 @@ extension HomeViewController: UITableViewDataSource {
         }
     }
 }
-
-
 

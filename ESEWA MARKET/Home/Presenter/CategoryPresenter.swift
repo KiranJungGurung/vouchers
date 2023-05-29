@@ -19,8 +19,7 @@ class CategoryPresenter {
                       Categories(categoryImage: UIImage(named: "j"), categoryName: "jewelery"),
                       Categories(categoryImage: UIImage(named: "fashion"), categoryName: "men's cloth"),
                       Categories(categoryImage: UIImage(named: "womencloth"), categoryName: "women's cloth"),
-]
-
+    ]
     var delegate: CategoryProtocolDelegate?
     weak var view: HomeViewController?
 

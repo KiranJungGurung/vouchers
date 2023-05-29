@@ -5,8 +5,8 @@
 //  Created by Kiran Gurung on 21/04/2023.
 //
 
-import UIKit
 import Kingfisher
+import UIKit
 
 class ProductDetailViewController: UIViewController, UITableViewDelegate{
     
@@ -53,6 +53,7 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         checkOutButton.backgroundColor = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
         checkOutButton.layer.cornerRadius = 16
         checkOutButton.layer.masksToBounds = true
+        checkOutButton.addTarget(self, action: #selector(addToCartButtonTapped), for: .touchUpInside)
         return checkOutButton
     }()
     
@@ -145,6 +146,10 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         super.viewDidLayoutSubviews()
         productDetailTableView.frame = view.bounds
     }
+    @objc func addToCartButtonTapped() {
+        let vc = CartViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
         // MARK: - TableView Datasource
@@ -203,7 +208,7 @@ extension ProductDetailViewController: UITableViewDataSource {
                 footerView.centerYAnchor.constraint(equalTo: self.productDetailTableView.centerYAnchor, constant: 10),
                 footerView.heightAnchor.constraint(equalToConstant: 125),
                 
-                
+    
                 button.widthAnchor.constraint(equalToConstant: 120),
                 button.heightAnchor.constraint(equalToConstant: 40),
                 button.centerXAnchor.constraint(equalTo: footerView.centerXAnchor, constant: 0),

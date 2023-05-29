@@ -135,3 +135,23 @@ struct RecommendedForYou {
     }
 }
 
+
+struct HomeTexts {
+    static let marketTitle = "Market"
+    static let searchBarPlaceholder = "What are you searching for?"
+    static let footerHomeButtonImage = "house"
+    static let footerCartButtonImage = "cart"
+    static let footerLikeButtonImage = "heart"
+    static let footerMenuButtonImage = "ellipsis"
+    static let cartViewControllerTitle = "My Cart"
+}
+
+struct TableViewHeaderText {
+    static let section0 = ""
+    static let section1 = "Categories"
+    static let section2 = "Featured Products"
+    static let section3 = "Hot Deals Of The Day"
+    static let section4 = ""
+    static let section5 = "Popular Brands"
+    static let defaultSection = "Recommended for you"
+}
