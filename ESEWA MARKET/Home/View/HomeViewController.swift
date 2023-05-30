@@ -11,7 +11,6 @@ import UIKit
 class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDelegate, CategoryProtocolDelegate {
     
     // MARK: - Properties
-    
     var searchController = UISearchController(searchResultsController: nil)
     
     var presenter: HomePresenter?
@@ -23,6 +22,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     var hotDealBanner = [HotDealBanner]()
     var popularBrand = [PopularBrand]()
     var recommendedForYou = [RecommendedForYou]()
+    
+    var CartVC = CartViewController()
+    
     
     // MARK: - HomeTableView
     
@@ -44,7 +46,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         searchBar()
         setupFooterView()
         
-        // MARK: -  NavigationBar Setup
+    // MARK: -  NavigationBar Setup
 
         view.backgroundColor = .systemGray6
         let button = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: nil)
@@ -54,7 +56,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         navigationItem.title = HomeTexts.marketTitle
         
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         homeTableView.frame = view.bounds
@@ -119,13 +121,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         view.addSubview(footerView)
 
         NSLayoutConstraint.activate([
-            footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
+            footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
             footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            footerView.heightAnchor.constraint(equalToConstant: 80),
+            footerView.heightAnchor.constraint(equalToConstant: 70),
         ])
     }
-
     
     @objc func didTap() {
         let vc = CartViewController()
@@ -193,9 +194,10 @@ extension HomeViewController: UITableViewDataSource {
                 vc.featureData = item
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            cell.addItemsToCart = { item in
-                let vc = CartViewController()
-
+            cell.addItemsToCart = {[weak self] item in
+                guard let strongSelf = self else {return}
+                strongSelf.CartVC.featureData = item
+                strongSelf.navigationController?.pushViewController(strongSelf.CartVC, animated: true)
             }
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell

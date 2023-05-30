@@ -135,7 +135,6 @@ struct RecommendedForYou {
     }
 }
 
-
 struct HomeTexts {
     static let marketTitle = "Market"
     static let searchBarPlaceholder = "What are you searching for?"

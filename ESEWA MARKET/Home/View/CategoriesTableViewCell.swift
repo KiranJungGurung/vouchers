@@ -16,14 +16,15 @@ class CategoriesTableViewCell: UITableViewCell {
     var category: [Categories]?
     
     lazy var categoriesCollectionView: UICollectionView = {
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collectionView.translatesAutoresizingMaskIntoConstraints = false
-            collectionView.backgroundColor = .clear
-            collectionView.showsHorizontalScrollIndicator = false
-            return collectionView
-        }()
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: 20))
+        return collectionView
+    }()
     
     static let reuseIdentifier = "CategoriesTableViewCell"
     
@@ -31,7 +32,6 @@ class CategoriesTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
-
 
         contentView.addSubview(categoriesCollectionView)
         // add datasource and delegate protocol
@@ -43,10 +43,11 @@ class CategoriesTableViewCell: UITableViewCell {
             categoriesCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             categoriesCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             categoriesCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            categoriesCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            categoriesCollectionView.heightAnchor.constraint(equalToConstant: 120),
-           ])
+            categoriesCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            categoriesCollectionView.heightAnchor.constraint(equalToConstant: 120)
         
+        ])
+        //Register
         categoriesCollectionView.register(CategoriesCell.self, forCellWithReuseIdentifier:cellReuseIdentifier)
 
     }
@@ -54,7 +55,6 @@ class CategoriesTableViewCell: UITableViewCell {
         if let model = model {
             self.category = model
             categoriesCollectionView.reloadData()
-
         }
     }
     
@@ -80,8 +80,14 @@ extension CategoriesTableViewCell: UICollectionViewDataSource {
 }
 extension CategoriesTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 120)
-     }
-    
+  // trying make the category cell dynamic
+        let item = category?[indexPath.row]
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = item?.categoryName
+        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: 80))
+        let calculateLabelWidth = labelSize.width
+        return CGSize(width: calculateLabelWidth, height: 120)
+    }
 }
 

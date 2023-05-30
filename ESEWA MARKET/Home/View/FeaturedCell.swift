@@ -11,6 +11,10 @@ import UIKit
 
 class FeaturedCell: UICollectionViewCell {
     
+    var model: FeaturedProduct?
+    
+    var addItemsToCart: ((FeaturedProduct) -> ())?
+    
     static let identifier = "FeaturedCell"
     
     lazy var containerView: UIView = {
@@ -86,8 +90,6 @@ class FeaturedCell: UICollectionViewCell {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.tintColor = .white
         addButton.isUserInteractionEnabled = true
-        //            addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-        
         return addButton
     }()
     
@@ -104,7 +106,6 @@ class FeaturedCell: UICollectionViewCell {
         containerView.addSubview(likeButton)
         containerView.addSubview(addContainerView)
         addContainerView.addSubview(addButton)
-        
         
         NSLayoutConstraint.activate([
             
@@ -151,11 +152,19 @@ class FeaturedCell: UICollectionViewCell {
             addButton.widthAnchor.constraint(equalToConstant: 40),
             addButton.heightAnchor.constraint(equalToConstant: 40)
         ])
-        
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)        
+
+    }
+    @objc func addButtonTapped() {
+        guard let model = model else {
+            return
+        }
+        addItemsToCart?(model)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+  
     func configure(with model: FeaturedProduct) {
         
         if let url = URL(string: model.image ?? "") {
@@ -165,7 +174,6 @@ class FeaturedCell: UICollectionViewCell {
         productSubTitleLabel.text = model.category
         priceLabel.text = "Rs. \(model.price ?? 1)"
     }
-    
 }
 
 

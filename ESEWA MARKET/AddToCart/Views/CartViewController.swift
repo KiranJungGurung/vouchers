@@ -6,14 +6,17 @@
 
 import UIKit
 
-class CartViewController: UIViewController, AddItemToCartProtocol {
+class CartViewController: UIViewController {
     
     // MARK: - Properties
     
-    var presenter: AddCartItemPresenter!
-    var model: [AddCartItemModel] = []
+//    var presenter: AddCartItemPresenter!
+//    var model: [AddCartItemModel] = []
     var navTitle: String?
     var totalPrice = 0.0
+    var featureData: FeaturedProduct?
+    var items =  [FeaturedProduct]()
+    
     
     // MARK: - Add Custom FooterView
     
@@ -96,6 +99,14 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           if let productItems = self.featureData {
+               items.append(productItems)
+           }
+           self.tableView.reloadData()
+       }
+    
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -103,20 +114,23 @@ class CartViewController: UIViewController, AddItemToCartProtocol {
         tableView.separatorStyle = .none
         tableView.separatorColor = .none
         
-        presenter = AddCartItemPresenter(delegate: self, view: self)
-        presenter?.updateView()
+//        presenter = AddCartItemPresenter(delegate: self, view: self)
+//        presenter?.updateView()
         
     }
-    func displayCartItemList(model: [AddCartItemModel]) {
-        self.model = model
-        tableView.reloadData()
-    }
+//    func displayCartItemList(model: [AddCartItemModel]) {
+//        self.model = model
+//        tableView.reloadData()
+//    }
     
     @objc func backButtonPressed() {
         self.navigationController?.popViewController(animated: true)
         
     }
-    
+//    @objc func cartTapped() {
+//           navigationController?.popViewController(animated: true)
+//       }
+
     func updateTotalPriceLabel() {
         itemTotalPriceLabel.text = "Rs.\(totalPrice)"
         
@@ -164,7 +178,8 @@ extension CartViewController: UITableViewDelegate {
         if editingStyle == .delete {
             let vc = DeletePopUpViewController()
             vc.onDeleteClicked = { deletedMessage in
-                self.presenter?.cartItemsList.remove(at: indexPath.row)
+//                self.presenter?.cartItemsList.remove(at: indexPath.row)
+                self.items.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .middle)
                 vc.dismiss(animated: true) {
                     self.tableView.reloadData()
@@ -184,23 +199,27 @@ extension CartViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Items(\(presenter.cartItemsList.count))"
+//        return "Items(\(presenter.cartItemsList.count))"
+        return "Items(\(items.count))"
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.cartItemsList.count ?? 1
+//        return presenter?.cartItemsList.count ?? 1
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         
-        let item = model[indexPath.row]
+        let item = items[indexPath.row]
         cell.configure(with: item)
+        
         cell.countChanged = { price in
             self.totalPrice = (price + price)
             self.updateTotalPriceLabel()
-        }
+         }
+        
         cell.backgroundColor = .clear
         return cell
     }

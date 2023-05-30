@@ -13,17 +13,17 @@ class FeaturedTableViewCell: UITableViewCell {
     
     var model : [FeaturedProduct]?
     var productClicked: ((FeaturedProduct) -> ())?
-    var addItemsToCart: ((FeaturedProduct) -> ())?
+    var addItemsToCart: ((FeaturedProduct) -> Void)?
     
     lazy var featuredCollectionView: UICollectionView = {
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collectionView.translatesAutoresizingMaskIntoConstraints = false
-            collectionView.showsHorizontalScrollIndicator = false
-            collectionView.backgroundColor = .systemGray6
-            return collectionView
-        }()
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .systemGray6
+        return collectionView
+    }()
     
     static let reuseIdentifier = "FeaturedTableViewCell"
 
@@ -32,8 +32,8 @@ class FeaturedTableViewCell: UITableViewCell {
         
         contentView.backgroundColor = .clear
         contentView.addSubview(featuredCollectionView)
-        // add datasource and delegate protocol
         
+        // add datasource and delegate protocol
         featuredCollectionView.delegate = self
         featuredCollectionView.dataSource = self
         
@@ -66,6 +66,10 @@ extension FeaturedTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! FeaturedCell
         if let item = model?[indexPath.row] {
             cell.configure(with: item)
+            
+            cell.addItemsToCart = { [weak self] item in
+                self?.addItemsToCart?(item)
+            }
         }
         return cell
     }

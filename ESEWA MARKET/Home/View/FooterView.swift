@@ -54,7 +54,6 @@ class FooterView: UIView {
 
     private func setupFooterView() {
         backgroundColor = .white
-
         addSubview(homeButton)
         addSubview(cartButton)
         addSubview(likeButton)

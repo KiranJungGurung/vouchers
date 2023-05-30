@@ -45,12 +45,9 @@ class CategoriesCell: UICollectionViewCell {
             categoryImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             categoryImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             categoryImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            categoryImageView.heightAnchor.constraint(equalToConstant: 70),
-            
+            categoryImageView.heightAnchor.constraint(equalToConstant: 60),
+                                    
             categoryLabel.topAnchor.constraint(equalTo: categoryImageView.bottomAnchor, constant: 10),
-            categoryLabel.leadingAnchor.constraint(equalTo: categoryImageView.leadingAnchor, constant: 4),
-            categoryLabel.trailingAnchor.constraint(equalTo: categoryImageView.trailingAnchor, constant: -4),
-            categoryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             categoryLabel.heightAnchor.constraint(equalToConstant: 20),
             categoryLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             

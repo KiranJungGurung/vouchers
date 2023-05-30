@@ -9,8 +9,8 @@ import Foundation
 import SwiftyJSON
 import UIKit
 
- protocol HomeProtocolDelegate: AnyObject {
-     func didFetchProduct(model:[FeaturedProduct])
+protocol HomeProtocolDelegate: AnyObject {
+    func didFetchProduct(model:[FeaturedProduct])
      
  }
 

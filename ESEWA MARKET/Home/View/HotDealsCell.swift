@@ -74,7 +74,6 @@ class HotDealsCell: UICollectionViewCell {
         addView.backgroundColor  = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
         addView.layer.cornerRadius = 9
         addView.layer.maskedCorners = [.layerMinXMinYCorner]
-        
         return addView
     }()
     
@@ -86,7 +85,6 @@ class HotDealsCell: UICollectionViewCell {
         addButton.tintColor = .white
         addButton.isUserInteractionEnabled = true
         //            addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-        
         return addButton
     }()
     

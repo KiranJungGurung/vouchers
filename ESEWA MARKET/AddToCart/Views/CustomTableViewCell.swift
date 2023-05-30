@@ -133,12 +133,14 @@ class CustomTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with model: AddCartItemModel) {
-        itemImage.image = model.itemImage
-        itemName.text = model.itemName
-        itemDescription.text = model.itemDescription
-        itemPrice.text = "Rs\(model.itemPrice ?? 00.00)"
-        itemCountLabel.text = "Rs\(model.itemCount ?? 1)"
+    func configure(with model: FeaturedProduct) {
+        if let url = URL(string: model.image ?? "") {
+            itemImage.kf.setImage(with: url)
+        }
+        itemName.text = model.title
+        itemDescription.text = model.category
+        itemPrice.text = "Rs\(model.price ?? 00.00)"
+//        itemCountLabel.text = "Rs\(model.itemCount ?? 1)"
     }
     
     override func layoutSubviews() {
@@ -215,7 +217,6 @@ class CustomTableViewCell: UITableViewCell {
         quantity += 1
         updatePriceLabel()
         updateCount()
-
     }
     
    func updateCount() {

@@ -12,14 +12,14 @@ protocol CategoryProtocolDelegate: AnyObject {
     func displayCategory(model: [Categories])
     
 }
-
 class CategoryPresenter {
     
-    var categories = [Categories(categoryImage: UIImage(named: "iphonec"), categoryName: "mobile"),
+    var categories = [Categories(categoryImage: UIImage(named: "iphonec"), categoryName: "Mobile"),
                       Categories(categoryImage: UIImage(named: "j"), categoryName: "jewelery"),
-                      Categories(categoryImage: UIImage(named: "fashion"), categoryName: "men's cloth"),
-                      Categories(categoryImage: UIImage(named: "womencloth"), categoryName: "women's cloth"),
+                      Categories(categoryImage: UIImage(named: "fashion"), categoryName: "Men's clothing"),
+                      Categories(categoryImage: UIImage(named: "womencloth"), categoryName: "Women's clothing"),
     ]
+    
     var delegate: CategoryProtocolDelegate?
     weak var view: HomeViewController?
 

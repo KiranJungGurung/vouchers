@@ -6,6 +6,7 @@
 //  Created by Kiran Gurung on 05/05/2023.
 //
 
+
 import Foundation
 import UIKit
 
@@ -13,6 +14,7 @@ protocol AddItemToCartProtocol: AnyObject {
     func displayCartItemList(model: [AddCartItemModel])
 
 }
+
 class AddCartItemPresenter {
     
     var cartItemsList: [AddCartItemModel] = [
