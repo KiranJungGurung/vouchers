@@ -24,6 +24,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     var recommendedForYou = [RecommendedForYou]()
     
     var CartVC = CartViewController()
+    var wishListVC = WishListViewController()
     
     
     // MARK: - HomeTableView
@@ -199,6 +200,12 @@ extension HomeViewController: UITableViewDataSource {
                 strongSelf.CartVC.featureData = item
                 strongSelf.navigationController?.pushViewController(strongSelf.CartVC, animated: true)
             }
+            cell.likeButtonClicked = {[weak self] item in
+                guard let strongSelf = self else {return}
+                strongSelf.wishListVC.featureData = item
+                strongSelf.navigationController?.pushViewController(strongSelf.CartVC, animated: true)
+            }
+            
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             

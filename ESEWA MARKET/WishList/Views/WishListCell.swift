@@ -1,25 +1,15 @@
-
 //
-//  FeaturedCell.swift
+//  WishListCell.swift
 //  ESEWA MARKET
 //
-//  Created by Kiran Gurung on 26/04/2023.
+//  Created by Kiran Gurung on 31/05/2023.
 //
-
 import Kingfisher
 import UIKit
 
-class FeaturedCell: UICollectionViewCell {
+class WishListCell: UICollectionViewCell {
     
-    var model: FeaturedProduct?
-    
-    var addItemsToCart: ((FeaturedProduct) -> ())?
-    
-    var wishListItem: ((FeaturedProduct) -> ())?
-    
-    var likeButtonClicked: ((FeaturedProduct) -> ())?
-    
-    static let identifier = "FeaturedCell"
+    static let identifier = "WishListCell"
     
     lazy var containerView: UIView = {
         let containerView = UIView()
@@ -32,7 +22,7 @@ class FeaturedCell: UICollectionViewCell {
         return containerView
     }()
     
-    lazy var featuredImageView: UIImageView = {
+     lazy var wishImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -60,7 +50,7 @@ class FeaturedCell: UICollectionViewCell {
         return subLabel
     }()
     
-   lazy var priceLabel: UILabel = {
+    lazy var priceLabel: UILabel = {
         let priceLabel = UILabel()
         priceLabel.font = UIFont.systemFont(ofSize: 16)
         priceLabel.textAlignment = .left
@@ -75,11 +65,10 @@ class FeaturedCell: UICollectionViewCell {
         likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         likeButton.translatesAutoresizingMaskIntoConstraints = false
         likeButton.tintColor = .gray
-        likeButton.isUserInteractionEnabled = true
         return likeButton
     }()
-    
-   lazy var addContainerView: UIView = {
+
+    lazy var addContainerView: UIView = {
         let addView = UIView()
         addView.translatesAutoresizingMaskIntoConstraints = false
         addView.backgroundColor  = UIColor(red: 48/255, green: 219/255, blue: 65/255, alpha: 1.0)
@@ -97,13 +86,13 @@ class FeaturedCell: UICollectionViewCell {
         addButton.isUserInteractionEnabled = true
         return addButton
     }()
-    
+  
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 14
         
-        contentView.addSubview(featuredImageView)
+        contentView.addSubview(wishImageView)
         contentView.addSubview(containerView)
         containerView.addSubview(productTitleLabel)
         containerView.addSubview(productSubTitleLabel)
@@ -112,14 +101,15 @@ class FeaturedCell: UICollectionViewCell {
         containerView.addSubview(addContainerView)
         addContainerView.addSubview(addButton)
         
+    
         NSLayoutConstraint.activate([
             
-            featuredImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
-            featuredImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
-            featuredImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
-            featuredImageView.heightAnchor.constraint(equalToConstant: 160),
+            wishImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
+            wishImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
+            wishImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
+            wishImageView.heightAnchor.constraint(equalToConstant: 160),
             
-            containerView.topAnchor.constraint(equalTo: featuredImageView.bottomAnchor, constant: 16),
+            containerView.topAnchor.constraint(equalTo: wishImageView.bottomAnchor, constant: 16),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
@@ -135,15 +125,14 @@ class FeaturedCell: UICollectionViewCell {
             priceLabel.topAnchor.constraint(equalTo: productSubTitleLabel.bottomAnchor, constant: 8),
             priceLabel.leadingAnchor.constraint(equalTo: productSubTitleLabel.leadingAnchor, constant: 0),
             priceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
-            priceLabel.heightAnchor.constraint(equalToConstant: 17),
             
             likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
-            likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -110),
+            likeButton.leadingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: 0),
             likeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             likeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
             likeButton.widthAnchor.constraint(equalToConstant: 25),
             likeButton.heightAnchor.constraint(equalToConstant: 25),
-
+              
             addContainerView.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: -20),
             addContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             addContainerView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
@@ -156,39 +145,25 @@ class FeaturedCell: UICollectionViewCell {
             addButton.bottomAnchor.constraint(equalTo: addContainerView.bottomAnchor, constant: -8),
             addButton.widthAnchor.constraint(equalToConstant: 40),
             addButton.heightAnchor.constraint(equalToConstant: 40)
-        ])
-        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-        likeButton.addTarget(self, action: #selector(wishButtonTapped), for: .touchUpInside)
-
-    }
-    @objc func addButtonTapped() {
-        guard let model = model else {
-            return
-        }
+            ])
         
-        addItemsToCart?(model)
-    }
+        
+        }
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
     
-    @objc func wishButtonTapped() {
-        guard let model = model else {
-            return
-        }
-        likeButtonClicked?(model)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-  
     func configure(with model: FeaturedProduct) {
-        self.model = model
         if let url = URL(string: model.image ?? "") {
-            featuredImageView.kf.setImage(with: url)
-        }
+            wishImageView.kf.setImage(with: url)
+           }
         productTitleLabel.text = model.title
         productSubTitleLabel.text = model.category
-        priceLabel.text = "Rs. \(model.price ?? 1)"
+        priceLabel.text = "Rs.\(model.price ?? 1)"
     }
 }
+
+
 
 
 

@@ -46,6 +46,8 @@ class CustomTableViewCell: UITableViewCell {
     lazy var itemName: UILabel = {
         let itemLabel = UILabel()
         itemLabel.textColor = .black
+        itemLabel.numberOfLines = 2
+        itemLabel.lineBreakMode = .byTruncatingTail
         itemLabel.font = .systemFont(ofSize: 17, weight: .bold)
         itemLabel.translatesAutoresizingMaskIntoConstraints = false
         itemLabel.textAlignment = .left

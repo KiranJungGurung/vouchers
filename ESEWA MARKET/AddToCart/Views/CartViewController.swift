@@ -15,7 +15,7 @@ class CartViewController: UIViewController {
     var navTitle: String?
     var totalPrice = 0.0
     var featureData: FeaturedProduct?
-    var items =  [FeaturedProduct]()
+    var featuredItems = [FeaturedProduct]()
     
     
     // MARK: - Add Custom FooterView
@@ -39,7 +39,6 @@ class CartViewController: UIViewController {
     
     lazy var itemTotalPriceLabel: UILabel = {
         let totalPrice = UILabel()
-//        totalPrice.text = "Rs.52,500"
         totalPrice.translatesAutoresizingMaskIntoConstraints = false
         totalPrice.textAlignment = .left
         totalPrice.font = .systemFont(ofSize: 16, weight: .medium)
@@ -102,7 +101,7 @@ class CartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
            super.viewWillAppear(animated)
            if let productItems = self.featureData {
-               items.append(productItems)
+               featuredItems.append(productItems)
            }
            self.tableView.reloadData()
        }
@@ -178,12 +177,11 @@ extension CartViewController: UITableViewDelegate {
         if editingStyle == .delete {
             let vc = DeletePopUpViewController()
             vc.onDeleteClicked = { deletedMessage in
-//                self.presenter?.cartItemsList.remove(at: indexPath.row)
-                self.items.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .middle)
-                vc.dismiss(animated: true) {
-                    self.tableView.reloadData()
-                    print(deletedMessage)
+            self.featuredItems.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .middle)
+            vc.dismiss(animated: true) {
+                self.tableView.reloadData()
+                print(deletedMessage)
                 }
             }
             vc.modalPresentationStyle = .popover
@@ -199,20 +197,18 @@ extension CartViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Items(\(presenter.cartItemsList.count))"
-        return "Items(\(items.count))"
+        return "Items(\(featuredItems.count))"
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return presenter?.cartItemsList.count ?? 1
-        return items.count
+        return featuredItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
         
-        let item = items[indexPath.row]
+        let item = featuredItems[indexPath.row]
         cell.configure(with: item)
         
         cell.countChanged = { price in

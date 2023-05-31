@@ -40,11 +40,12 @@ class CategoriesTableViewCell: UITableViewCell {
         categoriesCollectionView.dataSource = self
         
         NSLayoutConstraint.activate([
-            categoriesCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            categoriesCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            categoriesCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            categoriesCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-            categoriesCollectionView.heightAnchor.constraint(equalToConstant: 120)
+            categoriesCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            categoriesCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            categoriesCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            categoriesCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            categoriesCollectionView.heightAnchor.constraint(equalToConstant: 100),
+            categoriesCollectionView.widthAnchor.constraint(equalToConstant: 100),
         
         ])
         //Register
@@ -85,9 +86,9 @@ extension CategoriesTableViewCell: UICollectionViewDelegateFlowLayout {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = item?.categoryName
-        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: 80))
+        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: 70))
         let calculateLabelWidth = labelSize.width
-        return CGSize(width: calculateLabelWidth, height: 120)
+        return CGSize(width: calculateLabelWidth, height: 90)
     }
 }
 

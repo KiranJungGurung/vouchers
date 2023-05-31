@@ -26,10 +26,10 @@ class CategoriesCell: UICollectionViewCell {
    lazy var categoryLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
-        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.font = .systemFont(ofSize: 10, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -42,15 +42,16 @@ class CategoriesCell: UICollectionViewCell {
         contentView.addSubview(categoryLabel)
         
         NSLayoutConstraint.activate([
-            categoryImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            categoryImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            categoryImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            categoryImageView.heightAnchor.constraint(equalToConstant: 60),
-                                    
-            categoryLabel.topAnchor.constraint(equalTo: categoryImageView.bottomAnchor, constant: 10),
-            categoryLabel.heightAnchor.constraint(equalToConstant: 20),
+            categoryImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            categoryImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            categoryImageView.heightAnchor.constraint(equalToConstant: 50),
+            categoryImageView.widthAnchor.constraint(equalToConstant: 50),
+    
             categoryLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            
+            categoryLabel.topAnchor.constraint(equalTo: categoryImageView.bottomAnchor, constant:8),
+            categoryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            categoryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+
 //            categoryLabel.contentCompressionResistancePriority(for: )
 //            categoryLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         ])
