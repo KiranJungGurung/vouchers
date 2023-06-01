@@ -12,13 +12,10 @@ import UIKit
 class FeaturedCell: UICollectionViewCell {
     
     var model: FeaturedProduct?
-    
     var addItemsToCart: ((FeaturedProduct) -> ())?
     
-    var wishListItem: ((FeaturedProduct) -> ())?
-    
-    var likeButtonClicked: ((FeaturedProduct) -> ())?
-    
+    var addToWishList: ((FeaturedProduct) -> ())?
+
     static let identifier = "FeaturedCell"
     
     lazy var containerView: UIView = {
@@ -138,7 +135,7 @@ class FeaturedCell: UICollectionViewCell {
             priceLabel.heightAnchor.constraint(equalToConstant: 17),
             
             likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
-            likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -110),
+            likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -135),
             likeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             likeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
             likeButton.widthAnchor.constraint(equalToConstant: 25),
@@ -157,23 +154,23 @@ class FeaturedCell: UICollectionViewCell {
             addButton.widthAnchor.constraint(equalToConstant: 40),
             addButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+        
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-        likeButton.addTarget(self, action: #selector(wishButtonTapped), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
 
     }
     @objc func addButtonTapped() {
         guard let model = model else {
             return
         }
-        
         addItemsToCart?(model)
     }
     
-    @objc func wishButtonTapped() {
+    @objc func likeButtonTapped() {
         guard let model = model else {
             return
         }
-        likeButtonClicked?(model)
+        addToWishList?(model)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -181,6 +178,7 @@ class FeaturedCell: UICollectionViewCell {
   
     func configure(with model: FeaturedProduct) {
         self.model = model
+        
         if let url = URL(string: model.image ?? "") {
             featuredImageView.kf.setImage(with: url)
         }

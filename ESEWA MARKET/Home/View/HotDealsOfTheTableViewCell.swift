@@ -15,6 +15,8 @@ class HotDealsTableViewCell: UITableViewCell {
     
     var model : [FeaturedProduct]?
     var productClicked: ((FeaturedProduct) -> ())?
+    var addItemsToCart: ((FeaturedProduct) -> Void)?
+    var addToWishList: ((FeaturedProduct) -> Void)?
     
     lazy var HotDealsTableViewCell: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
@@ -69,15 +71,26 @@ extension HotDealsTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! HotDealsCell
         if let item = model?[indexPath.row] {
             cell.configure(with: item)
+            
+            cell.addItemsToCart = { [weak self] item in
+                self?.addItemsToCart?(item)
+            }
+            
         }
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let item = model?[indexPath.row]
+            if let item = item {
+                self.productClicked?(item)
+            }
+        }
 }
-
 extension HotDealsTableViewCell: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 180, height: 300)
     }
 }
+
 

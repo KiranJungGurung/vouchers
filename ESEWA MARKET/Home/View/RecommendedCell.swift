@@ -10,6 +10,10 @@ import UIKit
 class RecommendedCell: UICollectionViewCell {
     
     static let identifier = "RecommendedCell"
+
+    var model: FeaturedProduct?
+    var addItemsToCart: ((FeaturedProduct) -> ())?
+    var addToWishList: ((FeaturedProduct) -> ())?
     
     lazy var containerView: UIView = {
         let containerView = UIView()
@@ -101,7 +105,6 @@ class RecommendedCell: UICollectionViewCell {
         containerView.addSubview(addContainerView)
         addContainerView.addSubview(addButton)
         
-    
         NSLayoutConstraint.activate([
             
             recommendedImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
@@ -127,12 +130,12 @@ class RecommendedCell: UICollectionViewCell {
             priceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             
             likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
-            likeButton.leadingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: 0),
+            likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -135),
             likeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             likeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
             likeButton.widthAnchor.constraint(equalToConstant: 25),
             likeButton.heightAnchor.constraint(equalToConstant: 25),
-              
+            
             addContainerView.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: -20),
             addContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             addContainerView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
@@ -145,13 +148,24 @@ class RecommendedCell: UICollectionViewCell {
             addButton.bottomAnchor.constraint(equalTo: addContainerView.bottomAnchor, constant: -8),
             addButton.widthAnchor.constraint(equalToConstant: 40),
             addButton.heightAnchor.constraint(equalToConstant: 40)
-            ])
+        ])
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+
+    }
+    @objc func addButtonTapped() {
+        guard let model = model else {
+            return
         }
-        required init?(coder: NSCoder) {
+        addItemsToCart?(model)
+    }
+    
+    required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
-        }
+    }
     
     func configure(with model: FeaturedProduct) {
+        self.model = model
+        
         if let url = URL(string: model.image ?? "") {
             recommendedImageView.kf.setImage(with: url)
            }
@@ -160,9 +174,5 @@ class RecommendedCell: UICollectionViewCell {
         priceLabel.text = "Rs.\(model.price ?? 1)"
     }
 }
-
-
-
-
 
 

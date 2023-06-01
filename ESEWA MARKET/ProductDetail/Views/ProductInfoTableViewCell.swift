@@ -10,7 +10,10 @@ import UIKit
 class ProductInfoTableViewCell: UITableViewCell {
     
     private let identifier = "ProductInfoTableViewCell"
-
+    
+    var item: FeaturedProduct?
+    var footerViewData: ((FeaturedProduct) -> Void)?
+    
     lazy var productContainerView: UIView = {
         let myContainerView = UIView()
         myContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +52,7 @@ class ProductInfoTableViewCell: UITableViewCell {
         crossedPricelbl.attributedText = attributedText
         return crossedPricelbl
     }()
-
+    
     static let reuseIdentifier = "ProductInfoTableViewCell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -66,7 +69,7 @@ class ProductInfoTableViewCell: UITableViewCell {
             productContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             productContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             productContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-
+            
             productTitleLabel.topAnchor.constraint(equalTo: productContainerView.topAnchor, constant: 10),
             productTitleLabel.leadingAnchor.constraint(equalTo: productContainerView.leadingAnchor, constant: 10),
             productTitleLabel.trailingAnchor.constraint(equalTo: productContainerView.trailingAnchor, constant: -10),
@@ -81,8 +84,9 @@ class ProductInfoTableViewCell: UITableViewCell {
             priceCrossedLabel.centerXAnchor.constraint(equalTo: productContainerView.centerXAnchor, constant: 16),
             priceCrossedLabel.bottomAnchor.constraint(equalTo: productContainerView.bottomAnchor, constant: -16),
         ])
+        
     }
- 
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -90,7 +94,14 @@ class ProductInfoTableViewCell: UITableViewCell {
     func configure(with model: FeaturedProduct) {
         productTitleLabel.text = model.title
         priceLabel.text = "Rs.\(model.price ?? 00)"
-      }
+    }
+    
+    func sendDataToViewController() {
+        if let item = item {
+            self.footerViewData?(item)
+        }
+        
+        
+    }
     
 }
-

@@ -4,7 +4,7 @@
 //  ESEWA MARKET
 //
 //  Created by Kiran Gurung on 26/04/2023.
-//
+
 import UIKit
 
 class FeaturedTableViewCell: UITableViewCell {
@@ -14,7 +14,7 @@ class FeaturedTableViewCell: UITableViewCell {
     var model : [FeaturedProduct]?
     var productClicked: ((FeaturedProduct) -> ())?
     var addItemsToCart: ((FeaturedProduct) -> Void)?
-    var likeButtonClicked: ((FeaturedProduct) -> Void)?
+    var addToWishList: ((FeaturedProduct) -> Void)?
     
     lazy var featuredCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -71,8 +71,8 @@ extension FeaturedTableViewCell: UICollectionViewDataSource {
             cell.addItemsToCart = { [weak self] item in
                 self?.addItemsToCart?(item)
                 
-            cell.likeButtonClicked = { [weak self] item in
-                self?.likeButtonClicked?(item)
+            cell.addToWishList = { [weak self] item in
+                self?.addToWishList?(item)
                 }
             }
         }

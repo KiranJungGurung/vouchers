@@ -47,31 +47,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         searchBar()
         setupFooterView()
         
-    // MARK: -  NavigationBar Setup
-
-        view.backgroundColor = .systemGray6
-        let button = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: nil)
-        let notificationButton =  UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: nil)
-        button.tintColor = .black
-        navigationItem.rightBarButtonItem = notificationButton
-        navigationItem.title = HomeTexts.marketTitle
-        
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        homeTableView.frame = view.bounds
-    }
-    
-    func didFetchProduct(model: [FeaturedProduct]) {
-        self.featuredProduct = model
-        homeTableView.reloadData()
-    }
-    func displayCategory(model: [Categories]) {
-        self.category = model
-        homeTableView.reloadData()
-    }
-    private func setupTableView() {
         homeTableView.delegate = self
         homeTableView.dataSource = self
         homeTableView.estimatedRowHeight = 300
@@ -84,8 +59,29 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
             homeTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             homeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             homeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            homeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            homeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70),
+
         ])
+    // MARK: -  NavigationBar Setup
+
+        view.backgroundColor = .systemGray6
+        let button = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: nil)
+        let notificationButton =  UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: nil)
+        button.tintColor = .black
+        navigationItem.rightBarButtonItem = notificationButton
+        navigationItem.title = HomeTexts.marketTitle
+    }
+
+    func didFetchProduct(model: [FeaturedProduct]) {
+        self.featuredProduct = model
+        homeTableView.reloadData()
+    }
+    func displayCategory(model: [Categories]) {
+        self.category = model
+        homeTableView.reloadData()
+    }
+    private func setupTableView() {
+        
         
         self.presenter = HomePresenter(delegate: self)
         presenter?.fetch()
@@ -200,11 +196,18 @@ extension HomeViewController: UITableViewDataSource {
                 strongSelf.CartVC.featureData = item
                 strongSelf.navigationController?.pushViewController(strongSelf.CartVC, animated: true)
             }
-            cell.likeButtonClicked = {[weak self] item in
-                guard let strongSelf = self else {return}
-                strongSelf.wishListVC.featureData = item
-                strongSelf.navigationController?.pushViewController(strongSelf.CartVC, animated: true)
+            cell.addToWishList = { item in
+                let vc = WishListViewController()
+                vc.featureData = item
+                self.navigationController?.pushViewController(vc, animated: true)
             }
+            
+//            cell.likeButtonClicked = {[weak self] item in
+//                let vc = wishListVC
+////                guard let strongSelf = self else {return}
+////                strongSelf.wishListVC.featureData = item
+//                self?.navigationController?.pushViewController(vc, animated: true)
+//            }
             
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
@@ -212,6 +215,17 @@ extension HomeViewController: UITableViewDataSource {
         case 3 :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: HotDealsTableViewCell.reuseIdentifier, for: indexPath) as! HotDealsTableViewCell
             cell.configure(model: self.featuredProduct)
+            
+            cell.productClicked = { item in
+                let vc = ProductDetailViewController()
+                vc.featureData = item
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            cell.addItemsToCart = {[weak self] item in
+                guard let strongSelf = self else {return}
+                strongSelf.CartVC.featureData = item
+                strongSelf.navigationController?.pushViewController(strongSelf.CartVC, animated: true)
+            }
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
@@ -223,12 +237,33 @@ extension HomeViewController: UITableViewDataSource {
         case 5 :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: PopularBrandTableViewCell.reuseIdentifier, for: indexPath) as! PopularBrandTableViewCell
             cell.configure(model: self.featuredProduct)
+            cell.productClicked = { item in
+                let vc = ProductDetailViewController()
+                vc.featureData = item
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            cell.addItemsToCart = {[weak self] item in
+                guard let strongSelf = self else {return}
+                strongSelf.CartVC.featureData = item
+                strongSelf.navigationController?.pushViewController(strongSelf.CartVC, animated: true)
+            }
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
             
         default :
             let cell = homeTableView.dequeueReusableCell(withIdentifier: RecommendedTableViewCell.reuseIdentifier, for: indexPath) as! RecommendedTableViewCell
             cell.configure(model: self.featuredProduct)
+            cell.productClicked = { item in
+                let vc = ProductDetailViewController()
+                vc.featureData = item
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            cell.addItemsToCart = {[weak self] item in
+                guard let strongSelf = self else {return}
+                strongSelf.CartVC.featureData = item
+                strongSelf.navigationController?.pushViewController(strongSelf.CartVC, animated: true)
+            }
+            
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell
         }

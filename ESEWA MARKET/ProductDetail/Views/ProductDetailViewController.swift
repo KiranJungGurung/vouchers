@@ -11,7 +11,7 @@ import UIKit
 class ProductDetailViewController: UIViewController, UITableViewDelegate{
     
     // MARK: - Properties
-    
+
     var mySections = [0,1,2,3]
     var featureData: FeaturedProduct?
     
@@ -72,11 +72,11 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(productDetailTableView)
         view.addSubview(itemFooterView)
         view.addSubview(itemTitle)
         view.addSubview(itemPrice)
         view.addSubview(addToCartButton)
-        view.addSubview(productDetailTableView)
         setupTableView()
         view.backgroundColor = .white
         
@@ -146,10 +146,12 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         super.viewDidLayoutSubviews()
         productDetailTableView.frame = view.bounds
     }
+    
     @objc func addToCartButtonTapped() {
         let vc = CartViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
 
         // MARK: - TableView Datasource
@@ -165,7 +167,6 @@ extension ProductDetailViewController: UITableViewDataSource {
         } else {
             return 1
         }
-        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -208,12 +209,10 @@ extension ProductDetailViewController: UITableViewDataSource {
                 footerView.centerYAnchor.constraint(equalTo: self.productDetailTableView.centerYAnchor, constant: 10),
                 footerView.heightAnchor.constraint(equalToConstant: 125),
                 
-    
                 button.widthAnchor.constraint(equalToConstant: 120),
                 button.heightAnchor.constraint(equalToConstant: 40),
                 button.centerXAnchor.constraint(equalTo: footerView.centerXAnchor, constant: 0),
                 button.centerYAnchor.constraint(equalTo: footerView.centerYAnchor, constant: 650),
-                
             ])
             return footerView
         }
@@ -252,8 +251,8 @@ extension ProductDetailViewController: UITableViewDataSource {
             }
             return cell
         }
-        
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch mySections[indexPath.section] {
         case 0:

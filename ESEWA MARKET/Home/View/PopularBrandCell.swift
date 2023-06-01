@@ -12,6 +12,10 @@ class PopularBrandCell: UICollectionViewCell {
     
     static let identifier = "PopularBrandCell"
     
+    var model: FeaturedProduct?
+    var addItemsToCart: ((FeaturedProduct) -> ())?
+    var addToWishList: ((FeaturedProduct) -> ())?
+    
     lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -128,7 +132,7 @@ class PopularBrandCell: UICollectionViewCell {
             priceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             
             likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
-            likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -110),
+            likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -135),
             likeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             likeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
             likeButton.widthAnchor.constraint(equalToConstant: 25),
@@ -147,7 +151,16 @@ class PopularBrandCell: UICollectionViewCell {
             addButton.widthAnchor.constraint(equalToConstant: 40),
             addButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+
     }
+    @objc func addButtonTapped() {
+        guard let model = model else {
+            return
+        }
+        addItemsToCart?(model)
+    }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -155,6 +168,7 @@ class PopularBrandCell: UICollectionViewCell {
     }
     
     func configure(with model: FeaturedProduct) {
+        self.model = model
         if let url = URL(string: model.image ?? "") {
             popularBrandImageView.kf.setImage(with: url)
         }

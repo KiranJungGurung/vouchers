@@ -13,8 +13,11 @@ class RecommendedTableViewCell: UITableViewCell {
 
     private let cellReuseIdentifier = "RecommendedTableViewCell"
     
-    var model :[FeaturedProduct]?
-
+    var model : [FeaturedProduct]?
+    var productClicked: ((FeaturedProduct) -> ())?
+    var addItemsToCart: ((FeaturedProduct) -> Void)?
+    var addToWishList: ((FeaturedProduct) -> Void)?
+    
     lazy var recommendedCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
@@ -67,8 +70,22 @@ extension RecommendedTableViewCell: UICollectionViewDataSource {
         
         if let item = model?[indexPath.row] {
             cell.configure(with: item)
+            
+            cell.addItemsToCart = { [weak self] item in
+                self?.addItemsToCart?(item)
+                
+            cell.addToWishList = { [weak self] item in
+                self?.addToWishList?(item)
+                }
+            }
         }
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = model?[indexPath.row]
+        if let item = item {
+            self.productClicked?(item)
+        }
     }
 }
 extension RecommendedTableViewCell: UICollectionViewDelegateFlowLayout {

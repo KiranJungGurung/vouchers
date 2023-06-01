@@ -11,6 +11,10 @@ class HotDealsCell: UICollectionViewCell {
     
     static let identifier = "HotDealsCell"
     
+    var model: FeaturedProduct?
+    var addItemsToCart: ((FeaturedProduct) -> ())?
+    var addToWishList: ((FeaturedProduct) -> ())?
+    
    lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -128,7 +132,7 @@ class HotDealsCell: UICollectionViewCell {
             priceLabel.heightAnchor.constraint(equalToConstant: 17),
             
             likeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 4),
-            likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -110),
+            likeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: -135),
             likeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             likeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
             likeButton.widthAnchor.constraint(equalToConstant: 25),
@@ -146,13 +150,23 @@ class HotDealsCell: UICollectionViewCell {
             addButton.bottomAnchor.constraint(equalTo: addContainerView.bottomAnchor, constant: -8),
             addButton.widthAnchor.constraint(equalToConstant: 40),
             addButton.heightAnchor.constraint(equalToConstant: 40)
+        
         ])
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+    }
+    @objc func addButtonTapped() {
+        guard let model = model else {
+            return
+        }
+        addItemsToCart?(model)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     func configure(with model: FeaturedProduct) {
+        self.model = model
+
         if let url = URL(string: model.image ?? "") {
             hotDealsImageView.kf.setImage(with: url)
            }

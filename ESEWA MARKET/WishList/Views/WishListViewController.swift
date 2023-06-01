@@ -1,9 +1,7 @@
 //
 //  WishListViewController.swift
 //  ESEWA MARKET
-//
 //  Created by Kiran Gurung on 31/05/2023.
-//
 
 import UIKit
 
@@ -33,7 +31,7 @@ class WishListViewController: UIViewController, UITableViewDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+//
         if let productItems = self.featureData {
             self.featureData = productItems
         }
@@ -62,16 +60,14 @@ class WishListViewController: UIViewController, UITableViewDelegate{
 }
 extension WishListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return wishListItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = wishTableView.dequeueReusableCell(withIdentifier: WishListTableViewCell.reuseIdentifier, for: indexPath) as! WishListTableViewCell
-        
-        if let item = featureData?[indexPath.row] {
-            cell.configure(model: item)
-           }
-        
+        let item = wishListItems[indexPath.row]
+               // Configure the cell with the item's data
+        cell.textLabel?.text = item.title
         cell.backgroundColor = .clear
         return cell
     }
