@@ -13,10 +13,12 @@ class CartViewController: UIViewController {
 //    var presenter: AddCartItemPresenter!
 //    var model: [AddCartItemModel] = []
     var navTitle: String?
+    var cartButton: UIBarButtonItem?
     var totalPrice = 0.0
     var featureData: FeaturedProduct?
     var featuredItems = [FeaturedProduct]()
-    
+    var totalItemsInCart: Int = 0
+
     
     // MARK: - Add Custom FooterView
     
@@ -61,6 +63,7 @@ class CartViewController: UIViewController {
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
+        table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
     
@@ -71,16 +74,17 @@ class CartViewController: UIViewController {
         self.view.backgroundColor = .systemGray6.withAlphaComponent(1)
 
         //MARK: - ADD NABBAR INTO VIEWCONTROLLER
-        
+
         let button = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: nil)
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonPressed))
         button.tintColor = .black
         backButton.tintColor = .black
-        //        self.navigationController?.popViewController(animated: true)
+        
         navigationItem.rightBarButtonItem = button
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.title = navTitle//"My Cart"
-        
+        navigationItem.title = "My Cart"
+        cartButton = button
+
         // add tableview to view
         view.addSubview(tableView)
         view.addSubview(cartFooterView)
@@ -92,7 +96,7 @@ class CartViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+//        tableView.frame = view.bounds
         setupFooterView()
         updateTotalPriceLabel()
         
@@ -103,8 +107,13 @@ class CartViewController: UIViewController {
            if let productItems = self.featureData {
                featuredItems.append(productItems)
            }
+        
            self.tableView.reloadData()
-       }
+    }
+    func addItemToCart(_ product: FeaturedProduct) {
+        featuredItems.append(product)
+    }
+                                     
     
     func setupTableView() {
         tableView.delegate = self
@@ -126,9 +135,7 @@ class CartViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
         
     }
-//    @objc func cartTapped() {
-//           navigationController?.popViewController(animated: true)
-//       }
+
 
     func updateTotalPriceLabel() {
         itemTotalPriceLabel.text = "Rs.\(totalPrice)"
@@ -139,12 +146,17 @@ class CartViewController: UIViewController {
         // MARK: - Set Constraint of footerView
         
         NSLayoutConstraint.activate([
-            cartFooterView.leadingAnchor.constraint(equalTo: self.tableView.leadingAnchor, constant: 0),
-            cartFooterView.bottomAnchor.constraint(equalTo: self.tableView.bottomAnchor, constant: 0),
-            cartFooterView.trailingAnchor.constraint(equalTo: self.tableView.trailingAnchor, constant: 0),
+            
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+        
+            cartFooterView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            cartFooterView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
+            cartFooterView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
             cartFooterView.heightAnchor.constraint(equalToConstant: 100),
             
-
             itemCheckOutTotal.topAnchor.constraint(equalTo: self.cartFooterView.topAnchor, constant: 8),
             itemCheckOutTotal.leadingAnchor.constraint(equalTo: self.cartFooterView.leadingAnchor, constant:8),
             itemCheckOutTotal.trailingAnchor.constraint(equalTo: self.cartFooterView.trailingAnchor, constant: -8),
@@ -188,7 +200,9 @@ extension CartViewController: UITableViewDelegate {
             vc.preferredContentSize.height = 50
             self.present(vc, animated: true, completion: nil)
         }
+        
     }
+
 }
 
 extension CartViewController: UITableViewDataSource {
@@ -210,6 +224,8 @@ extension CartViewController: UITableViewDataSource {
         
         let item = featuredItems[indexPath.row]
         cell.configure(with: item)
+        
+        
         
         cell.countChanged = { price in
             self.totalPrice = (price + price)

@@ -26,6 +26,12 @@
 		B320F7942A283A390057EBCB /* CheckoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320F7932A283A390057EBCB /* CheckoutModel.swift */; };
 		B320F7972A283AB80057EBCB /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320F7962A283AB80057EBCB /* CheckoutViewController.swift */; };
 		B3297ED329F13F6D00D5E555 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3297ED229F13F6D00D5E555 /* Constants.swift */; };
+		B3BA17C52A2B714300FF3C8C /* House Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA17C12A2B714300FF3C8C /* House Presenter.swift */; };
+		B3BA17C62A2B714300FF3C8C /* House View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA17C22A2B714300FF3C8C /* House View.swift */; };
+		B3BA17C72A2B714300FF3C8C /* House VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA17C32A2B714300FF3C8C /* House VC.swift */; };
+		B3BA17C82A2B714300FF3C8C /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA17C42A2B714300FF3C8C /* House.swift */; };
+		B3BA17CE2A2C8D4900FF3C8C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA17CD2A2C8D4900FF3C8C /* ProfileViewController.swift */; };
+		B3BA17D02A2C8F7100FF3C8C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA17CF2A2C8F7100FF3C8C /* MainViewController.swift */; };
 		B3D1FF902A03A83000335742 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1FF8F2A03A83000335742 /* HomeViewController.swift */; };
 		B3D1FF932A03A8DF00335742 /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1FF922A03A8DF00335742 /* BannerCell.swift */; };
 		B3D1FF952A03A91C00335742 /* ShopBannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1FF942A03A91C00335742 /* ShopBannerTableViewCell.swift */; };
@@ -41,6 +47,8 @@
 		B3D1FFA92A03AAE400335742 /* RecommendedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1FFA82A03AAE400335742 /* RecommendedTableViewCell.swift */; };
 		B3D1FFAC2A03AB3C00335742 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1FFAB2A03AB3C00335742 /* AppDelegate.swift */; };
 		B3D1FFAE2A03AB5C00335742 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1FFAD2A03AB5C00335742 /* SceneDelegate.swift */; };
+		B3D2AE622A2B61120055C046 /* StatusApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D2AE612A2B61120055C046 /* StatusApi.swift */; };
+		B3D2AE642A2B61320055C046 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D2AE632A2B61320055C046 /* BaseViewController.swift */; };
 		B3D51CE729EE847A00435BB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3D51CE629EE847A00435BB3 /* Assets.xcassets */; };
 		B3D51CEA29EE847A00435BB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3D51CE829EE847A00435BB3 /* LaunchScreen.storyboard */; };
 		B3E9250A2A05FDB7007CF3DD /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E925092A05FDB7007CF3DD /* HomeModel.swift */; };
@@ -69,6 +77,12 @@
 		B320F7932A283A390057EBCB /* CheckoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutModel.swift; sourceTree = "<group>"; };
 		B320F7962A283AB80057EBCB /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		B3297ED229F13F6D00D5E555 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B3BA17C12A2B714300FF3C8C /* House Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "House Presenter.swift"; sourceTree = "<group>"; };
+		B3BA17C22A2B714300FF3C8C /* House View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "House View.swift"; sourceTree = "<group>"; };
+		B3BA17C32A2B714300FF3C8C /* House VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "House VC.swift"; sourceTree = "<group>"; };
+		B3BA17C42A2B714300FF3C8C /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
+		B3BA17CD2A2C8D4900FF3C8C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		B3BA17CF2A2C8F7100FF3C8C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B3D1FF8F2A03A83000335742 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B3D1FF922A03A8DF00335742 /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
 		B3D1FF942A03A91C00335742 /* ShopBannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBannerTableViewCell.swift; sourceTree = "<group>"; };
@@ -84,6 +98,8 @@
 		B3D1FFA82A03AAE400335742 /* RecommendedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTableViewCell.swift; sourceTree = "<group>"; };
 		B3D1FFAB2A03AB3C00335742 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3D1FFAD2A03AB5C00335742 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B3D2AE612A2B61120055C046 /* StatusApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusApi.swift; sourceTree = "<group>"; };
+		B3D2AE632A2B61320055C046 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B3D51CDA29EE847900435BB3 /* ESEWA MARKET.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ESEWA MARKET.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D51CE629EE847A00435BB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3D51CE929EE847A00435BB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -229,6 +245,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		B3BA17CC2A2C8D0300FF3C8C /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B3BA17CD2A2C8D4900FF3C8C /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		B3CA02F929F1A42F00D5185B /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +293,19 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		B3D2AE5E2A2B60D30055C046 /* MVP Template */ = {
+			isa = PBXGroup;
+			children = (
+				B3D2AE612A2B61120055C046 /* StatusApi.swift */,
+				B3D2AE632A2B61320055C046 /* BaseViewController.swift */,
+				B3BA17C12A2B714300FF3C8C /* House Presenter.swift */,
+				B3BA17C22A2B714300FF3C8C /* House View.swift */,
+				B3BA17C32A2B714300FF3C8C /* House VC.swift */,
+				B3BA17C42A2B714300FF3C8C /* House.swift */,
+			);
+			path = "MVP Template";
+			sourceTree = "<group>";
+		};
 		B3D51CD129EE847900435BB3 = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +327,8 @@
 		B3D51CDC29EE847900435BB3 /* ESEWA MARKET */ = {
 			isa = PBXGroup;
 			children = (
+				B3BA17CC2A2C8D0300FF3C8C /* Profile */,
+				B3D2AE5E2A2B60D30055C046 /* MVP Template */,
 				B320F7912A283A020057EBCB /* Checkout */,
 				B320F78B2A2734BE0057EBCB /* WishList */,
 				B320F7802A248E850057EBCB /* API */,
@@ -299,6 +338,7 @@
 				B3CA02F929F1A42F00D5185B /* Home */,
 				B3297ED129F13F6200D5E555 /* Resources */,
 				B3D51CEB29EE847A00435BB3 /* Info.plist */,
+				B3BA17CF2A2C8F7100FF3C8C /* MainViewController.swift */,
 			);
 			path = "ESEWA MARKET";
 			sourceTree = "<group>";
@@ -443,6 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B320F76E2A237AA50057EBCB /* CategoryPresenter.swift in Sources */,
+				B3BA17C62A2B714300FF3C8C /* House View.swift in Sources */,
 				B320F78A2A27197F0057EBCB /* WishListViewController.swift in Sources */,
 				B320F75B2A2372310057EBCB /* DeletePopUpViewController.swift in Sources */,
 				B3D1FF972A03A94300335742 /* CategoriesTableViewCell.swift in Sources */,
@@ -450,14 +491,19 @@
 				B320F75F2A23727F0057EBCB /* CartModelPresenter.swift in Sources */,
 				B3D1FFAE2A03AB5C00335742 /* SceneDelegate.swift in Sources */,
 				B320F7902A2735570057EBCB /* WishListCell.swift in Sources */,
+				B3D2AE622A2B61120055C046 /* StatusApi.swift in Sources */,
 				B320F7822A248EAB0057EBCB /* APIManager.swift in Sources */,
+				B3BA17D02A2C8F7100FF3C8C /* MainViewController.swift in Sources */,
 				B320F75D2A2372590057EBCB /* CustomTableViewCell.swift in Sources */,
+				B3D2AE642A2B61320055C046 /* BaseViewController.swift in Sources */,
 				B3E9250A2A05FDB7007CF3DD /* HomeModel.swift in Sources */,
 				B320F77D2A2460D00057EBCB /* DescriptionTableViewCell.swift in Sources */,
 				B3D1FF952A03A91C00335742 /* ShopBannerTableViewCell.swift in Sources */,
 				B320F7972A283AB80057EBCB /* CheckoutViewController.swift in Sources */,
 				B320F77F2A24610D0057EBCB /* ProductDetailViewController.swift in Sources */,
+				B3BA17CE2A2C8D4900FF3C8C /* ProfileViewController.swift in Sources */,
 				B3D1FFA32A03AA6F00335742 /* PopularBrandCell.swift in Sources */,
+				B3BA17C52A2B714300FF3C8C /* House Presenter.swift in Sources */,
 				B3D1FFA12A03AA3200335742 /* HotDealsCell.swift in Sources */,
 				B3E9250C2A05FDFD007CF3DD /* HomePresenter.swift in Sources */,
 				B320F78E2A2734FA0057EBCB /* WishListTableViewCell.swift in Sources */,
@@ -475,7 +521,9 @@
 				B320F7942A283A390057EBCB /* CheckoutModel.swift in Sources */,
 				B3D1FF992A03A97300335742 /* CategoryCell.swift in Sources */,
 				B3D1FF9D2A03A9BD00335742 /* FeaturedTableViewCell.swift in Sources */,
+				B3BA17C82A2B714300FF3C8C /* House.swift in Sources */,
 				B3D1FF9B2A03A99600335742 /* FeaturedCell.swift in Sources */,
+				B3BA17C72A2B714300FF3C8C /* House VC.swift in Sources */,
 				B3D1FFA72A03AABE00335742 /* PopularBrandTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

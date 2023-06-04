@@ -13,8 +13,7 @@ class CustomTableViewCell: UITableViewCell {
     static let identifier = "CustomCartableViewCell"
     var countChanged: ((Double)-> Void)?
 //    var totalPrice: ((Int)-> Void)?
-    
-    var model: AddCartItemModel?
+//    var model: AddCartItemModel?
     var priceUpdated: ((Double) -> ())?
     var quantity = 1
     var productPrice =  2000.00
@@ -46,7 +45,7 @@ class CustomTableViewCell: UITableViewCell {
     lazy var itemName: UILabel = {
         let itemLabel = UILabel()
         itemLabel.textColor = .black
-        itemLabel.numberOfLines = 2
+        itemLabel.numberOfLines = 1
         itemLabel.lineBreakMode = .byTruncatingTail
         itemLabel.font = .systemFont(ofSize: 17, weight: .bold)
         itemLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -60,6 +59,7 @@ class CustomTableViewCell: UITableViewCell {
         desc.font = .systemFont(ofSize: 10, weight: .medium)
         desc.translatesAutoresizingMaskIntoConstraints = false
         desc.textAlignment = .left
+        
         return desc
     }()
     
@@ -169,6 +169,8 @@ class CustomTableViewCell: UITableViewCell {
             itemImage.heightAnchor.constraint(equalToConstant: 100),
             
             itemName.leadingAnchor.constraint(equalTo: itemImage.trailingAnchor, constant: 8),
+            itemName.trailingAnchor.constraint(equalTo: itemCountView.leadingAnchor, constant: 0),
+
             itemName.heightAnchor.constraint(equalToConstant: 80),
             
             itemDescription.leadingAnchor.constraint(equalTo: itemName.leadingAnchor),

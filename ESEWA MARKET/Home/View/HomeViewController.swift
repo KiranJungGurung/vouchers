@@ -24,9 +24,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     var recommendedForYou = [RecommendedForYou]()
     
     var CartVC = CartViewController()
-    var wishListVC = WishListViewController()
-    
-    
+   
     // MARK: - HomeTableView
     
     lazy var homeTableView: UITableView = {
@@ -42,36 +40,101 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         super.viewDidLoad()
         view.addSubview(homeTableView)
         view.addSubview(footerView)
-//        setupNavigationBarItems()
+        setupNavigationBar()
         setupTableView()
-        searchBar()
         setupFooterView()
+        footerView.MainViewController = self
+
         
+        // add delegate and datasource into tableview
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        
         homeTableView.estimatedRowHeight = 300
         homeTableView.rowHeight = UITableView.automaticDimension
         homeTableView.backgroundColor = .clear
         homeTableView.separatorStyle = .none
         homeTableView.translatesAutoresizingMaskIntoConstraints = false
+
+    // MARK: -  NavigationBar Setup
+
+        view.backgroundColor = .systemGray6
+    }
+    
+    func setupNavigationBar() {
         
+        let navigationBarView = UINavigationBar()
+        navigationBarView.backgroundColor = .white
+        navigationBarView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let logoImageView = UIImageView(image: UIImage(named: "logo"))
+        logoImageView.contentMode = .scaleAspectFit
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let notificationButton = UIButton()
+        notificationButton.setImage(UIImage(systemName: "bell"), for: .normal)
+        notificationButton.tintColor = .black
+        notificationButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let moreButton = UIButton()
+        moreButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        moreButton.tintColor = .black
+        moreButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        let greetingLabel = UILabel()
+        greetingLabel.text = "Hi Kiran,Everything you will discover here."
+        greetingLabel.numberOfLines = 1
+        greetingLabel.adjustsFontSizeToFitWidth = true
+        greetingLabel.font = UIFont.systemFont(ofSize: 16)
+        greetingLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let searchBar = UISearchBar()
+        searchBar.sizeToFit()
+        navigationItem.titleView = searchBar
+        searchBar.placeholder = "Search"
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(navigationBarView)
+        navigationBarView.addSubview(logoImageView)
+        navigationBarView.addSubview(notificationButton)
+        navigationBarView.addSubview(moreButton)
+        navigationBarView.addSubview(greetingLabel)
+        navigationBarView.addSubview(searchBar)
+
         NSLayoutConstraint.activate([
-            homeTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            navigationBarView.topAnchor.constraint(equalTo: view.topAnchor, constant: 3),
+            navigationBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navigationBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            navigationBarView.heightAnchor.constraint(equalToConstant: 260),
+            
+            logoImageView.centerYAnchor.constraint(equalTo: navigationBarView.centerYAnchor),
+            logoImageView.leadingAnchor.constraint(equalTo: navigationBarView.leadingAnchor, constant: 16),
+            logoImageView.heightAnchor.constraint(equalToConstant: 150), // Adjust the size as needed
+            logoImageView.widthAnchor.constraint(equalToConstant: 260),
+            
+            notificationButton.leadingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 15),
+            notificationButton.trailingAnchor.constraint(equalTo: navigationBarView.trailingAnchor, constant: -14),
+            notificationButton.heightAnchor.constraint(equalToConstant: 260),
+            
+            moreButton.leadingAnchor.constraint(equalTo: notificationButton.trailingAnchor, constant: -18),
+            moreButton.heightAnchor.constraint(equalToConstant: 260),
+            
+            greetingLabel.leadingAnchor.constraint(equalTo: logoImageView.leadingAnchor, constant: 8),
+            greetingLabel.centerYAnchor.constraint(equalTo: navigationBarView.centerYAnchor, constant: 43),
+            greetingLabel.heightAnchor.constraint(equalToConstant: 70),
+            
+            searchBar.topAnchor.constraint(equalTo: greetingLabel.bottomAnchor, constant: 5),
+            searchBar.leadingAnchor.constraint(equalTo: greetingLabel.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: greetingLabel.trailingAnchor),
+            searchBar.heightAnchor.constraint(equalToConstant: 40),
+            
+            homeTableView.topAnchor.constraint(equalTo: navigationBarView.bottomAnchor, constant: 0),
             homeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             homeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             homeTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70),
 
-        ])
-    // MARK: -  NavigationBar Setup
-
-        view.backgroundColor = .systemGray6
-        let button = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: nil)
-        let notificationButton =  UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: nil)
-        button.tintColor = .black
-        navigationItem.rightBarButtonItem = notificationButton
-        navigationItem.title = HomeTexts.marketTitle
+            ])
     }
-
     func didFetchProduct(model: [FeaturedProduct]) {
         self.featuredProduct = model
         homeTableView.reloadData()
@@ -98,16 +161,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         homeTableView.register(PopularBrandTableViewCell.self, forCellReuseIdentifier: PopularBrandTableViewCell.reuseIdentifier)
         homeTableView.register(RecommendedTableViewCell.self, forCellReuseIdentifier: RecommendedTableViewCell.reuseIdentifier)
     }
- 
-    private func searchBar() {
-        navigationItem.searchController = UISearchController()
-        navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.searchBar.placeholder = HomeTexts.searchBarPlaceholder
-        searchController.searchBar.tintColor = .white
-    }
-    
+
 //     MARK: - INITIALIZE FOOTER VIEW
-    
+
     lazy var footerView: FooterView = {
         let footerView = FooterView()
         footerView.translatesAutoresizingMaskIntoConstraints = false
@@ -159,7 +215,9 @@ extension HomeViewController: UITableViewDataSource {
             return TableViewHeaderText.defaultSection
         }
     }
-
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 60
+//    }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UITableViewHeaderFooterView()
         headerView.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
@@ -196,18 +254,6 @@ extension HomeViewController: UITableViewDataSource {
                 strongSelf.CartVC.featureData = item
                 strongSelf.navigationController?.pushViewController(strongSelf.CartVC, animated: true)
             }
-            cell.addToWishList = { item in
-                let vc = WishListViewController()
-                vc.featureData = item
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            
-//            cell.likeButtonClicked = {[weak self] item in
-//                let vc = wishListVC
-////                guard let strongSelf = self else {return}
-////                strongSelf.wishListVC.featureData = item
-//                self?.navigationController?.pushViewController(vc, animated: true)
-//            }
             
             cell.backgroundColor = UIColor(red: 237/255.0, green: 238/255.0, blue: 242/255.0, alpha: 1)
             return cell

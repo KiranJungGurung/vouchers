@@ -11,9 +11,10 @@ import UIKit
 class ProductDetailViewController: UIViewController, UITableViewDelegate{
     
     // MARK: - Properties
-
     var mySections = [0,1,2,3]
     var featureData: FeaturedProduct?
+    var addItemsToCart: ((FeaturedProduct) -> ())?
+
     
     // MARK: - Add Custom FooterView
     
@@ -28,7 +29,6 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
     
     lazy var itemTitle: UILabel = {
         let total = UILabel()
-        total.text = "Naxasa"
         total.translatesAutoresizingMaskIntoConstraints = false
         total.textAlignment = .left
         total.font = .systemFont(ofSize: 16, weight: .bold)
@@ -38,7 +38,6 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
     
     lazy var itemPrice: UILabel = {
         let totalPrice = UILabel()
-        totalPrice.text  = "Rs.345"
         totalPrice.translatesAutoresizingMaskIntoConstraints = false
         totalPrice.textAlignment = .left
         totalPrice.font = .systemFont(ofSize: 18, weight: .medium)
@@ -62,7 +61,6 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         productTable.separatorStyle = .none
         productTable.separatorColor = .clear
         productTable.backgroundColor = .white
-        
         productTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return productTable
         
@@ -78,7 +76,11 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         view.addSubview(itemPrice)
         view.addSubview(addToCartButton)
         setupTableView()
+        fetchProduct()
         view.backgroundColor = .white
+        if let cartVC = self.navigationController?.viewControllers.first(where: { $0 is CartViewController }) as? CartViewController {
+               setupAddToCartClosure(in: cartVC)
+           }
         
         // MARK: - Navigation UI
         let backButton = UIButton(type: .system)
@@ -100,6 +102,15 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
         productDetailTableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: DescriptionTableViewCell.reuseIdentifier)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
+    
+    // populating data from api in itemFooterView
+    
+    func fetchProduct() {
+        itemTitle.text = featureData?.title
+        itemPrice.text = "Rs.\(featureData?.price ?? 0)"
+    }
+
+ 
     
     //MARK: - ProductDetailTableView
     
@@ -148,8 +159,18 @@ class ProductDetailViewController: UIViewController, UITableViewDelegate{
     }
     
     @objc func addToCartButtonTapped() {
+        
+        guard let product = featureData else { return }
+        addItemsToCart?(product)
         let vc = CartViewController()
+        vc.featureData = product
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func setupAddToCartClosure(in cartVC: CartViewController) {
+        addItemsToCart = { [weak cartVC] product in
+            cartVC?.addItemToCart(product)
+        }
     }
     
 }
@@ -194,11 +215,10 @@ extension ProductDetailViewController: UITableViewDataSource {
             button.setTitle("VIEW MORE", for: .normal)
             button.tintColor = .green
             button.contentMode = .scaleAspectFit
-            button.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.layer.cornerRadius = 14
             button.layer.masksToBounds = true
-            button.backgroundColor = .lightGray.withAlphaComponent(0.1)
+            button.backgroundColor = .lightGray.withAlphaComponent(0.5)
             
             view.addSubview(footerView)
             footerView.addSubview(button)
@@ -214,13 +234,16 @@ extension ProductDetailViewController: UITableViewDataSource {
                 button.centerXAnchor.constraint(equalTo: footerView.centerXAnchor, constant: 0),
                 button.centerYAnchor.constraint(equalTo: footerView.centerYAnchor, constant: 650),
             ])
+            button.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
+
             return footerView
+
         }
         return nil
     }
     @objc func moreButtonTapped() {
-//        navigationController?.popViewController(animated: true)
-        
+        let vc = HomeViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     @objc func backButtonTapped() {
