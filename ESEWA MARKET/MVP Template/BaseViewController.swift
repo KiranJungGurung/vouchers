@@ -1,4 +1,4 @@
-//
+
 //  BaseViewController.swift
 //  ESEWA MARKET
 //
@@ -11,17 +11,17 @@ class BaseViewController <T : UIView > : UIViewController, StatusApi {
         // show error message
 
     }
-    
+
     func onFailure(_ message: String) {
         // show Failure message
 
     }
-    
+
     func showLoading() {
         // show loading
 
     }
-    
+
     func hideLoading() {
         // hide loading
     }
@@ -40,10 +40,10 @@ class BaseViewController <T : UIView > : UIViewController, StatusApi {
         let view = T()
         self.view = view
         return view
-     
+
       }
     }
-    
+
 
 
 }

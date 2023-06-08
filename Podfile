@@ -10,7 +10,12 @@ pod 'Alamofire'
 #pod 'BottomSheet', :git => 'https://github.com/joomcode/BottomSheet'
 pod 'SwiftyJSON', '~> 4.0'
 pod 'Kingfisher', '~> 7.0'
+pod 'FirebaseAuth'
+pod 'Firebase/Core'
+pod 'FirebaseDatabase'
+
 #pod 'ObjectMapper'
+
 
 
 end

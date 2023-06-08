@@ -12,7 +12,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
     
     // MARK: - Properties
     var searchController = UISearchController(searchResultsController: nil)
-    
+    var searchBar = SearchBarView()
     var presenter: HomePresenter?
     var presenter1: CategoryPresenter?
     var model = [Product]()
@@ -88,10 +88,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         greetingLabel.font = UIFont.systemFont(ofSize: 16)
         greetingLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let searchBar = UISearchBar()
-        searchBar.sizeToFit()
-        navigationItem.titleView = searchBar
-        searchBar.placeholder = "Search"
         searchBar.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(navigationBarView)
@@ -102,7 +98,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         navigationBarView.addSubview(searchBar)
 
         NSLayoutConstraint.activate([
-            navigationBarView.topAnchor.constraint(equalTo: view.topAnchor, constant: 3),
+            navigationBarView.topAnchor.constraint(equalTo: view.topAnchor, constant: -50),
             navigationBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             navigationBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             navigationBarView.heightAnchor.constraint(equalToConstant: 260),
@@ -123,11 +119,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
             greetingLabel.centerYAnchor.constraint(equalTo: navigationBarView.centerYAnchor, constant: 43),
             greetingLabel.heightAnchor.constraint(equalToConstant: 70),
             
-            searchBar.topAnchor.constraint(equalTo: greetingLabel.bottomAnchor, constant: 5),
-            searchBar.leadingAnchor.constraint(equalTo: greetingLabel.leadingAnchor),
-            searchBar.trailingAnchor.constraint(equalTo: greetingLabel.trailingAnchor),
-            searchBar.heightAnchor.constraint(equalToConstant: 40),
-            
+            searchBar.topAnchor.constraint(equalTo: greetingLabel.bottomAnchor, constant: -20),
+            searchBar.leadingAnchor.constraint(equalTo: navigationBarView.leadingAnchor, constant: 20),
+            searchBar.trailingAnchor.constraint(equalTo: navigationBarView.trailingAnchor, constant: -20),
+
             homeTableView.topAnchor.constraint(equalTo: navigationBarView.bottomAnchor, constant: 0),
             homeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             homeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
@@ -144,7 +139,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, HomeProtocolDel
         homeTableView.reloadData()
     }
     private func setupTableView() {
-        
         
         self.presenter = HomePresenter(delegate: self)
         presenter?.fetch()
